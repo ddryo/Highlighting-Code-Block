@@ -335,7 +335,6 @@ class LOOS_HCB {
             if ( LOOS_HCB::$settings[ 'font_family' ] ) {
                 $hcb_style  .= '.hcb_wrap pre{font-family:'. LOOS_HCB::$settings[ 'font_family' ] .'}';
             }
-
             echo '<style id="hcb_style">'. $hcb_style .'</style>'."\n";
         },10);
 
@@ -348,7 +347,6 @@ class LOOS_HCB {
             if ( LOOS_HCB::$settings[ 'block_width' ] ) {
                 $hcb_style  .= '.wp-block{max-width: '. LOOS_HCB::$settings[ 'block_width' ] .'px !important}';
             }
-
 
             /* script */
             $hcb_script = "";

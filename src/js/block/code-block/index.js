@@ -3,7 +3,7 @@ import classnames from 'classnames';
 /**
  * wp objects
  */
-import { __, RichText, InspectorControls, registerBlockType, Fragment } from '../@wp';
+import { __, RichText, InspectorControls, registerBlockType, Fragment, createBlock } from '../@wp';
 
 /**
  * アイコンS
@@ -75,6 +75,32 @@ registerBlockType('loos-hcb/code-block', {
     },
     supports: {
         className: false, //ブロック要素を作成した際に付く .wp-block-[ブロック名] で自動生成されるクラス名の設定。
+    },
+    transforms: {
+        from: [
+            //どのブロックタイプから変更できるようにするか
+            {
+                type: 'block',
+                blocks: ['core/code'], //整形済みブロック : 'core/preformatted',
+                transform: (attributes) => {
+                    return createBlock('loos-hcb/code-block', {
+                        code: attributes.content,
+                    });
+                },
+            },
+        ],
+        to: [
+            //どのブロックタイプへ変更できるようにするか
+            {
+                type: 'block',
+                blocks: ['core/code'],
+                transform: (attributes) => {
+                    return createBlock('core/code', {
+                        content: attributes.code,
+                    });
+                },
+            },
+        ],
     },
 
     edit: (props) => {
