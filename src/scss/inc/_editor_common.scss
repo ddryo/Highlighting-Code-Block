@@ -1,0 +1,103 @@
+// 共通
+.mce-content-body .hcb_wrap{
+    margin: 2em 0;
+}
+.hcb_wrap{
+    position: relative;
+    border: solid 1px #f1f1f1;
+    pre,
+    textarea.hcb_textarea{
+        position: static;
+        display: block;
+        width: 100%;
+        tab-size: 2;
+        box-sizing: border-box;
+        line-height: 1.8;
+        font-size: 14px;
+        font-family: Menlo, Consolas, 'メイリオ', sans-serif;
+        padding: 1.5em;
+        margin: 0 !important;
+        border: none;
+        border-radius: 0;
+        white-space: pre !important;
+        overflow-x: auto;
+        // overflow-y: hidden;
+        overflow-wrap: break-word;
+
+        // スクロールバー
+        &::-webkit-scrollbar{
+            border: none;
+            height: 8px;
+        }
+        &::-webkit-scrollbar-track{
+            background: #f7f7f7;
+            border: none;
+        }
+        &::-webkit-scrollbar-thumb{
+            background: rgba(0,0,0,0.1);
+            border-radius: 4px;
+        }
+    }
+
+    textarea.hcb_textarea{
+        resize: none;
+        outline: none;
+        box-shadow: none;
+    }
+
+    pre code{
+        display: block;
+        color: inherit !important;
+        padding: 0 !important;
+        background: inherit !important;
+        font-family: inherit !important;
+        tab-size: 2;
+    }
+    
+    .select_wrap{
+        padding: 8px 8px;
+        &::after{
+            content: "";
+            clear: both;
+            display: block;
+            height: 0px;
+            visibility: hidden;
+        }
+        select{
+            margin: 0;
+            float: left;
+            width: 10em;
+        }
+        .filename_input{
+            line-height: 28px;
+            width: 10em;
+            height: 28px;
+            padding: 0 8px;
+            margin-left: 1em;
+            float: right;
+        }
+        .num_input{
+            line-height: 28px;
+            width: 10em;
+            height: 28px;
+            padding: 0 8px;
+            margin-left: 1em;
+            float: right;
+        }
+    }
+
+    pre::before{
+        content: attr(data-lang);
+        position: absolute;
+        top: 0px;
+        right: 0;
+        display: block;
+        width: max-content;
+        min-width: 3em;
+        font-size: 12px;
+        line-height: 24px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 0 8px;
+    }
+}

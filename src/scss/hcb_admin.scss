@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+.hcb_col2_wrap{
+    display: flex;
+    margin-bottom: 1em;
+
+    .hcb_col_item{
+        &:first-child{
+            margin-right: 2em;
+        }
+    }
+}
+
+pre.default_support_langs{
+    background: #eaeaea;
+    margin: 0;
+    padding: 1.5em .5em .75em;
+    position: relative;
+    &::before{
+        content: 'Default : ';
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        font-size: 12px;
+        padding: 0 .5em;
+        background: #ccc;
+        box-sizing: border-box;
+    }
+    code{
+        display: block;
+        background: none;
+        line-height: 1.25;
+        font-size: 12px;
+    }
+}

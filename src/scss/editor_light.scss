@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+@import './inc/editor_common';
+
+// Dark
+.hcb_wrap pre,
+.hcb_wrap textarea.hcb_textarea{
+    color: #333 !important;
+    background: #f7f7f7 !important;
+}
+
+/* クラシックブロック用 */
+.hcb_wrap pre.prism::before{
+    color: #333;
+    background: #dedede;
+}
+

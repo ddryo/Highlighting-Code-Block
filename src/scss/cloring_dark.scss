@@ -1,0 +1,156 @@
+@charset "UTF-8";
+
+/*
+  Dark coloring
+*/
+
+/* Bace Color*/
+.hcb_wrap pre,
+.hcb_wrap pre code {
+	color: #f8f8f2;
+	text-shadow: 0 1px #1a1a1a;
+	background: #34352e;
+}
+
+/* Lang Name */
+.hcb_wrap pre::before{
+  background-color: #111111;
+}
+.hcb_wrap pre[data-file]::before{
+    background-image: url(../img/file-icon-dark.svg);
+}
+
+/* line highkight */
+.line-highlight {
+	background: rgba(255, 251, 247, 0.1);
+}
+.line-highlight:before,
+.line-highlight[data-end]:after {
+	background-color: rgba(175, 167, 161, 0.4);
+	color: #fcfcfc;
+	text-shadow: none;
+}
+
+/* line numbers */
+.line-numbers .line-numbers-rows {
+	border-right: 1px solid #999;
+}
+.line-numbers-rows > span:before {
+	color: #999;
+}
+
+
+/* ---------------------
+  Syntax Highlight
+ --------------------- */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+	color: #a8a897;
+}
+
+.token.punctuation {
+	color: #f8f8f2;
+}
+
+.namespace {
+	opacity: .7;
+}
+
+.token.property,
+.token.tag,
+.token.constant,
+.token.symbol,
+.token.deleted,
+.token.important {
+	color: #ff2c78;
+}
+
+.token.boolean,
+.token.number {
+	color: #ae81ff;
+}
+
+.token.selector,
+.token.attr-name,
+.token.char,
+.token.builtin,
+.token.inserted,
+.token.class-name {
+	color: #b4ec43;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string,
+.token.variable {
+	color: #f8f8f2;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.function,
+.token.string{
+	color: #f3e880;
+}
+
+.token.function,
+.token.keyword.def {
+	color: #5fe6ff;
+}
+.token.keyword,
+.token.operator {
+	color: #f92672;
+	/* font-weight: bold; */
+}
+.token.regex,
+.token.keyword.this{
+	color: #fd971f;
+}
+
+.token.delimiter:not(.symbol){
+	color: #5294ff;
+}
+
+/* .token.important, */
+.token.bold {
+	font-weight: bold;
+}
+.token.italic,
+.token.builtin,
+.token.keyword.def {
+	font-style: italic;
+}
+
+.token.entity {
+	cursor: help;
+}
+
+
+
+/* CSS / SCSS */
+.language-css .token.property,
+.language-scss .token.property,
+.language-json .token.property{
+	color: #5fe6ff;
+}
+
+/* PHP */
+.language-php .token.important.delimiter{
+	font-weight: normal;
+}
+
+	
+/* Ruby */
+.language-ruby .token.interpolation{
+	color: #f8f8f2;
+}
+
+/* JSON */
+.language-json .token.operator{
+	color:#f3e880
+}
+

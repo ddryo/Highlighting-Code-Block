@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+@import './inc/editor_common';
+
+// Dark
+.hcb_wrap pre,
+.hcb_wrap textarea.hcb_textarea{
+    color: #fff !important;
+    background: #333330 !important;
+}
+.hcb_wrap pre code,
+.hcb_wrap textarea.hcb_textarea{
+    text-shadow: 0 0 1px #333;
+}
+
+// Gutenberg
+.hcb_wrap{
+    textarea.hcb_textarea{
+        &::placeholder{
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+        }
+        &::-ms-input-placeholder{
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+        }
+        &::-moz-placeholderm{
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+        }
+        &::-webkit-input-placeholder{
+            font-style: italic;
+            color: rgba(255,255,255,0.4);
+        }
+    }
+}
+
+
+/* クラシックブロック用 */
+.hcb_wrap pre.prism::before{
+    color: #333;
+    background: #ebebeb;
+}
+
