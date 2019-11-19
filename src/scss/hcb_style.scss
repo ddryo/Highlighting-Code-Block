@@ -1,175 +1,177 @@
 /*
     カラーリングに関係ない共通設定
  */
+$hcbPaddingY: 1.75em;
 
- /* scrollbar */
-.hcb_wrap pre::-webkit-scrollbar{
+/* scrollbar */
+.hcb_wrap pre::-webkit-scrollbar {
     height: 6px;
 }
-.hcb_wrap pre::-webkit-scrollbar-track{
+
+.hcb_wrap pre::-webkit-scrollbar-track {
     background: #f7f7f7;
-    border:none;
+    border: none;
 }
-.hcb_wrap pre::-webkit-scrollbar-thumb{
-    background: rgba(0, 0, 0, 0.1);
+
+.hcb_wrap pre::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .1);
     border-radius: 3px;
 }
 
 /* code wrapper*/
-.hcb_wrap{
-	position: relative;
-	display: block;
-	margin: 2em 0;
-	padding: 0;
-	z-index: 0;
-	
-	code,
-	pre{
-		text-align: left;
-		white-space: pre;
-		word-spacing: normal;
-		word-break: normal;
-		word-wrap: normal;
-		tab-size: 4;
-		hyphens: none;
-		border: none;
-	}
+.hcb_wrap {
+    position: relative;
+    z-index: 0;
+    display: block;
+    margin: 2em 0;
+    padding: 0;
 
-	pre{
-		position: static;
-		display: block;
-		line-height: 1;
-		letter-spacing: 0.1px;
-		font-family: Menlo, Consolas, 'メイリオ', sans-serif;
-		margin: 0;
-		padding: 1.75em 1.5em;
-		border-radius: 0;
-		box-sizing: border-box;
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
-		// z-index: 0;
-	}
+    code,
+    pre {
+        white-space: pre;
+        text-align: left;
+        word-wrap: normal;
+        word-break: normal;
+        word-spacing: normal;
+        tab-size: 4;
+        hyphens: none;
+        border: none;
+    }
 
-	code,
-	span{
-		font-family: inherit;
-		font-size: inherit;
-		line-height: 1.6;
-		box-sizing: border-box;
-	}
+    pre {
+        position: static;
+        display: block;
+        box-sizing: border-box;
+        margin: 0;
+        padding: $hcbPaddingY 1.5em;
+        overflow: auto;
+        font-family: Menlo, Consolas, "メイリオ", sans-serif;
+        line-height: 1;
+        letter-spacing: .1px;
+        border-radius: 0;
+        -webkit-overflow-scrolling: touch;
+        // z-index: 0;
+    }
+
+    code,
+    span {
+        box-sizing: border-box;
+        font-size: inherit;
+        font-family: inherit;
+        line-height: 1.5;
+    }
 }
 
 /* Inline code */
 :not(pre) > code.prism {
-	padding: .1em;
-	border-radius: .3em;
-	white-space: normal;
+    padding: .1em;
+    white-space: normal;
+    border-radius: .3em;
 }
-
 
 /* line highlight */
 .hcb_wrap .line-highlight {
-	position: absolute;
-	left: 0;
-	right: 0;
-	padding: 0;
-	margin-top: 1.6em; /* Same as .prism’s padding-top */
-	pointer-events: none;
-	line-height: inherit;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-top: $hcbPaddingY;
+    padding: 0;
+    font-size: inherit;
+    line-height: inherit;
     white-space: pre;
-    font-size: inherit
+    pointer-events: none;
 }
 
-.hcb_wrap .line-highlight:before,
-.hcb_wrap .line-highlight[data-end]:after {
-	content: attr(data-start);
-	position: absolute;
-	top: 0em;
-	left: 0em;
-	min-width: 1.6em;
+.hcb_wrap .line-highlight::before,
+.hcb_wrap .line-highlight[data-end]::after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    min-width: 1.5em; // ?
     padding: 1px 2px;
     font-weight: bold;
     font-size: 12px;
     line-height: inherit;
-	text-align: center;
-    vertical-align: .3em;
-    vertical-align: middle;
-	border-radius: 0px;
+    text-align: center;
     text-shadow: none;
-    box-sizing: border-box;
+    vertical-align: middle;
+    border-radius: 0;
+    content: attr(data-start);
 }
 
-.hcb_wrap .line-highlight[data-end]:after {
-	content: attr(data-end);
-	top: auto;
-	bottom: 0em;
+.hcb_wrap .line-highlight[data-end]::after {
+    top: auto;
+    bottom: 0;
+    content: attr(data-end);
 }
 
-.hcb_wrap .line-numbers .line-highlight:before,
-.hcb_wrap .line-numbers .line-highlight:after {
-	content: none;
+.hcb_wrap .line-numbers .line-highlight::before,
+.hcb_wrap .line-numbers .line-highlight::after {
+    content: none;
 }
 
 /* line numbers */
 .hcb_wrap pre.line-numbers {
-	position: static;  /* relative -> hcb_wrap */
-	padding-left: 3.75em;
-	counter-reset: linenumber;
+    position: static; /* relative -> hcb_wrap */
+    padding-left: 3.75em;
+    counter-reset: linenumber;
 }
 
 .hcb_wrap pre.line-numbers > code {
-	position: relative;
-	white-space: inherit;
+    position: relative;
+    white-space: inherit;
 }
 
 .hcb_wrap .line-numbers .line-numbers-rows {
-	position: absolute;
-	pointer-events: none;
-	top: -2px;
-	font-size: inherit;
-	left: -3.75em;
-	width: 3em;  /* works for line-numbers below 1000 lines */
-	letter-spacing: -1px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+    position: absolute;
+    top: -2px;
+    left: -3.75em;
+    width: 3em; /* works for line-numbers below 1000 lines */
+    font-size: inherit;
+    letter-spacing: -1px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
 }
 
 .hcb_wrap .line-numbers-rows > span {
-	pointer-events: none;
-	display: block;
-	counter-increment: linenumber;
+    display: block;
+    counter-increment: linenumber;
+    pointer-events: none;
 }
 
-.hcb_wrap .line-numbers-rows > span:before {
-	content: counter(linenumber);
-	display: block;
-	padding-right: 0.8em;
-	text-align: right;
+.hcb_wrap .line-numbers-rows > span::before {
+    display: block;
+    padding-right: .8em;
+    text-align: right;
+    content: counter(linenumber);
 }
 
 /* Lang Name */
-.hcb_wrap pre::before{
-  content: attr(data-lang);
-  position: absolute;
-  top: 0px;
-  right: 0;
-//   display: block;
-//   width: max-content;
-  min-width: 4em;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  line-height: 20px;
-  text-align: center;
-  padding: 0 10px;
-  box-sizing: border-box;
-  z-index: 1;
+.hcb_wrap pre::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    //   display: block;
+    //   width: max-content;
+    min-width: 4em;
+    padding: 0 10px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+    text-align: center;
+    content: attr(data-lang);
 }
-.hcb_wrap pre[data-file]::before{
-	content: attr(data-file);
-	background-repeat: no-repeat;
-	background-position: center left 8px;
-	background-size: auto 10px;
-	padding: 0 8px 0 20px;
+
+.hcb_wrap pre[data-file]::before {
+    padding: 0 8px 0 20px;
+    background-repeat: no-repeat;
+    background-position: center left 8px;
+    background-size: auto 10px;
+    content: attr(data-file);
 }
