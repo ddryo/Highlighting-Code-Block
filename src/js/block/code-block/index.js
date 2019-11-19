@@ -4,8 +4,9 @@ import classnames from 'classnames';
  * wp objects
  */
 const { __ } = wp.i18n,
-    { RichText } = wp.editor,
-    { registerBlockType } = wp.blocks;
+    { RichText, InspectorControls } = wp.editor,
+    { registerBlockType } = wp.blocks,
+    { Fragment } = wp.element;
 
 /**
  * アイコン
@@ -16,6 +17,11 @@ import { hcbIcon } from './_icon';
  * 使用する関数たち
  */
 import { setHeightCodeBlocks, sanitizeCodeblock } from './_utils';
+
+/**
+ * InspectorControls
+ */
+import HcbSidePanels from './_panels';
 
 /**
  * 言語情報をグローバル変数から受け取る。object になっていなければアラート。
@@ -86,7 +92,6 @@ registerBlockType('loos-hcb/code-block', {
             setHeightCodeBlocks(hcbTextarea);
         }, 10);
 
-        let hcbElemList = [];
         let optionsList = [<option value=''>- Lang Select -</option>];
 
         Object.keys(hcbLangs).forEach((key) => {
@@ -97,58 +102,61 @@ registerBlockType('loos-hcb/code-block', {
         let preClass = 'prism ' + attributes.isLineShow + '-numbers lang-' + attributes.langType;
         setAttributes({ preClass: preClass });
 
-        hcbElemList.push(
-            <textarea
-                className='hcb_textarea'
-                placeholder='Your Code...'
-                value={attributes.code}
-                onChange={(e) => {
-                    setAttributes({ code: e.target.value });
-                    setHeightCodeBlocks(e.target);
-                }}
-            ></textarea>
+        return (
+            <Fragment>
+                <InspectorControls>
+                    <HcbSidePanels {...props} />
+                </InspectorControls>
+                <div className={blockClass}>
+                    <textarea
+                        className='hcb_textarea'
+                        placeholder='Your Code...'
+                        value={attributes.code}
+                        onChange={(e) => {
+                            setAttributes({ code: e.target.value });
+                            setHeightCodeBlocks(e.target);
+                        }}
+                    ></textarea>
+                    <div className='select_wrap'>
+                        <select
+                            value={attributes.langType}
+                            onChange={(e) => {
+                                const selected = e.target.querySelector('option:checked');
+                                let selectedLangName = selected.text;
+                                if ('- Lang Select -' === selectedLangName) {
+                                    selectedLangName = '';
+                                }
+                                setAttributes({ langType: selected.value });
+                                setAttributes({ langName: selectedLangName });
+                            }}
+                        >
+                            {optionsList}
+                        </select>
+                        <input
+                            type='text'
+                            className='num_input'
+                            value={attributes.dataLineNum}
+                            placeholder='data-line属性の値'
+                            onChange={(e) => {
+                                setAttributes({ dataLineNum: e.target.value });
+                            }}
+                        />
+                        <input
+                            type='text'
+                            className='filename_input'
+                            value={attributes.fileName}
+                            placeholder='ファイル名'
+                            onChange={(e) => {
+                                setAttributes({ fileName: e.target.value });
+                            }}
+                        />
+                    </div>
+                </div>
+            </Fragment>
         );
-
-        hcbElemList.push(
-            <div className='select_wrap'>
-                <select
-                    value={attributes.langType}
-                    onChange={(e) => {
-                        const selected = e.target.querySelector('option:checked');
-                        let selectedLangName = selected.text;
-                        if ('- Lang Select -' === selectedLangName) {
-                            selectedLangName = '';
-                        }
-                        setAttributes({ langType: selected.value });
-                        setAttributes({ langName: selectedLangName });
-                    }}
-                >
-                    {optionsList}
-                </select>
-                <input
-                    type='text'
-                    className='num_input'
-                    value={attributes.dataLineNum}
-                    placeholder='data-line属性の値'
-                    onChange={(e) => {
-                        setAttributes({ dataLineNum: e.target.value });
-                    }}
-                />
-                <input
-                    type='text'
-                    className='filename_input'
-                    value={attributes.fileName}
-                    placeholder='ファイル名'
-                    onChange={(e) => {
-                        setAttributes({ fileName: e.target.value });
-                    }}
-                />
-            </div>
-        );
-        return <div className={blockClass}>{hcbElemList}</div>;
     },
     save: (props) => {
-        const attributes = props.attributes;
+        const { attributes } = props;
         let preData = {
             className: attributes.preClass,
         };

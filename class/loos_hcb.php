@@ -218,15 +218,6 @@ class LOOS_HCB {
                 LOOS_HCB_VERSION
             );
 
-            /* Script to Add Custom Blocks */
-            // wp_enqueue_script( 
-            //     'hcb-gutenberg-script',
-            //     plugins_url( 'assets/js/hcb_gutenberg_script.js', LOOS_HCB_FILE ),
-            //     array(),
-            //     LOOS_HCB_VERSION,
-            //     true
-            // );
-
         } );
 
 
@@ -239,7 +230,7 @@ class LOOS_HCB {
             
             wp_register_script(
                 'hcb-script',
-                LOOS_HCB_URL.'/assets/js/hcb_gutenberg_script.js',
+                LOOS_HCB_URL.'/assets/js/hcb_block.js',
                 array('wp-blocks', 'wp-element', 'wp-polyfill'), //$asset_file['dependencies'],
                 LOOS_HCB_VERSION, //$asset_file['version']
                 true

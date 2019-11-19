@@ -7,23 +7,18 @@ module.exports = {
     // メインとなるJavaScriptファイル（エントリーポイント）
     entry: {
         hcb_script: './src/js/hcb_script.js',
-        hcb_gutenberg_script: './src/js/hcb_gutenberg_script.js',
+        hcb_block: './src/js/hcb_block.js',
     },
 
     // ファイルの出力設定
     output: {
         // 出力ファイル名
-        //filename: 'main.js',
         filename: '[name].js',
 
         //pathはgulp側で。
     },
     module: {
         rules: [
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader',
-            },
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
