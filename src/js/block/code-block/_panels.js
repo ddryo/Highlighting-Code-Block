@@ -1,5 +1,7 @@
-const { PanelBody, RadioControl } = wp.components;
+// @wp
+import { PanelBody, RadioControl } from '../@wp';
 
+// コンポーネントを export
 export default (props) => {
     const { attributes, setAttributes, clientId, className } = props;
     let isLineShow = attributes.isLineShow;

@@ -3,13 +3,10 @@ import classnames from 'classnames';
 /**
  * wp objects
  */
-const { __ } = wp.i18n,
-    { RichText, InspectorControls } = wp.editor,
-    { registerBlockType } = wp.blocks,
-    { Fragment } = wp.element;
+import { __, RichText, InspectorControls, registerBlockType, Fragment } from '../@wp';
 
 /**
- * アイコン
+ * アイコンS
  */
 import { hcbIcon } from './_icon';
 
