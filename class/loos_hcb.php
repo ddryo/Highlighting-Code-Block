@@ -167,14 +167,8 @@ class LOOS_HCB {
             /** script */
             wp_enqueue_script( 'hcb_script', LOOS_HCB_URL. '/assets/js/hcb_script.js', array('hcb_prism_script'), LOOS_HCB_VERSION, true );
 
-            /** style */
-            // wp_enqueue_style(
-            //     'hcb_style',
-            //     plugins_url( "assets/css/hcb_style.css", LOOS_HCB_FILE ),
-            //     array(),
-            //     LOOS_HCB_VERSION
-            // );
-        },20 );
+
+        }, 20 );
 
 
         /**

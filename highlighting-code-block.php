@@ -2,8 +2,8 @@
 /*
 Plugin Name: Highlighting Code Block
 Plugin URI: https://wemo.tech/
-Description: シンタックスハイライト機能を持つコードブロックを簡単に追加できます。新旧エディタ対応。
-Version: 1.0.6
+Description: シンタックスハイライト機能を持つコードブロックを簡単に追加できます。ブロックエディター対応。
+Version: 1.0.7
 Author: LOOS WEB STUDIO
 Author URI: https://loos-web-studio.com/
 License: GPL2
@@ -56,8 +56,8 @@ if ( (double) $phpver < 5.6 ) {
  * Defined HCB const.
  */
 if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
-    // define( 'LOOS_HCB_VERSION', '1.0.6' );
-    define( 'LOOS_HCB_VERSION', date('Ymdgis') ); //開発用
+    define( 'LOOS_HCB_VERSION', '1.0.7' );
+    // define( 'LOOS_HCB_VERSION', date('Ymdgis') ); //開発用
 }
 if ( ! defined( 'LOOS_HCB_FILE' ) ) {
     define( 'LOOS_HCB_FILE', __FILE__ );
