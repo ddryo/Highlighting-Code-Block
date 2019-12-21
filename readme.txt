@@ -15,9 +15,10 @@ Add code block with syntax highlighting using prism.js. (Available for Gutenberg
 
 "Highlighting Code Block" allows you to add a syntax-highlighted code block with just a click.
 
-新旧エディタ両方に対応しており、どちらのエディタでもコードの記述をサポートいたします。
+It supports both "Block Editor" and "Classic Editor".
+(However, we recommend using it in the "Block Editor".)
 
-当プラグインの詳細な説明については[ こちらのページ ](https://wemo.tech/2122/)をご覧ください。
+Please see [this page](https://wemo.tech/2122/) for a detailed description of this plugin.(Japanese article)
 
 = How to use （For Block Editor） =
 - Open the "Formatting" category of the Block Inserter.
