@@ -149,7 +149,7 @@ class LOOS_HCB {
          * Admin Scripts
          */
         add_action('admin_enqueue_scripts', function () {
-            wp_enqueue_style( 'hcb_admin', LOOS_HCB_URL. '/assets/css/hcb_admin.css', array(), LOOS_HCB_VERSION );
+            wp_enqueue_style( 'hcb_admin', LOOS_HCB_URL. '/assets/css/hcb_admin.css', [], LOOS_HCB_VERSION );
         });
 
 
@@ -159,13 +159,13 @@ class LOOS_HCB {
         add_action( 'wp_enqueue_scripts', function(){
 
             /** Prism.js */
-            wp_enqueue_script( 'hcb_prism_script', $this->prism_js_path, array(), LOOS_HCB_VERSION, true );
+            wp_enqueue_script( 'hcb_prism_script', $this->prism_js_path, [], LOOS_HCB_VERSION, true );
 
             /** Coloring File */
-            // wp_enqueue_style( 'hcb_prism_style', $this->prism_css_path, array(), LOOS_HCB_VERSION );
+            // wp_enqueue_style( 'hcb_prism_style', $this->prism_css_path, [], LOOS_HCB_VERSION );
 
             /** script */
-            wp_enqueue_script( 'hcb_script', LOOS_HCB_URL. '/assets/js/hcb_script.js', array('hcb_prism_script'), LOOS_HCB_VERSION, true );
+            wp_enqueue_script( 'hcb_script', LOOS_HCB_URL. '/assets/js/hcb_script.js', ['hcb_prism_script'], LOOS_HCB_VERSION, true );
 
 
         }, 20 );
@@ -208,7 +208,7 @@ class LOOS_HCB {
             wp_enqueue_style( 
                 'hcb-gutenberg-style',
                 plugins_url( 'assets/css/editor_'. LOOS_HCB::$settings[ 'editor_coloring' ] .'.css', LOOS_HCB_FILE ),
-                array(),
+                [],
                 LOOS_HCB_VERSION
             );
 
@@ -223,18 +223,27 @@ class LOOS_HCB {
             // $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
             
             wp_register_script(
-                'hcb-script',
+                'loos-hcb-script',
                 LOOS_HCB_URL.'/assets/js/hcb_block.js',
-                array('wp-blocks', 'wp-element', 'wp-polyfill'), //$asset_file['dependencies'],
+                ['wp-blocks', 'wp-element', 'wp-polyfill'], //$asset_file['dependencies'],
                 LOOS_HCB_VERSION, //$asset_file['version']
                 true
             );
 
             register_block_type(
-            'loos-hcb/code-block', [
-                'editor_script' => 'hcb-script',
-            ]
-        );
+                'loos-hcb/code-block', [
+                    'editor_script' => 'loos-hcb-script',
+                ]
+            );
+
+            // JS用翻訳ファイルの読み込み
+            if ( function_exists( 'wp_set_script_translations' ) ) {
+                wp_set_script_translations(
+                    'loos-hcb-script',
+                    LOOS_HCB_DOMAIN,
+                    LOOS_HCB_PATH . 'languages'
+                );
+            }
 
         } );
 
@@ -345,10 +354,9 @@ class LOOS_HCB {
             /* script */
             $hcb_script = "";
             $langs      = mb_convert_kana( LOOS_HCB::$settings[ 'support_langs' ], "as");
-            $langs      = str_replace(array("\r\n", "\r", "\n"), '', $langs);
+            $langs      = str_replace(["\r\n", "\r", "\n"], '', $langs);
             $hcb_script .= 'var hcbLangArray = {'. $langs .'};';
             //$hcb_script .= 'var hcbShowLinenum = "'. LOOS_HCB::$settings[ 'show_linenum' ].'";';
-
             echo '<style>'. $hcb_style .'</style>'."\n";
             echo '<script>'. $hcb_script .'</script>'."\n";
 

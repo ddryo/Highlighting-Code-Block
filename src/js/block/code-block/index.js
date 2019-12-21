@@ -21,6 +21,11 @@ import { setHeightCodeBlocks, sanitizeCodeblock } from './_utils';
 import HcbSidePanels from './_panels';
 
 /**
+ * テキストドメイン
+ */
+const textDomain = 'loos-hcb';
+
+/**
  * 言語情報をグローバル変数から受け取る。object になっていなければアラート。
  * Receive language information from global variables. Alert if not object.
  */
@@ -159,7 +164,7 @@ registerBlockType('loos-hcb/code-block', {
                             type='text'
                             className='num_input'
                             value={attributes.dataLineNum}
-                            placeholder='data-line属性の値'
+                            placeholder={__('"data-line" value', textDomain)} //data-line属性値
                             onChange={(e) => {
                                 setAttributes({ dataLineNum: e.target.value });
                             }}
@@ -168,7 +173,7 @@ registerBlockType('loos-hcb/code-block', {
                             type='text'
                             className='filename_input'
                             value={attributes.fileName}
-                            placeholder='ファイル名'
+                            placeholder={__('file name', textDomain)} //ファイル名
                             onChange={(e) => {
                                 setAttributes({ fileName: e.target.value });
                             }}

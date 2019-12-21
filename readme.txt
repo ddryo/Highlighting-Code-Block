@@ -1,80 +1,80 @@
 === Highlighting Code Block ===
 Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
-Tags: SyntaxHighlighter, syntax highlighting, sourcecode, block-editor, classic editor, Guternberg,
-Requires at least: 4.6
+Tags: code, syntax, code highlighting, syntax highlighting, syntax highlight, block, editor, Guternberg,
+Requires at least: 5.0
 Tested up to: 5.3
 Stable tag: 1.0.7
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-「Highlighting Code Block」は、綺麗にシンタックスハイライトされたコードブロックをクリックだけで追加できるようにします。
+Add code block with syntax highlighting using prism.js. (Available for Gutenberg and Classic Editor)
 
 == Description ==
 
-「Highlighting Code Block」は、綺麗にシンタックスハイライトされたコードブロックをクリックだけで追加できるようにします。
+"Highlighting Code Block" allows you to add a syntax-highlighted code block with just a click.
 
 新旧エディタ両方に対応しており、どちらのエディタでもコードの記述をサポートいたします。
 
 当プラグインの詳細な説明については[ こちらのページ ](https://wemo.tech/2122/)をご覧ください。
 
+= How to use （For Block Editor） =
+- Open the "Formatting" category of the Block Inserter.
+- There is a custom block named "Highlighing Code Block".
+- Select it, the block will be inserted.
+- Select the language of the code and enter any code.
 
-= インストール・有効化したら =
-
-- ブロックエディタでは、「フォーマット」のカテゴリーの中に「Highlighting Code Block」という名前のコードブロックが用意されているはずです。
-「Highlighting Code Block」を選択したら、セレクトボックス付きのコードブロックが出現します。
-お好きな言語を選び、コードを記述してください。
-- クラシックエディタでは、ツールバー（デフォルトでは２段目）に「コードブロック」と書かれたセレクトボックスが出現しているはずです。
-こちらのセレクトボックスからお好きな言語を選択すると、コードブロック（preタグ）が挿入されます。
-すでに入力済みのテキストを選択した状態でコードブロックを選択することも可能です。自動でラッピングされます。（改行が含まれる場合はうまくラッピングできません。）
-
-
-= 動作しない？ =
-
-当プラグインはPHPバージョン5.6以降でのみ動作します。
-ご使用のPHPバージョンをご確認ください。
+= How to use （For Classic Editor） =
+- You should see a select box labeled "Code Block" on the toolbar (2nd row by default).
+- When you select a language from the select box, a code block (pre tag) is inserted.
 
 
+= If it doesn't work =
 
-= 各種設定 =
+This plugin works only with PHP version 5.6 or later, WordPress 5.0 or later.
+Please check your PHP version or WordPress version.
 
-管理画面の左メニュー「設定」項目の中、「CODE BLOCK」という項目から設定を変更できます。
+
+
+= About settings =
+
+The menu "CODE BLOCK" should be added to "Settings" in the left menu of the management screen.
+Settings related to this plugin are set in this menu.
 
 
 == Installation ==
 
+This plugin can be installed directly from your site.
 
-= 自動インストール =
-1. プラグインの検索フィールドより「Highlighting Code Block」と入力します。
-2. 当プラグインを見つけたら、"今すぐインストール"をクリックしてインストールし、有効化してください。
-
-= 手動インストール =
-1.「highlighting-code-block」フォルダ全体を /wp-content/plugins/ ディレクトリにアップロードします。
-2.「プラグイン」メニューからプラグインを有効化します。
+1. Log in and navigate to "Plugins" → "Add New".
+2. Type "Highlighting Code Block" in the search field and press Enter.
+3. Locate the plugin in the list of search results and click "Install Now".
+4. Once installed, click the "Activate" button.
 
 
 == Frequently Asked Questions ==
 
-= 使用可能な言語について =
-デフォルトでは以下の言語が使用可能です。
-  - HTML
-  - CSS
-  - SCSS
-  - JavaScript
-  - TypeScript
-  - PHP
-  - Ruby
-  - Python
-  - Swift
-  - C
-  - C#
-  - C++
-  - Objective-C
-  - SQL
-  - JSON
-  - Bash
-  - Git
+= Available languages =
+The following languages are available by default.
+
+- HTML
+- CSS
+- SCSS
+- JavaScript
+- TypeScript
+- PHP
+- Ruby
+- Python
+- Swift
+- C
+- C#
+- C++
+- Objective-C
+- SQL
+- JSON
+- Bash
+- Git
 
 
 == Screenshots ==
@@ -94,36 +94,39 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Changelog ==
 
+= 1.0.8 =
+English is supported.
+
+
 = 1.0.7 =
-- WordPress5.3に対応。
-- HCBのコードブロックの左右marginを削除し、テーマに任せるように変更。
-- コアの「ソースコードブロック」との変換を可能に。
-- ブロックの実装コードを修正。
+- Compatible with WordPress5.3.
+-  Deleted the left and right margins of the HCB code block, and left it to the theme.
+- Enabled conversion with core "source code block".
 
 = 1.0.6 =
-- 読み込むCSSファイルを圧縮
-- 一部head内でstyleタグで読み込むように変更
-- フォントファミリーの設定が反映されない不具合を修正
-- その他、CSSやJSのコード整理
+- Compress CSS file to read.
+- Changed to load some CSS with style tag in head.
+- Fixed a bug that font family settings were not reflected.
+- Code cleanup for CSS and JS
 
 = 1.0.5 =
-scriptの読み込みをwp_footerへ移動
-HCBブロックのロゴを変更
-コードブロックのfont-familyが変更を指定できるようになりました。
+- Move reading script to wp_footer.
+- Changed HCB block logo.
+- You can now set font-family for code blocks.
 
 = 1.0.4 =
-WordPress5.2.1への対応
-コードブロックのfont-family変更（windowsのフォントが読みにくかったので）
-コードブロックにファイル名を設定できるようにしました
+- Support for WordPress 5.2.1
+- Changed font-family of code block.
+- The file name can be set to the code block.
 
 = 1.0.3 =
-WordPress5.1.1への対応
+Support for WordPress 5.1.1
 
 = 1.0.2 =
-Change Readme.txt
+Change readme.txt
 
 = 1.0.1 =
 Comment delete.
 
 = 1.0 =
-Initial working version.
+Initial release.

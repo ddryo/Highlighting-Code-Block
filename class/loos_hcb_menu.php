@@ -37,7 +37,9 @@ class LOOS_HCB_Menu {
      * 設定ページ表示関数
      */
     public function hcb_settings_cb() {
-        echo '<div class="wrap hcb_setting"><h1>Highlighting Code Block 設定</h1><form action="options.php" method="post">';
+        echo '<div class="wrap hcb_setting">'.
+            '<h1>'. __( 'Highlighting Code Block settings', LOOS_HCB_DOMAIN ) .'</h1>'.
+            '<form action="options.php" method="post">';
             do_settings_sections( self::PAGE_NAME ); // このページに登録されたセクションの表示
             settings_fields( self::PAGE_NAME );      // register_setting() で使用されるグループ名に一致する必要がある。
             submit_button();
@@ -55,63 +57,68 @@ class LOOS_HCB_Menu {
          * 同じオプションに配列で値を保存するので、register_setting()は１つだけ
          *   @param : グループ名・データベースのオプション名・(サニタイズ関数)
          */
-        register_setting( self::PAGE_NAME, LOOS_HCB::DB_NAME['settings'] );  
+        register_setting( self::PAGE_NAME, LOOS_HCB::DB_NAME['settings'] );
 
         /**
          * 「基本設定」セクション
          */
         add_settings_section(
             self::SECTION_NAME,  //ID名
-            '基本設定',            //セクションのタイトル
-            '',                  //セクションを出力する関数名
-            self::PAGE_NAME      //セクションを表示する設定ページ
+            __( 'Basic settings', LOOS_HCB_DOMAIN ), //セクションのタイトル
+            '', //セクションを出力する関数名
+            self::PAGE_NAME //セクションを表示する設定ページ
         );
         // 言語名を表示するかどうか
         add_settings_field(
             'show_lang',                         //ID名
-            '言語名の表示',                         //フィールドのタイトル
+            __( 'Display language name', LOOS_HCB_DOMAIN ), //フィールドのタイトル
             array( $this, 'settings_field_cb'),  //フィールドを出力する関数。引数として配列を一つ（$args）渡す
             self::PAGE_NAME,                     //フィールドを表示する設定ページ
             self::SECTION_NAME,                  //フィールドを表示する設定ページのセクション
             array(
                 'id' => 'show_lang',
                 'type' => 'checkbox',
-                'label' => 'コードブロックに言語名を表示する',
-                'desc' => 'チェックすると、サイト表示側のコードに言語の種類が表示されます。'
+                'label' => __( 'Display language name in code block', LOOS_HCB_DOMAIN ),
+                'desc' => __( 'If checked, the language type is displayed in the code on the site display side.', LOOS_HCB_DOMAIN )
             )
         );
+
         // 行数を表示するかどうか
         add_settings_field(
             'show_linenum',
-            '行数の表示',
+             __( 'Display settings for the number of rows', LOOS_HCB_DOMAIN ),
             array( $this, 'settings_field_cb'),
             self::PAGE_NAME,
             self::SECTION_NAME,
             array(
                 'id' => 'show_linenum',
                 'type' => 'checkbox',
-                'label' => 'コードブロックに行数を表示する',
-                'desc' => 'チェックすると、サイト表示側のコードの左端に行数が表示されます。'
+                'label' => __( 'Show line count in code block', LOOS_HCB_DOMAIN ),
+                'desc' => __( 'If checked, the number of lines will be displayed on the left end of the code on the site display side.', LOOS_HCB_DOMAIN ), 
             )
         );
         // font-smoothing設定
         add_settings_field(
             'font_smoothing',
-            'フォントスムージング',
+            __( 'Font smoothing', LOOS_HCB_DOMAIN ),
             array( $this, 'settings_field_cb'),
             self::PAGE_NAME,
             self::SECTION_NAME,
             array(
                 'id' => 'font_smoothing',
                 'type' => 'checkbox',
-                'label' => 'フォントスムージングをオンにする',
-                'desc' => 'コードブロックに<code>-webkit-font-smoothing: antialiased;</code>と<code>-moz-osx-font-smoothing: grayscale;</code>が追加されます。'
+                'label' => __( 'Turn on font smoothing', LOOS_HCB_DOMAIN ),
+                'desc' => sprintf(
+                    __( 'Add %s and %s to the code block.', LOOS_HCB_DOMAIN ),
+                    '<code>-webkit-font-smoothing: antialiased;</code>',
+                    '<code>-moz-osx-font-smoothing: grayscale;</code>'
+                ),
             )
         );
         // コードカラーリング（フロント）
         add_settings_field(
             'front_coloring',
-            'コードカラーリング（サイト表示）',
+             __( 'Cord coloring (front side)', LOOS_HCB_DOMAIN ),
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,   
             self::SECTION_NAME,
@@ -127,7 +134,7 @@ class LOOS_HCB_Menu {
         // コードカラーリング（エディタ）
         add_settings_field(
             'editor_coloring',
-            'コードカラーリング（エディタ内）',
+            __( 'Code coloring (editor side)', LOOS_HCB_DOMAIN ),
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,   
             self::SECTION_NAME,
@@ -143,7 +150,7 @@ class LOOS_HCB_Menu {
         // フォントサイズ（PC）
         add_settings_field(
             'fontsize_pc',
-            'フォントサイズ（PC）',
+            __( 'Font Size', LOOS_HCB_DOMAIN ). '(PC)',
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,   
             self::SECTION_NAME,
@@ -159,9 +166,9 @@ class LOOS_HCB_Menu {
         // フォントサイズ（SP）
         add_settings_field(
             'fontsize_sp',
-            'フォントサイズ（SP）',
+            __( 'Font Size', LOOS_HCB_DOMAIN ). '(SP)',
             array($this, 'settings_field_cb'),
-            self::PAGE_NAME,   
+            self::PAGE_NAME,
             self::SECTION_NAME,
             array(
                 'id' => 'fontsize_sp',
@@ -172,12 +179,13 @@ class LOOS_HCB_Menu {
                 'desc' => ''
             )
         );
+
         // フォントファミリー
         add_settings_field(
-            'fontsize_sp',
-            'font-family: <br>コードのフォント',
+            'font_family',
+            __( '"Font-family" in code', LOOS_HCB_DOMAIN ),
             array($this, 'settings_field_cb'),
-            self::PAGE_NAME,   
+            self::PAGE_NAME,
             self::SECTION_NAME,
             array(
                 'id' => 'font_family',
@@ -185,15 +193,16 @@ class LOOS_HCB_Menu {
                 'rows' => 2,
                 'before' => '',
                 'after' => '',
-                'desc' => 'デフォルト：<code>Menlo, Consolas, "メイリオ", sans-serif;</code>'
+                'desc' => __( 'Default' ). ' : <code>Menlo, Consolas, "メイリオ", sans-serif;</code>'
             )
         );
+        
         // ブロックエディタのコンテンツ幅
         add_settings_field(
             'block_width',
-            'ブロックエディタのコンテンツ幅',
+            __( 'Block editor maximum width', LOOS_HCB_DOMAIN ),
             array($this, 'settings_field_cb'),
-            self::PAGE_NAME,   
+            self::PAGE_NAME,
             self::SECTION_NAME,
             array(
                 'id' => 'block_width',
@@ -201,18 +210,29 @@ class LOOS_HCB_Menu {
                 'input_type' => 'number',
                 'before' => '',
                 'after' => ' px',
-                'desc' => 'コードの執筆に適した幅を設定できます。( WordPressのデフォルトは<code>610px</code>です)',
+                // 'desc' => ''
             )
         );
+
 
         /**
          * 「高度な設定設定」セクション
          */
-        add_settings_section( self::SECTION_NAME2, '高度な設定', '', self::PAGE_NAME);
+        add_settings_section(
+            self::SECTION_NAME2,
+            __( 'Advanced settings', LOOS_HCB_DOMAIN ),
+            '',
+            self::PAGE_NAME
+        );
+
+
+        
+
+        
         // 使用する言語設定
         add_settings_field(
             'support_langs',
-            '使用する言語設定',
+            __( 'Language set to use', LOOS_HCB_DOMAIN ),
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,
             self::SECTION_NAME2,
@@ -220,10 +240,14 @@ class LOOS_HCB_Menu {
                 'id' => 'support_langs',
                 'type' => 'textarea',
                 'rows' => 16,
-                'desc' => '「<code>クラスキー:"言語名"</code>」の形式で「<code>,</code>」（カンマ）区切りで記述してください。（改行の有無はどちらでも可。）
-                        <br>&emsp;&emsp;・「クラスキー」は、prism.jsで使用されるクラス名、「lang-◯◯」の「◯◯」に該当する部分です
-                        <br>&emsp;&emsp;・「言語名」は、セレクトボックスおよびコードブロック上に表示されます
-                        <br>※ デフォルトでサポートされていない言語を使用する場合、「独自prism.js」の設定と併用してください。',
+                'desc' => sprintf(
+                    __( 'Write in the format of %s, separated by "," (comma).', LOOS_HCB_DOMAIN ),
+                    '<code>'. __('class-key:"language-name"', LOOS_HCB_DOMAIN ) .'</code>'
+                ).
+                '<br>&emsp;- '.__('"class-key" is the class name used in prism.js (the part corresponding to "◯◯" in "lang- ◯◯")', LOOS_HCB_DOMAIN ). 
+                '<br> '.__('* If you use a language that is not supported by default, please use it together with "Original prism.js" setting.', LOOS_HCB_DOMAIN ).
+                '',
+
                 'after' => '<pre class="default_support_langs"><code>html:"HTML",
 css:"CSS",
 scss:"SCSS",
@@ -244,10 +268,12 @@ git:"Git",</code></pre>',
 
             )
         );
+
+
         // 独自カラーリングファイル
         add_settings_field(
             'prism_css_path',
-            '独自カラーリングファイル',
+            __('Original coloring file', LOOS_HCB_DOMAIN ), 
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,
             self::SECTION_NAME2,
@@ -257,13 +283,13 @@ git:"Git",</code></pre>',
                 'input_type' => 'text',
                 'before' => get_stylesheet_directory_uri()."/ ",
                 'after' => '',
-                'desc' => 'あなたが用意したコードカラーリング用のCSSファイルを読み込みます。'
+                'desc' => __('Load your own CSS file for code coloring.', LOOS_HCB_DOMAIN ),
             )
         );
         // 独自prism
         add_settings_field(
             'prism_js_path',
-            '独自prism.js',
+            __('Original prism.js', LOOS_HCB_DOMAIN ),
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,
             self::SECTION_NAME2,
@@ -273,25 +299,26 @@ git:"Git",</code></pre>',
                 'input_type' => 'text',
                 'before' => get_stylesheet_directory_uri()."/ ",
                 'after' => '',
-                'desc' => '自分専用の言語セットに対応したprism.jsファイルを使用できます。'
+                'desc' => __('You can use the prism.js file corresponding to your own language set.', LOOS_HCB_DOMAIN ),
             )
         );
         // ヘルプ
         add_settings_field(
             'hcb_help',
-            'ヘルプ',
+            __('help', LOOS_HCB_DOMAIN ), //'ヘルプ',
             array($this, 'settings_field_cb'),
             self::PAGE_NAME,
             self::SECTION_NAME2,
             array(
                 'type' => '',
-                'desc' => '
-                ファイルはテーマファイル内にアップロードしてください。
-                <br>
-                ファイルのパスが指定された場合、既存のカラーリングファイルやprism.jsファイルは読み込まれません。
-                <br><br>
-                ※ 現在読み込んでいるprism.jsファイルは<a href="https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+csharp+bash+cpp+ruby+markup-templating+git+java+json+objectivec+php+sql+scss+python+typescript+swift&plugins=line-highlight+line-numbers" target="_blank"> こちら </a>でダウンロードできるJSファイルです。
-                '
+                'desc' => __('When you use each original file, please upload it in the theme folder.', LOOS_HCB_DOMAIN ).
+                '<br>'.
+                __('If you set the path to your own file, the default coloring file and prism.js file will not be loaded..',LOOS_HCB_DOMAIN ).
+                '<br><br>'.
+                sprintf(
+                    __('* The currently loaded prism.js file can be downloaded at %s.', LOOS_HCB_DOMAIN ),
+                    '<a href="https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+csharp+bash+cpp+ruby+markup-templating+git+java+json+objectivec+php+sql+scss+python+typescript+swift&plugins=line-highlight+line-numbers" target="_blank">'.__( 'Here', LOOS_HCB_DOMAIN ) .'</a>'
+                )
             )
         );
     }

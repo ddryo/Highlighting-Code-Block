@@ -1,39 +1,17 @@
 <?php
-/*
-Plugin Name: Highlighting Code Block
-Plugin URI: https://wemo.tech/
-Description: シンタックスハイライト機能を持つコードブロックを簡単に追加できます。ブロックエディター対応。
-Version: 1.0.7
-Author: LOOS WEB STUDIO
-Author URI: https://loos-web-studio.com/
-License: GPL2
-
-/*  Copyright 2018 LOOS WEB STUDIO (email : info@loos-web-studio.com)
- 
-    This program is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License, version 2, as
-     published by the Free Software Foundation.
- 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
- 
-    You should have received a copy of the GNU General Public License
-    along with this program; if not, write to the Free Software
-    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-*/
-
-
 /**
- * Return 403 err if not 'add_filter'.
- */ 
-if ( ! function_exists( 'add_filter' ) ) {
-    header( 'Status: 403 Forbidden' );
-    header( 'HTTP/1.1 403 Forbidden' );
-    exit;
-}
+ * Plugin Name: Highlighting Code Block
+ * Plugin URI: https://wordpress.org/plugins/highlighting-code-block/
+ * Description: Add code block with syntax highlighting using prism.js. (Available for Gutenberg and Classic Editor)
+ * Version: 1.0.7
+ * Author: LOOS WEB STUDIO
+ * Author URI: https://loos-web-studio.com/
+ * License: GPL2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: loos-hcb
+ */
 
+if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
  * Be disabled ~PHP5.6.
@@ -43,7 +21,7 @@ if ( (double) $phpver < 5.6 ) {
     add_action( 'admin_notices', function() { ?>
         <div class="notice notice-error is-dismissible">
             <p>
-                <b>[ SEO SIMPLE PACK ]</b><br>
+                <b>[ Highlighting Code Block ]</b><br>
                 This Plugin is available in PHP since version 5.6 ! <br> (Your PHP is ver. <?php echo phpversion(); ?> )
             </p>
         </div> <?php
@@ -51,6 +29,12 @@ if ( (double) $phpver < 5.6 ) {
     return;
 }
 
+/**
+ * 翻訳用のテキストドメインを定義
+ */
+if ( ! defined( 'LOOS_HCB_DOMAIN' ) ) {
+    define( 'LOOS_HCB_DOMAIN', 'loos-hcb' );
+}
 
 /**
  * Defined HCB const.
@@ -74,6 +58,12 @@ if ( ! defined( 'LOOS_HCB_URL' ) ) {
 
 
 /**
+ * 翻訳ファイルを登録
+ */
+load_plugin_textdomain( LOOS_HCB_DOMAIN, false, basename( LOOS_HCB_PATH ) .'/languages' );
+
+
+/**
  * Autoload Class files.
  */
 spl_autoload_register( function( $classname ) {
@@ -87,9 +77,9 @@ spl_autoload_register( function( $classname ) {
 /**
  * Activation hooks.
  */
-register_activation_hook( LOOS_HCB_FILE,   array('LOOS_HCB_Activation', 'plugin_activate') );
-register_deactivation_hook( LOOS_HCB_FILE, array('LOOS_HCB_Activation', 'plugin_deactivate') );
-register_uninstall_hook( LOOS_HCB_FILE,    array('LOOS_HCB_Activation', 'plugin_uninstall') );
+register_activation_hook( LOOS_HCB_FILE, ['LOOS_HCB_Activation', 'plugin_activate'] );
+register_deactivation_hook( LOOS_HCB_FILE, ['LOOS_HCB_Activation', 'plugin_deactivate'] );
+register_uninstall_hook( LOOS_HCB_FILE, ['LOOS_HCB_Activation', 'plugin_uninstall'] );
 
 
 /**

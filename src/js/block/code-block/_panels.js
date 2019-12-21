@@ -1,28 +1,33 @@
 // @wp
-import { PanelBody, RadioControl } from '../@wp';
+import { __, PanelBody, RadioControl } from '../@wp';
+
+/**
+ * テキストドメイン
+ */
+const textDomain = 'loos-hcb';
 
 // コンポーネントを export
 export default (props) => {
-    const { attributes, setAttributes, clientId, className } = props;
+    const { attributes, setAttributes } = props;
     let isLineShow = attributes.isLineShow;
 
     return (
-        <PanelBody title='HCB設定' initialOpen={true}>
+        <PanelBody title={__('HCB settings', textDomain)} initialOpen={true}>
             <RadioControl
-                label='このブロックの行数表示'
+                label={__('Display number of lines in this block', textDomain)} //
                 // help=''
                 selected={isLineShow}
                 options={[
                     {
-                        label: '個別設定はしない',
+                        label: __('Do not set individually', textDomain), //個別で設定はしない
                         value: 'undefined',
                     },
                     {
-                        label: '行数を表示する',
+                        label: __('Display row count', textDomain), //行数を表示する
                         value: 'on',
                     },
                     {
-                        label: '行数を表示しない',
+                        label: __('Do not display row count', textDomain), //行数を表示しない
                         value: 'off',
                     },
                 ]}
