@@ -4,7 +4,7 @@ Donate link: https://wemo.tech/2122/
 Tags: code, syntax, code highlighting, syntax highlighting, syntax highlight, block, editor, Guternberg,
 Requires at least: 5.0
 Tested up to: 5.3
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -95,13 +95,15 @@ The following languages are available by default.
 
 == Changelog ==
 
+= 1.0.9 =
+Fixed translation file.
+
 = 1.0.8 =
 English is supported.
 
-
 = 1.0.7 =
 - Compatible with WordPress5.3.
--  Deleted the left and right margins of the HCB code block, and left it to the theme.
+- Deleted the left and right margins of the HCB code block, and left it to the theme.
 - Enabled conversion with core "source code block".
 
 = 1.0.6 =
