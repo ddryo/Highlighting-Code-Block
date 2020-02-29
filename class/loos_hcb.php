@@ -156,7 +156,7 @@ class LOOS_HCB {
         /**
          * Front Scripts
          */
-        add_action( 'wp_enqueue_scripts', function(){
+        add_action( 'wp_enqueue_scripts', function() {
 
             /** Prism.js */
             wp_enqueue_script( 'hcb_prism_script', $this->prism_js_path, [], LOOS_HCB_VERSION, true );
