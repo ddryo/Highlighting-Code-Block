@@ -100,20 +100,18 @@ class LOOS_HCB {
 
 		} else {
 
-			$this->prism_js_path = LOOS_HCB_URL.'/assets/js/prism.js';
+			$this->prism_js_path = LOOS_HCB_URL .'assets/js/prism.js';
 
 		}
 
 		/* Set Coloring file path */
 		if ( self::$settings[ 'prism_css_path' ] ) {
 
-			// $this->prism_css_path = get_stylesheet_directory_uri() ."/". self::$settings[ 'prism_css_path' ];
-			self::$prism_css_path = get_stylesheet_directory() ."/". self::$settings[ 'prism_css_path' ];
+			self::$prism_css_path = get_stylesheet_directory() .'/'. self::$settings[ 'prism_css_path' ];
 
 		} else {
 
-			// $this->prism_css_path = LOOS_HCB_URL.'/assets/css/cloring_'. self::$settings[ 'front_coloring' ] .'.css';
-			self::$prism_css_path = LOOS_HCB_PATH.'/assets/css/cloring_'. self::$settings[ 'front_coloring' ] .'.css';
+			self::$prism_css_path = LOOS_HCB_PATH .'assets/css/cloring_'. self::$settings[ 'front_coloring' ] .'.css';
 
 		}
 
@@ -141,7 +139,7 @@ class LOOS_HCB {
 		 * Admin Scripts
 		 */
 		add_action('admin_enqueue_scripts', function () {
-			wp_enqueue_style( 'hcb_admin', LOOS_HCB_URL. '/assets/css/hcb_admin.css', [], LOOS_HCB_VERSION );
+			wp_enqueue_style( 'hcb_admin', LOOS_HCB_URL .'assets/css/hcb_admin.css', [], LOOS_HCB_VERSION );
 		});
 
 
@@ -157,7 +155,7 @@ class LOOS_HCB {
 			// wp_enqueue_style( 'hcb_prism_style', $this->prism_css_path, [], LOOS_HCB_VERSION );
 
 			/** script */
-			wp_enqueue_script( 'hcb_script', LOOS_HCB_URL. '/assets/js/hcb_script.js', ['hcb_prism_script'], LOOS_HCB_VERSION, true );
+			wp_enqueue_script( 'hcb_script', LOOS_HCB_URL .'assets/js/hcb_script.js', ['hcb_prism_script'], LOOS_HCB_VERSION, true );
 
 
 		}, 20 );
@@ -216,7 +214,7 @@ class LOOS_HCB {
 			
 			wp_register_script(
 				'loos-hcb-script',
-				LOOS_HCB_URL.'/assets/js/hcb_block.js',
+				LOOS_HCB_URL .'assets/js/hcb_block.js',
 				['wp-blocks', 'wp-element', 'wp-polyfill'], //$asset_file['dependencies'],
 				LOOS_HCB_VERSION, //$asset_file['version']
 				true
@@ -300,10 +298,10 @@ class LOOS_HCB {
 		add_action( 'wp_head', function() {
 
 			/* HCB Style */
-			$hcb_style = LOOS_HCB::get_file_contents( LOOS_HCB_PATH.'/assets/css/hcb_style.css' );
+			$hcb_style = LOOS_HCB::get_file_contents( LOOS_HCB_PATH .'assets/css/hcb_style.css' );
 			$hcb_style .= LOOS_HCB::get_file_contents( self::$prism_css_path );
 			$hcb_style = str_replace('@charset "UTF-8";', '', $hcb_style);
-			$hcb_style = str_replace('../img', LOOS_HCB_URL.'/assets/img', $hcb_style);
+			$hcb_style = str_replace('../img', LOOS_HCB_URL .'assets/img', $hcb_style);
 			
 
 			/* Font size */

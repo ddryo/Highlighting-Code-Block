@@ -3,14 +3,13 @@
  * Plugin Name: Highlighting Code Block
  * Plugin URI: https://wordpress.org/plugins/highlighting-code-block/
  * Description: Add code block with syntax highlighting using prism.js. (Available for Gutenberg and Classic Editor)
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: LOOS WEB STUDIO
  * Author URI: https://loos-web-studio.com/
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: loos-hcb
  */
-
 if ( !defined( 'ABSPATH' ) ) exit;
 
 /**
@@ -40,7 +39,7 @@ if ( ! defined( 'LOOS_HCB_DOMAIN' ) ) {
  * Defined HCB const.
  */
 if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
-	define( 'LOOS_HCB_VERSION', '1.1.0' );
+	define( 'LOOS_HCB_VERSION', '1.2.0' );
 	// define( 'LOOS_HCB_VERSION', date('Ymdgis') ); //開発用
 }
 if ( ! defined( 'LOOS_HCB_FILE' ) ) {
@@ -53,7 +52,7 @@ if ( ! defined( 'LOOS_HCB_BASENAME' ) ) {
 	define( 'LOOS_HCB_BASENAME', plugin_basename( LOOS_HCB_FILE ) );
 }
 if ( ! defined( 'LOOS_HCB_URL' ) ) {
-	define( 'LOOS_HCB_URL', plugins_url( '', __FILE__ ) );
+	define( 'LOOS_HCB_URL', plugins_url( '/', __FILE__ ) );
 }
 
 
@@ -67,7 +66,11 @@ load_plugin_textdomain( LOOS_HCB_DOMAIN, false, basename( LOOS_HCB_PATH ) .'/lan
  * Autoload Class files.
  */
 spl_autoload_register( function( $classname ) {
-	$file = LOOS_HCB_PATH . 'class/'. mb_strtolower( $classname ) . '.php';
+
+	// LOOS_HCB の付いたクラスだけを対象にする。
+	if ( strpos( $classname, 'LOOS_HCB' ) === false ) return;
+
+	$file = LOOS_HCB_PATH .'class/'. mb_strtolower( $classname ) .'.php';
 	if ( file_exists( $file ) ) {
 		require $file;
 	}

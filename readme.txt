@@ -3,8 +3,8 @@ Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
 Tags: code, syntax, code highlighting, syntax highlighting, syntax highlight, block, editor, Guternberg,
 Requires at least: 5.0
-Tested up to: 5.3
-Stable tag: 1.1.0
+Tested up to: 5.4
+Stable tag: 1.2.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -94,6 +94,12 @@ The following languages are available by default.
 
 
 == Changelog ==
+
+= 1.2.0 =
+- Fixed a bug that CSS cannot be read depending on the server.
+- It is now possible to set whether to display the language name for each block.
+- Even if the language name is set to hidden, it will be displayed if the file name is entered.
+- You can now preview the display of language names and file names in the block editor.
 
 = 1.1.0 =
 Fixed translation file.
