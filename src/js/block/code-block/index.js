@@ -74,9 +74,13 @@ registerBlockType('loos-hcb/code-block', {
             type: 'string',
             default: 'undefined', // -> undefinedはthe_contentにて書き換える
         },
-        preClass: {
+        isShowLang: {
             type: 'string',
+            default: '',
         },
+        // preClass: {
+        //     type: 'string',
+        // },
     },
     supports: {
         className: false, //ブロック要素を作成した際に付く .wp-block-[ブロック名] で自動生成されるクラス名の設定。
@@ -110,7 +114,8 @@ registerBlockType('loos-hcb/code-block', {
 
     edit: (props) => {
         const { attributes, setAttributes, clientId, className } = props;
-        const blockClass = classnames('hcb_wrap', className);
+        const { code, langType, fileName, langName, dataLineNum, isShowLang } = attributes;
+        const blockClass = classnames('hcb_wrap', 'hcb-block', className);
 
         // コードの textarea 高さセット
         setTimeout(() => {
@@ -127,19 +132,25 @@ registerBlockType('loos-hcb/code-block', {
         });
 
         //preタグにつけるクラス名を生成して保存
-        let preClass = 'prism ' + attributes.isLineShow + '-numbers lang-' + attributes.langType;
-        setAttributes({ preClass: preClass });
+        // let preClass = 'prism ' + isLineShow + '-numbers lang-' + langType;
+        // setAttributes({ preClass: preClass });
 
         return (
             <Fragment>
                 <InspectorControls>
                     <HcbSidePanels {...props} />
                 </InspectorControls>
-                <div className={blockClass}>
+                <div 
+                    className={blockClass}
+                    data-file={fileName || null}
+                    data-lang={langName || null}
+                    // data-line={dataLineNum || null}
+                    data-show-lang={isShowLang || null}
+                >
                     <textarea
                         className='hcb_textarea'
                         placeholder='Your Code...'
-                        value={attributes.code}
+                        value={code}
                         onChange={(e) => {
                             setAttributes({ code: e.target.value });
                             setHeightCodeBlocks(e.target);
@@ -163,7 +174,7 @@ registerBlockType('loos-hcb/code-block', {
                         <input
                             type='text'
                             className='num_input'
-                            value={attributes.dataLineNum}
+                            value={dataLineNum}
                             placeholder={__('"data-line" value', textDomain)} //data-line属性値
                             onChange={(e) => {
                                 setAttributes({ dataLineNum: e.target.value });
@@ -172,7 +183,7 @@ registerBlockType('loos-hcb/code-block', {
                         <input
                             type='text'
                             className='filename_input'
-                            value={attributes.fileName}
+                            value={fileName}
                             placeholder={__('file name', textDomain)} //ファイル名
                             onChange={(e) => {
                                 setAttributes({ fileName: e.target.value });
@@ -183,29 +194,22 @@ registerBlockType('loos-hcb/code-block', {
             </Fragment>
         );
     },
-    save: (props) => {
-        const { attributes } = props;
-        let preData = {
-            className: attributes.preClass,
-        };
+    save: ({attributes}) => {
+        const {code, langType, fileName, langName, dataLineNum, isLineShow, isShowLang } = attributes;
 
-        //ファイル名の指定があるかどうか。
-        if ('' !== attributes.fileName) {
-            preData['data-file'] = attributes.fileName;
-        }
-        //言語の指定があるかどうか。
-        if ('' !== attributes.langName) {
-            preData['data-lang'] = attributes.langName;
-        }
-        //ハイライト行の指定があるかどうか
-        if ('' !== attributes.dataLineNum) {
-            preData['data-line'] = attributes.dataLineNum;
-        }
+        // preタグにつけるクラス
+        let preClass = 'prism ' + isLineShow + '-numbers lang-' + langType;
 
         return (
             <div className='hcb_wrap'>
-                <pre {...preData}>
-                    <RichText.Content tagName='code' value={sanitizeCodeblock(attributes.code)} />
+                <pre 
+                    className={preClass}
+                    data-file={fileName || null}
+                    data-lang={langName || null}
+                    data-line={dataLineNum || null}
+                    data-show-lang={isShowLang || null}
+                >
+                    <RichText.Content tagName='code' value={sanitizeCodeblock(code)} />
                 </pre>
             </div>
         );

@@ -176,3 +176,7 @@ $hcbPaddingY: 1.75em;
     background-size: auto 10px;
     content: attr(data-file);
 }
+
+.hcb_wrap pre[data-show-lang="0"]:not([data-file])::before {
+    content: none;
+}

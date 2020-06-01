@@ -1,103 +1,142 @@
 // 共通
-.mce-content-body .hcb_wrap{
+.mce-content-body .hcb_wrap {
     margin: 2em 0;
 }
-.hcb_wrap{
+
+.hcb_wrap {
     position: relative;
     border: solid 1px #f1f1f1;
+
     pre,
-    textarea.hcb_textarea{
+    textarea.hcb_textarea {
         position: static;
         display: block;
-        width: 100%;
-        tab-size: 2;
         box-sizing: border-box;
-        line-height: 1.8;
-        font-size: 14px;
-        font-family: Menlo, Consolas, 'メイリオ', sans-serif;
-        padding: 1.5em;
+        width: 100%;
         margin: 0 !important;
-        border: none;
-        border-radius: 0;
-        white-space: pre !important;
+        padding: 1.5em;
         overflow-x: auto;
+        font-size: 14px;
+        font-family: Menlo, Consolas, "メイリオ", sans-serif;
+        line-height: 1.8;
+        white-space: pre !important;
         // overflow-y: hidden;
         overflow-wrap: break-word;
+        tab-size: 2;
+        border: none;
+        border-radius: 0;
 
         // スクロールバー
-        &::-webkit-scrollbar{
-            border: none;
+        &::-webkit-scrollbar {
             height: 8px;
+            border: none;
         }
-        &::-webkit-scrollbar-track{
+
+        &::-webkit-scrollbar-track {
             background: #f7f7f7;
             border: none;
         }
-        &::-webkit-scrollbar-thumb{
-            background: rgba(0,0,0,0.1);
+
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, .1);
             border-radius: 4px;
         }
     }
 
-    textarea.hcb_textarea{
-        resize: none;
+    textarea.hcb_textarea {
         outline: none;
         box-shadow: none;
+        resize: none;
     }
 
-    pre code{
+    pre code {
         display: block;
-        color: inherit !important;
         padding: 0 !important;
-        background: inherit !important;
+        color: inherit !important;
         font-family: inherit !important;
         tab-size: 2;
+        background: inherit !important;
     }
-    
-    .select_wrap{
+
+    .select_wrap {
         padding: 8px 8px;
-        &::after{
-            content: "";
-            clear: both;
+
+        &::after {
             display: block;
-            height: 0px;
+            clear: both;
+            height: 0;
             visibility: hidden;
+            content: "";
         }
-        select{
-            margin: 0;
+
+        select {
             float: left;
             width: 10em;
+            margin: 0;
         }
-        .filename_input{
-            line-height: 28px;
+
+        .filename_input {
+            float: right;
             width: 10em;
             height: 28px;
-            padding: 0 8px;
             margin-left: 1em;
-            float: right;
-        }
-        .num_input{
+            padding: 0 8px;
             line-height: 28px;
+        }
+
+        .num_input {
+            float: right;
             width: 10em;
             height: 28px;
-            padding: 0 8px;
             margin-left: 1em;
-            float: right;
+            padding: 0 8px;
+            line-height: 28px;
         }
     }
 
-    pre::before{
-        content: attr(data-lang);
+    pre::before {
         position: absolute;
-        top: 0px;
+        top: 0;
         right: 0;
         display: block;
         width: max-content;
         min-width: 3em;
+        padding: 0 8px;
         font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
         line-height: 24px;
         text-align: center;
-        font-family: Arial, Helvetica, sans-serif;
-        padding: 0 8px;
+        content: attr(data-lang);
     }
+}
+
+
+/* Lang Name (ブロックだけ) */
+.hcb-block::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    box-sizing: border-box;
+    //   display: block;
+    //   width: max-content;
+    min-width: 4em;
+    padding: 0 10px;
+    font-size: 12px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 20px;
+    text-align: center;
+    content: attr(data-lang);
+}
+
+.hcb-block[data-file]::before {
+    padding: 0 8px 0 20px;
+    background-repeat: no-repeat;
+    background-position: center left 8px;
+    background-size: auto 10px;
+    content: attr(data-file);
+}
+
+.hcb-block[data-show-lang="0"]:not([data-file])::before {
+    content: none;
 }

@@ -1,44 +1,58 @@
 @charset "UTF-8";
-
-@import './inc/editor_common';
+@import "./inc/editor_common";
 
 // Dark
 .hcb_wrap pre,
-.hcb_wrap textarea.hcb_textarea{
+.hcb_wrap textarea.hcb_textarea {
     color: #fff !important;
-    background: #333330 !important;
+    background: #34352e !important;
 }
+
 .hcb_wrap pre code,
-.hcb_wrap textarea.hcb_textarea{
+.hcb_wrap textarea.hcb_textarea {
     text-shadow: 0 0 1px #333;
 }
 
 // Gutenberg
-.hcb_wrap{
-    textarea.hcb_textarea{
-        &::placeholder{
+.hcb_wrap {
+
+    textarea.hcb_textarea {
+
+        &::placeholder {
+            color: rgba(255, 255, 255, .4);
             font-style: italic;
-            color: rgba(255,255,255,0.4);
         }
-        &::-ms-input-placeholder{
+
+        &::-ms-input-placeholder {
+            color: rgba(255, 255, 255, .4);
             font-style: italic;
-            color: rgba(255,255,255,0.4);
         }
-        &::-moz-placeholderm{
+
+        &::-moz-placeholderm {
+            color: rgba(255, 255, 255, .4);
             font-style: italic;
-            color: rgba(255,255,255,0.4);
         }
-        &::-webkit-input-placeholder{
+
+        &::-webkit-input-placeholder {
+            color: rgba(255, 255, 255, .4);
             font-style: italic;
-            color: rgba(255,255,255,0.4);
         }
     }
 }
 
 
 /* クラシックブロック用 */
-.hcb_wrap pre.prism::before{
+.hcb_wrap pre.prism::before {
     color: #333;
     background: #ebebeb;
 }
 
+/* Lang Name */
+.hcb-block::before {
+    color: #fff;
+    background-color: #111;
+}
+
+.hcb-block[data-file]::before {
+    background-image: url(../img/file-icon-dark.svg);
+}

@@ -1,17 +1,26 @@
 @charset "UTF-8";
-
-@import './inc/editor_common';
+@import "./inc/editor_common";
 
 // Dark
 .hcb_wrap pre,
-.hcb_wrap textarea.hcb_textarea{
-    color: #333 !important;
-    background: #f7f7f7 !important;
+.hcb_wrap textarea.hcb_textarea {
+    color: #1f1e1e !important;
+    background: #f7f6f6 !important;
 }
 
 /* クラシックブロック用 */
-.hcb_wrap pre.prism::before{
+.hcb_wrap pre.prism::before {
     color: #333;
     background: #dedede;
 }
 
+/* Lang Name */
+.hcb-block::before {
+    color: #1f1e1e;
+    background-color: #dedede;
+}
+
+.hcb-block[data-file]::before {
+    // background-color: #dedede;
+    background-image: url(../img/file-icon-light.svg);
+}

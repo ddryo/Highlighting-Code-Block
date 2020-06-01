@@ -1,0 +1,15 @@
+# バージョン更新時の修正箇所
+
+・readmeのStable tag
+・readmeのチェンジログ
+・mainPHPのコメント
+・mainPHPのバージョン定数
+
+
+# package.json の po2json コマンド を書き換え
+"po2json": "po2json languages/loos-hcb-ja.po languages/loos-hcb-ja-loos-hcb-script.json -f jed"
+
+po2jsonの実行
+```
+npm run po2json
+```
