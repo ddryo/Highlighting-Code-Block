@@ -7,40 +7,40 @@
 /* Bace Color*/
 .hcb_wrap pre.prism,
 .hcb_wrap pre.prism code {
-    color: #1f1e1e;
-    text-shadow: 0 1px #fff;
-    background: #f7f6f6;
+	color: #1f1e1e;
+	text-shadow: 0 1px #fff;
+	background: #f7f6f6;
 }
 
 /* Lang Name */
 .hcb_wrap pre::before {
-    color: #1f1e1e;
-    background-color: #dedede;
+	color: #1f1e1e;
+	background-color: #dedede;
 }
 
 .hcb_wrap pre[data-file]::before {
-    // background-color: #dedede;
-    background-image: url(../img/file-icon-light.svg);
+	// background-color: #dedede;
+	background-image: url(../img/file-icon-light.svg);
 }
 
 /* line highkight */
 .line-highlight {
-    background: rgba(153, 122, 102, .1);
+	background: rgba(153, 122, 102, 0.1);
 }
 
 .line-highlight::before,
 .line-highlight[data-end]::after {
-    color: hsl(24, 20%, 95%);
-    background-color: rgba(0, 0, 0, .2);
+	color: hsl(24, 20%, 95%);
+	background-color: rgba(0, 0, 0, 0.2);
 }
 
 /* line numbers */
 .line-numbers .line-numbers-rows {
-    border-right: 1px solid #999;
+	border-right: 1px solid #999;
 }
 
 .line-numbers-rows > span::before {
-    color: #999;
+	color: #999;
 }
 
 
@@ -51,15 +51,15 @@
 .token.prolog,
 .token.doctype,
 .token.cdata {
-    color: #708090;
+	color: #708090;
 }
 
 .token.punctuation {
-    color: #5f5f5f;
+	color: #5f5f5f;
 }
 
 .namespace {
-    opacity: .7;
+	opacity: 0.7;
 }
 
 .token.property,
@@ -69,7 +69,7 @@
 .token.constant,
 .token.symbol,
 .token.deleted {
-    color: #905;
+	color: #905;
 }
 
 .token.selector,
@@ -79,7 +79,7 @@
 .token.builtin,
 .token.inserted,
 .token.class-name {
-    color: #407b08;
+	color: #407b08;
 }
 
 
@@ -87,44 +87,44 @@
 .token.url,
 .language-css .token.string,
 .style .token.string {
-    color: #9a6e3a;
+	color: #9a6e3a;
 }
 
 .token.atrule,
 .token.attr-value,
 .token.function {
-    color: #07a;
+	color: #07a;
 }
 
 .token.keyword,
 .token.operator {
-    color: #c72c4c;
+	color: #c72c4c;
 }
 
 .token.regex,
 .token.keyword.this,
 .token.important,
 .token.variable {
-    color: #f18106;
+	color: #f18106;
 }
 
 
 .token.bold {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 .token.italic,
 .token.builtin,
 .token.keyword.def {
-    font-style: italic;
+	font-style: italic;
 }
 
 .token.entity {
-    cursor: help;
+	cursor: help;
 }
 
 
 .token.delimiter.important {
-    color: #183d86;
-    font-weight: normal;
+	color: #183d86;
+	font-weight: normal;
 }

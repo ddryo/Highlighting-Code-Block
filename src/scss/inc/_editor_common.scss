@@ -1,142 +1,142 @@
 // 共通
 .mce-content-body .hcb_wrap {
-    margin: 2em 0;
+	margin: 2em 0;
 }
 
 .hcb_wrap {
-    position: relative;
-    border: solid 1px #f1f1f1;
+	position: relative;
+	border: solid 1px #f1f1f1;
 
-    pre,
-    textarea.hcb_textarea {
-        position: static;
-        display: block;
-        box-sizing: border-box;
-        width: 100%;
-        margin: 0 !important;
-        padding: 1.5em;
-        overflow-x: auto;
-        font-size: 14px;
-        font-family: Menlo, Consolas, "メイリオ", sans-serif;
-        line-height: 1.8;
-        white-space: pre !important;
-        // overflow-y: hidden;
-        overflow-wrap: break-word;
-        tab-size: 2;
-        border: none;
-        border-radius: 0;
+	pre,
+	textarea.hcb_textarea {
+		position: static;
+		display: block;
+		box-sizing: border-box;
+		width: 100%;
+		margin: 0 !important;
+		padding: 1.5em;
+		overflow-x: auto;
+		font-size: 14px;
+		font-family: Menlo, Consolas, "メイリオ", sans-serif;
+		line-height: 1.8;
+		white-space: pre !important;
+		// overflow-y: hidden;
+		overflow-wrap: break-word;
+		tab-size: 2;
+		border: none;
+		border-radius: 0;
 
-        // スクロールバー
-        &::-webkit-scrollbar {
-            height: 8px;
-            border: none;
-        }
+		// スクロールバー
+		&::-webkit-scrollbar {
+			height: 8px;
+			border: none;
+		}
 
-        &::-webkit-scrollbar-track {
-            background: #f7f7f7;
-            border: none;
-        }
+		&::-webkit-scrollbar-track {
+			background: #f7f7f7;
+			border: none;
+		}
 
-        &::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, .1);
-            border-radius: 4px;
-        }
-    }
+		&::-webkit-scrollbar-thumb {
+			background: rgba(0, 0, 0, 0.1);
+			border-radius: 4px;
+		}
+	}
 
-    textarea.hcb_textarea {
-        outline: none;
-        box-shadow: none;
-        resize: none;
-    }
+	textarea.hcb_textarea {
+		outline: none;
+		box-shadow: none;
+		resize: none;
+	}
 
-    pre code {
-        display: block;
-        padding: 0 !important;
-        color: inherit !important;
-        font-family: inherit !important;
-        tab-size: 2;
-        background: inherit !important;
-    }
+	pre code {
+		display: block;
+		padding: 0 !important;
+		color: inherit !important;
+		font-family: inherit !important;
+		tab-size: 2;
+		background: inherit !important;
+	}
 
-    .select_wrap {
-        padding: 8px 8px;
+	.select_wrap {
+		padding: 8px 8px;
 
-        &::after {
-            display: block;
-            clear: both;
-            height: 0;
-            visibility: hidden;
-            content: "";
-        }
+		&::after {
+			display: block;
+			clear: both;
+			height: 0;
+			visibility: hidden;
+			content: "";
+		}
 
-        select {
-            float: left;
-            width: 10em;
-            margin: 0;
-        }
+		select {
+			float: left;
+			width: 10em;
+			margin: 0;
+		}
 
-        .filename_input {
-            float: right;
-            width: 10em;
-            height: 28px;
-            margin-left: 1em;
-            padding: 0 8px;
-            line-height: 28px;
-        }
+		.filename_input {
+			float: right;
+			width: 10em;
+			height: 28px;
+			margin-left: 1em;
+			padding: 0 8px;
+			line-height: 28px;
+		}
 
-        .num_input {
-            float: right;
-            width: 10em;
-            height: 28px;
-            margin-left: 1em;
-            padding: 0 8px;
-            line-height: 28px;
-        }
-    }
+		.num_input {
+			float: right;
+			width: 10em;
+			height: 28px;
+			margin-left: 1em;
+			padding: 0 8px;
+			line-height: 28px;
+		}
+	}
 
-    pre::before {
-        position: absolute;
-        top: 0;
-        right: 0;
-        display: block;
-        width: max-content;
-        min-width: 3em;
-        padding: 0 8px;
-        font-size: 12px;
-        font-family: Arial, Helvetica, sans-serif;
-        line-height: 24px;
-        text-align: center;
-        content: attr(data-lang);
-    }
+	pre::before {
+		position: absolute;
+		top: 0;
+		right: 0;
+		display: block;
+		width: max-content;
+		min-width: 3em;
+		padding: 0 8px;
+		font-size: 12px;
+		font-family: Arial, Helvetica, sans-serif;
+		line-height: 24px;
+		text-align: center;
+		content: attr(data-lang);
+	}
 }
 
 
 /* Lang Name (ブロックだけ) */
 .hcb-block::before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 1;
-    box-sizing: border-box;
-    //   display: block;
-    //   width: max-content;
-    min-width: 4em;
-    padding: 0 10px;
-    font-size: 12px;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 20px;
-    text-align: center;
-    content: attr(data-lang);
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	box-sizing: border-box;
+	//   display: block;
+	//   width: max-content;
+	min-width: 4em;
+	padding: 0 10px;
+	font-size: 12px;
+	font-family: Arial, Helvetica, sans-serif;
+	line-height: 20px;
+	text-align: center;
+	content: attr(data-lang);
 }
 
 .hcb-block[data-file]::before {
-    padding: 0 8px 0 20px;
-    background-repeat: no-repeat;
-    background-position: center left 8px;
-    background-size: auto 10px;
-    content: attr(data-file);
+	padding: 0 8px 0 20px;
+	background-repeat: no-repeat;
+	background-position: center left 8px;
+	background-size: auto 10px;
+	content: attr(data-file);
 }
 
 .hcb-block[data-show-lang="0"]:not([data-file])::before {
-    content: none;
+	content: none;
 }

@@ -4,7 +4,7 @@ Donate link: https://wemo.tech/2122/
 Tags: code, syntax, code highlighting, syntax highlighting, syntax highlight, block, editor, Guternberg,
 Requires at least: 5.0
 Tested up to: 5.4
-Stable tag: 1.2.0
+Stable tag: 1.2.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -94,6 +94,9 @@ The following languages are available by default.
 
 
 == Changelog ==
+
+= 1.2.1 =
+Change the code to register the script.
 
 = 1.2.0 =
 - Fixed a bug that CSS cannot be read depending on the server.

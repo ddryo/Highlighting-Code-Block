@@ -1,0 +1,47 @@
+{
+    "name": "loos-hcb/code-block",
+    "title": "Highlighing Code Block",
+    "category": "formatting",
+    "keywords": [
+        "hcb",
+        "code"
+    ],
+    "supports": {
+        "className": false
+    },
+    "attributes": {
+        "code": {
+            "type": "string",
+            "source": "text",
+            "selector": "code"
+        },
+        "className": {
+            "type": "string",
+            "default": ""
+        },
+        "langType": {
+            "type": "string",
+            "default": "plane"
+        },
+        "langName": {
+            "type": "string",
+            "default": ""
+        },
+        "fileName": {
+            "type": "string",
+            "default": ""
+        },
+        "dataLineNum": {
+            "type": "text"
+        },
+        "isLineShow": {
+            "type": "string",
+            "default": "undefined"
+        },
+        "isShowLang": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "textdomain": "loos-hcb"
+}

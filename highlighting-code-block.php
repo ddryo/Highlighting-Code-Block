@@ -3,14 +3,14 @@
  * Plugin Name: Highlighting Code Block
  * Plugin URI: https://wordpress.org/plugins/highlighting-code-block/
  * Description: Add code block with syntax highlighting using prism.js. (Available for Gutenberg and Classic Editor)
- * Version: 1.2.0
+ * Version: 1.2.1
  * Author: LOOS WEB STUDIO
  * Author URI: https://loos-web-studio.com/
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: loos-hcb
  */
-if ( !defined( 'ABSPATH' ) ) exit;
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
  * Be disabled ~PHP5.6.
@@ -39,7 +39,7 @@ if ( ! defined( 'LOOS_HCB_DOMAIN' ) ) {
  * Defined HCB const.
  */
 if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
-	define( 'LOOS_HCB_VERSION', '1.2.0' );
+	define( 'LOOS_HCB_VERSION', '1.2.1' );
 	// define( 'LOOS_HCB_VERSION', date('Ymdgis') ); //開発用
 }
 if ( ! defined( 'LOOS_HCB_FILE' ) ) {
@@ -59,7 +59,9 @@ if ( ! defined( 'LOOS_HCB_URL' ) ) {
 /**
  * 翻訳ファイルを登録
  */
-load_plugin_textdomain( LOOS_HCB_DOMAIN, false, basename( LOOS_HCB_PATH ) .'/languages' );
+$languages_path = basename( LOOS_HCB_PATH ) .'/languages';
+$languages_path = str_replace('trunk/', 'highlighting-code-block/', $languages_path);
+load_plugin_textdomain( LOOS_HCB_DOMAIN, false, $languages_path );
 
 
 /**

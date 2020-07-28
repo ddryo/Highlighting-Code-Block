@@ -24,8 +24,8 @@ class LOOS_HCB_Menu {
 	 */
 	public function add_hcb_page() {
 		add_options_page(
-			'CODE BLOCK',  // ページのタイトル
-			'CODE BLOCK',  // メニューのタイトル
+			__( '[HCB] Settings', LOOS_HCB_DOMAIN ),  // ページのタイトル
+			__( '[HCB] Settings', LOOS_HCB_DOMAIN ),  // メニューのタイトル
 			'manage_options', // このページを操作する権限
 			self::PAGE_NAME,   // ページ名
 			array($this, 'hcb_settings_cb') // コールバック関数。この関数の実行結果が出力される

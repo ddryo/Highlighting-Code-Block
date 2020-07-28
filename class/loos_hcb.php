@@ -1,5 +1,4 @@
 <?php
-
 class LOOS_HCB {
 
 	/**
@@ -111,7 +110,7 @@ class LOOS_HCB {
 
 		} else {
 
-			self::$prism_css_path = LOOS_HCB_PATH .'assets/css/cloring_'. self::$settings[ 'front_coloring' ] .'.css';
+			self::$prism_css_path = LOOS_HCB_PATH .'build/css/coloring_'. self::$settings[ 'front_coloring' ] .'.css';
 
 		}
 
@@ -139,7 +138,7 @@ class LOOS_HCB {
 		 * Admin Scripts
 		 */
 		add_action('admin_enqueue_scripts', function () {
-			wp_enqueue_style( 'hcb_admin', LOOS_HCB_URL .'assets/css/hcb_admin.css', [], LOOS_HCB_VERSION );
+			wp_enqueue_style( 'hcb_admin', LOOS_HCB_URL .'build/css/hcb_admin.css', [], LOOS_HCB_VERSION );
 		});
 
 
@@ -155,7 +154,7 @@ class LOOS_HCB {
 			// wp_enqueue_style( 'hcb_prism_style', $this->prism_css_path, [], LOOS_HCB_VERSION );
 
 			/** script */
-			wp_enqueue_script( 'hcb_script', LOOS_HCB_URL .'assets/js/hcb_script.js', ['hcb_prism_script'], LOOS_HCB_VERSION, true );
+			wp_enqueue_script( 'hcb_script', LOOS_HCB_URL .'build/js/hcb_script.js', ['hcb_prism_script'], LOOS_HCB_VERSION, true );
 
 
 		}, 20 );
@@ -166,7 +165,7 @@ class LOOS_HCB {
 		 */
 		add_filter( 'mce_css', function( $mce_css ) {
 
-			$editor_style_path = plugins_url( 'assets/css/editor_'. LOOS_HCB::$settings[ 'editor_coloring' ] .'.css', LOOS_HCB_FILE )."?v=".LOOS_HCB_VERSION;
+			$editor_style_path = plugins_url( 'build/css/editor_'. LOOS_HCB::$settings[ 'editor_coloring' ] .'.css', LOOS_HCB_FILE )."?v=".LOOS_HCB_VERSION;
 
 			if ( ! empty( $mce_css ) ) {
 				$mce_css .= ',';
@@ -194,46 +193,65 @@ class LOOS_HCB {
 		 */
 		add_action( 'enqueue_block_editor_assets', function() {
 
-			/* Stylesheet to Block Editor */
+			// ブロックエディター用CSS
 			wp_enqueue_style( 
 				'hcb-gutenberg-style',
-				plugins_url( 'assets/css/editor_'. LOOS_HCB::$settings[ 'editor_coloring' ] .'.css', LOOS_HCB_FILE ),
+				plugins_url( 'build/css/editor_'. LOOS_HCB::$settings[ 'editor_coloring' ] .'.css', LOOS_HCB_FILE ),
 				[],
 				LOOS_HCB_VERSION
 			);
 
-		} );
-
-
-		/**
-		 * カスタムブロック用のスクリプトを追加
-		 */
-		add_action( 'init', function() {
-
-			// $asset_file = include( plugin_dir_path( __FILE__ ) . 'build/index.asset.php');
-			
-			wp_register_script(
-				'loos-hcb-script',
-				LOOS_HCB_URL .'assets/js/hcb_block.js',
-				['wp-blocks', 'wp-element', 'wp-polyfill'], //$asset_file['dependencies'],
-				LOOS_HCB_VERSION, //$asset_file['version']
-				true
-			);
-
-			register_block_type(
-				'loos-hcb/code-block', [
-					'editor_script' => 'loos-hcb-script',
-				]
+			// 個別ブロック以外の共通スクリプト（翻訳登録用）
+			$asset = include( LOOS_HCB_PATH. 'build/js/hcb_blocks.asset.php' );
+			wp_enqueue_script(
+				'hcb-blocks',
+				LOOS_HCB_URL .'build/js/hcb_blocks.js',
+				$asset['dependencies'],
+				$asset['version'],
+				false
 			);
 
 			// JS用翻訳ファイルの読み込み
 			if ( function_exists( 'wp_set_script_translations' ) ) {
 				wp_set_script_translations(
-					'loos-hcb-script',
+					'hcb-blocks',
 					LOOS_HCB_DOMAIN,
 					LOOS_HCB_PATH . 'languages'
 				);
 			}
+
+		} );
+
+
+		/**
+		 * ブロックを追加
+		 */
+		add_action( 'init', function() {
+
+			// register_block_typeが未定義のバージョンではプラグインを読み込まない
+			if ( ! function_exists( 'register_block_type' ) ) return;
+
+			// ブロックのスクリプト登録
+			$asset = include( LOOS_HCB_PATH. 'build/js/blocks/code-block/index.asset.php' );
+			wp_register_script(
+				'hcb-code-block',
+				LOOS_HCB_URL .'build/js/blocks/code-block/index.js',
+				$asset['dependencies'],
+				$asset['version'],
+				true
+			);
+
+			// ブロックの登録
+			$metadata = json_decode( file_get_contents( LOOS_HCB_PATH . 'src/js/blocks/code-block/block.json' ), true );
+			register_block_type(
+				'loos-hcb/code-blocks',
+				array_merge(
+					$metadata,
+					[
+						'editor_script' => 'hcb-code-block',
+					]
+				)
+			);
 		} );
 	}
 
@@ -298,7 +316,7 @@ class LOOS_HCB {
 		add_action( 'wp_head', function() {
 
 			/* HCB Style */
-			$hcb_style = LOOS_HCB::get_file_contents( LOOS_HCB_PATH .'assets/css/hcb_style.css' );
+			$hcb_style = LOOS_HCB::get_file_contents( LOOS_HCB_PATH .'build/css/hcb_style.css' );
 			$hcb_style .= LOOS_HCB::get_file_contents( self::$prism_css_path );
 			$hcb_style = str_replace('@charset "UTF-8";', '', $hcb_style);
 			$hcb_style = str_replace('../img', LOOS_HCB_URL .'assets/img', $hcb_style);

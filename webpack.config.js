@@ -1,51 +1,58 @@
-const webpack = require('webpack');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const defaultConfig = require('@wordpress/scripts/config/webpack.config');
+const path = require('path');
+const glob = require('glob');
+
+// ブロック自動取得
 
 module.exports = {
-    mode: 'production',
+	...defaultConfig, //@wordpress/scriptを引き継ぐ
 
-    // メインとなるJavaScriptファイル（エントリーポイント）
-    entry: {
-        hcb_script: './src/js/hcb_script.js',
-        hcb_block: './src/js/hcb_block.js',
-    },
+	mode: 'production', // npm start でも圧縮させる
 
-    // ファイルの出力設定
-    output: {
-        // 出力ファイル名
-        filename: '[name].js',
+	//エントリーポイント
+	entry: {
+		hcb_script: './src/js/hcb_script.js',
+		hcb_blocks: './src/js/hcb_blocks.js',
+		['blocks/code-block/index']: './src/js/blocks/code-block/index.js',
+	},
 
-        //pathはgulp側で。
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        // Babel を利用する
-                        loader: 'babel-loader',
-                        // Babel のオプションを指定する
-                        options: {
-                            presets: ['@babel/preset-env'],
-                            plugins: [
-                                [
-                                    'transform-react-jsx',
-                                    {
-                                        pragma: 'wp.element.createElement',
-                                    },
-                                ],
-                            ],
-                        },
-                    },
-                ],
-            },
-        ],
-    },
-    //importするときにいちいち.jsを書かなくてもすむ
-    resolve: {
-        extensions: ['.js'],
-    },
-    performance: { hints: false },
+	//アウトプット先
+	output: {
+		filename: '[name].js',
+		// path は Gulpで 指定
+	},
+
+	module: {
+		...defaultConfig.module,
+		rules: [
+			...defaultConfig.module.rules,
+			{
+				test: /\.scss/,
+				use: [
+					// linkタグに出力する機能
+					'style-loader',
+					{
+						// CSSをバンドルするための機能
+						loader: 'css-loader',
+						options: { url: false }, // CSS内のurl()メソッドの取り込みを禁止する
+						// sourceMap: false, // ソースマップの利用有無
+						// importLoaders: 2, //sass-loaderの読み込みに必要?
+					},
+					{
+						loader: 'sass-loader',
+						options: {
+							// ソースマップの利用有無
+							// sourceMap: false,
+						},
+					},
+				],
+			},
+		],
+	},
+
+	resolve: {
+		alias: {
+			'@blocks': path.resolve(__dirname, 'src/blocks/'),
+		},
+	},
 };
