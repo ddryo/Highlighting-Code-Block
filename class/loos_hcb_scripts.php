@@ -72,25 +72,30 @@ class LOOS_HCB_Scripts {
 	 * Admin Scripts
 	 */
 	public static function hook_admin_enqueue_scripts( $hook_suffix ) {
-
 		if ( 'settings_page_hcb_settings' === $hook_suffix ) {
 			wp_enqueue_style( 'hcb-admin', LOOS_HCB_URL .'build/css/hcb_admin.css', [], LOOS_HCB_VERSION );
 		}
-
 	}
 
 
-	
 	/**
 	 * Block Scripts
 	 */
 	public static function hook_enqueue_block_editor_assets() {
 
-		// ブロックエディター用CSS
+		// Editor Style
+		wp_enqueue_style( 
+			'hcb-editor-style',
+			LOOS_HCB_URL .'build/css/hcb_editor.css',
+			[],
+			LOOS_HCB_VERSION
+		);
+
+		// Editor Coloring
 		wp_enqueue_style( 
 			'hcb-gutenberg-style',
 			LOOS_HCB::$editor_coloring_css_url,
-			[],
+			['hcb-editor-style'],
 			LOOS_HCB_VERSION
 		);
 

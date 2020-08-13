@@ -45,6 +45,6 @@
         }
     },
     "textdomain": "loos-hcb",
-    "editorScript": "hcb-code-block",
-    "editorStyle": "hcb-gutenberg-style"
+    "editorScript": "file:../../build/js/code-block/index.js",
+    "editorStyle": "file:../../build/css/hcb_editor.css"
 }
