@@ -1,4 +1,5 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 
 class LOOS_HCB_Menu {
 
@@ -7,7 +8,7 @@ class LOOS_HCB_Menu {
 	 */
 	const PAGE_NAME     = 'hcb_settings';
 	const SECTION_NAME  = 'hcb_setting_section';
-	const SECTION_NAME2 = 'hcb_setting_section2';
+	const ADVANCED_SECTION = 'hcb_setting_advanced';
 
 
 	/**
@@ -193,40 +194,37 @@ class LOOS_HCB_Menu {
 				'rows' => 2,
 				'before' => '',
 				'after' => '',
-				'desc' => __( 'Default' ). ' : <code>Menlo, Consolas, "メイリオ", sans-serif;</code>'
+				'desc' => __( 'Default' ). ' : <code>Menlo, Consolas, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;</code>'
 			)
 		);
 		
 		// ブロックエディタのコンテンツ幅
-		add_settings_field(
-			'block_width',
-			__( 'Block editor maximum width', LOOS_HCB_DOMAIN ),
-			array($this, 'settings_field_cb'),
-			self::PAGE_NAME,
-			self::SECTION_NAME,
-			array(
-				'id' => 'block_width',
-				'type' => 'input',
-				'input_type' => 'number',
-				'before' => '',
-				'after' => ' px',
-				// 'desc' => ''
-			)
-		);
+		// add_settings_field(
+		// 	'block_width',
+		// 	__( 'Block editor maximum width', LOOS_HCB_DOMAIN ),
+		// 	array($this, 'settings_field_cb'),
+		// 	self::PAGE_NAME,
+		// 	self::SECTION_NAME,
+		// 	array(
+		// 		'id' => 'block_width',
+		// 		'type' => 'input',
+		// 		'input_type' => 'number',
+		// 		'before' => '',
+		// 		'after' => ' px',
+		// 		// 'desc' => ''
+		// 	)
+		// );
 
 
 		/**
 		 * 「高度な設定設定」セクション
 		 */
 		add_settings_section(
-			self::SECTION_NAME2,
+			self::ADVANCED_SECTION,
 			__( 'Advanced settings', LOOS_HCB_DOMAIN ),
 			'',
 			self::PAGE_NAME
 		);
-
-
-		
 
 		
 		// 使用する言語設定
@@ -235,7 +233,7 @@ class LOOS_HCB_Menu {
 			__( 'Language set to use', LOOS_HCB_DOMAIN ),
 			array($this, 'settings_field_cb'),
 			self::PAGE_NAME,
-			self::SECTION_NAME2,
+			self::ADVANCED_SECTION,
 			array(
 				'id' => 'support_langs',
 				'type' => 'textarea',
@@ -248,23 +246,24 @@ class LOOS_HCB_Menu {
 				'<br> '.__('* If you use a language that is not supported by default, please use it together with "Original prism.js" setting.', LOOS_HCB_DOMAIN ).
 				'',
 
-				'after' => '<pre class="default_support_langs"><code>html:"HTML",
-css:"CSS",
-scss:"SCSS",
-js:"JavaScript",
-ts:"TypeScript",
-php:"PHP",
-ruby:"Ruby",
-python:"Python",
-swift:"Swift",
-c:"C",
-csharp:"C#",
-cpp:"C++",
-objectivec:"Objective-C",
-sql:"SQL",
-json:"JSON",
-bash:"Bash",
-git:"Git",</code></pre>',
+				'after' => '<pre class="default_support_langs"><code>'. LOOS_HCB::DEFAULT_LANGS . '</code></pre>',
+// 				'after' => '<pre class="default_support_langs"><code>html:"HTML",
+// css:"CSS",
+// scss:"SCSS",
+// js:"JavaScript",
+// ts:"TypeScript",
+// php:"PHP",
+// ruby:"Ruby",
+// python:"Python",
+// swift:"Swift",
+// c:"C",
+// csharp:"C#",
+// cpp:"C++",
+// objectivec:"Objective-C",
+// sql:"SQL",
+// json:"JSON",
+// bash:"Bash",
+// git:"Git",</code></pre>',
 
 			)
 		);
@@ -276,7 +275,7 @@ git:"Git",</code></pre>',
 			__('Original coloring file', LOOS_HCB_DOMAIN ), 
 			array($this, 'settings_field_cb'),
 			self::PAGE_NAME,
-			self::SECTION_NAME2,
+			self::ADVANCED_SECTION,
 			array(
 				'id' => 'prism_css_path',
 				'type' => 'input',
@@ -292,7 +291,7 @@ git:"Git",</code></pre>',
 			__('Original prism.js', LOOS_HCB_DOMAIN ),
 			array($this, 'settings_field_cb'),
 			self::PAGE_NAME,
-			self::SECTION_NAME2,
+			self::ADVANCED_SECTION,
 			array(
 				'id' => 'prism_js_path',
 				'type' => 'input',
@@ -308,7 +307,7 @@ git:"Git",</code></pre>',
 			__('help', LOOS_HCB_DOMAIN ), //'ヘルプ',
 			array($this, 'settings_field_cb'),
 			self::PAGE_NAME,
-			self::SECTION_NAME2,
+			self::ADVANCED_SECTION,
 			array(
 				'type' => '',
 				'desc' => __('When you use each original file, please upload it in the theme folder.', LOOS_HCB_DOMAIN ).

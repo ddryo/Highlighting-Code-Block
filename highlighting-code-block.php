@@ -3,8 +3,8 @@
  * Plugin Name: Highlighting Code Block
  * Plugin URI: https://wordpress.org/plugins/highlighting-code-block/
  * Description: Add code block with syntax highlighting using prism.js. (Available for Gutenberg and Classic Editor)
- * Version: 1.2.1
- * Author: LOOS WEB STUDIO
+ * Version: 1.2.2
+ * Author: LOOS, Inc.
  * Author URI: https://loos-web-studio.com/
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -39,8 +39,7 @@ if ( ! defined( 'LOOS_HCB_DOMAIN' ) ) {
  * Defined HCB const.
  */
 if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
-	define( 'LOOS_HCB_VERSION', '1.2.1' );
-	// define( 'LOOS_HCB_VERSION', date('Ymdgis') ); //開発用
+	define( 'LOOS_HCB_VERSION', ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? date('mdGis') : '1.2.2');
 }
 if ( ! defined( 'LOOS_HCB_FILE' ) ) {
 	define( 'LOOS_HCB_FILE', __FILE__ );
@@ -54,15 +53,6 @@ if ( ! defined( 'LOOS_HCB_BASENAME' ) ) {
 if ( ! defined( 'LOOS_HCB_URL' ) ) {
 	define( 'LOOS_HCB_URL', plugins_url( '/', __FILE__ ) );
 }
-
-
-/**
- * 翻訳ファイルを登録
- */
-$languages_path = basename( LOOS_HCB_PATH ) .'/languages';
-$languages_path = str_replace('trunk/', 'highlighting-code-block/', $languages_path);
-load_plugin_textdomain( LOOS_HCB_DOMAIN, false, $languages_path );
-
 
 /**
  * Autoload Class files.
@@ -88,6 +78,14 @@ register_uninstall_hook( LOOS_HCB_FILE, ['LOOS_HCB_Activation', 'plugin_uninstal
 
 
 /**
- * Init
+ * Start
  */
-new LOOS_HCB();
+add_action( 'plugins_loaded', function() {
+
+	// 翻訳ファイルを登録
+	$locale = apply_filters( 'plugin_locale', determine_locale(), LOOS_HCB_DOMAIN );
+	load_textdomain( LOOS_HCB_DOMAIN, LOOS_HCB_PATH . 'languages/loos-hcb-' . $locale . '.mo' );
+
+	// プラグイン実行
+	new LOOS_HCB();
+});

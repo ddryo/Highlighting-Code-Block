@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.wrap.hcb_setting th {
+	min-width: 16em;
+}
+
 .hcb_col2_wrap {
 	display: flex;
 	margin-bottom: 1em;
@@ -38,3 +42,4 @@ pre.default_support_langs {
 		background: none;
 	}
 }
+

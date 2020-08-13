@@ -17,11 +17,7 @@ import { SelectControl } from '@wordpress/components';
  * External dependencies
  */
 import classnames from 'classnames';
-
-//アイコン
 import hcbIcon from './_icon';
-
-//使用する関数たち
 import { setHeightCodeBlocks, sanitizeCodeblock } from './_utils';
 
 /**
@@ -40,16 +36,11 @@ import metadata from './block.json';
 const textDomain = 'loos-hcb';
 
 /**
- * 言語情報をグローバル変数から受け取る。object になっていなければアラート。
- * Receive language information from global variables. Alert if not object.
+ * 言語情報をグローバル変数から受け取る。
  */
-let hcbLangs = window.hcbLangArray;
+let hcbLangs = window.hcbLangs;
 if ('object' !== typeof hcbLangs) {
-	hcbLangs = {};
-	/* eslint no-alert: 0 */
-	alert(
-		'エラー：「Highlighting Code Block」プラグインの「使用する言語設定」を見直してください。'
-	);
+	hcbLangs = {html:"HTML",css:"CSS",scss:"SCSS",js:"JavaScript",ts:"TypeScript",php:"PHP",ruby:"Ruby",python:"Python",swift:"Swift",c:"C",csharp:"C#",cpp:"C++",objectivec:"Objective-C",sql:"SQL",json:"JSON",bash:"Bash",git:"Git"};
 }
 
 /**

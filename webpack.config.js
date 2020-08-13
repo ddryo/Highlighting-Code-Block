@@ -11,9 +11,9 @@ module.exports = {
 
 	//エントリーポイント
 	entry: {
-		hcb_script: './src/js/hcb_script.js',
+		// hcb: './src/js/hcb.js',
 		hcb_blocks: './src/js/hcb_blocks.js',
-		['blocks/code-block/index']: './src/js/blocks/code-block/index.js',
+		['/code-block/index']: './src/js/code-block/index.js',
 	},
 
 	//アウトプット先

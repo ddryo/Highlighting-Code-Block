@@ -32,7 +32,8 @@
             "default": ""
         },
         "dataLineNum": {
-            "type": "text"
+            "type": "string",
+            "default": ""
         },
         "isLineShow": {
             "type": "string",
@@ -43,5 +44,7 @@
             "default": ""
         }
     },
-    "textdomain": "loos-hcb"
+    "textdomain": "loos-hcb",
+    "editorScript": "hcb-code-block",
+    "editorStyle": "hcb-gutenberg-style"
 }

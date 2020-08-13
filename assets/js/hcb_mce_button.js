@@ -14,13 +14,9 @@ function sanitizeCodeblock(str) {
 
 (function () {
 	//グローバル変数の受け取り
-	let globalHcbLangs = window.hcbLangArray;
+	let globalHcbLangs = window.hcbLangs;
 	if (typeof globalHcbLangs !== 'object') {
-		globalHcbLangs = {};
-		/* eslint no-alert: 0 */
-		alert(
-			'エラー：「Highlighting Code Block」プラグインの「使用する言語設定」を見直してください。'
-		);
+		globalHcbLangs = {html:"HTML",css:"CSS",scss:"SCSS",js:"JavaScript",ts:"TypeScript",php:"PHP",ruby:"Ruby",python:"Python",swift:"Swift",c:"C",csharp:"C#",cpp:"C++",objectivec:"Objective-C",sql:"SQL",json:"JSON",bash:"Bash",git:"Git"};
 	}
 
 	const varluesArr = [{ text: 'Plane Text', value: 'plane' }];

@@ -13,34 +13,6 @@
 	text-shadow: 0 0 1px #333;
 }
 
-// Gutenberg
-.hcb_wrap {
-
-	textarea.hcb_textarea {
-
-		&::placeholder {
-			color: rgba(255, 255, 255, 0.4);
-			font-style: italic;
-		}
-
-		&::-ms-input-placeholder {
-			color: rgba(255, 255, 255, 0.4);
-			font-style: italic;
-		}
-
-		&::-moz-placeholderm {
-			color: rgba(255, 255, 255, 0.4);
-			font-style: italic;
-		}
-
-		&::-webkit-input-placeholder {
-			color: rgba(255, 255, 255, 0.4);
-			font-style: italic;
-		}
-	}
-}
-
-
 /* クラシックブロック用 */
 .hcb_wrap pre.prism::before {
 	color: #333;
@@ -55,4 +27,28 @@
 
 .hcb-block[data-file]::before {
 	background-image: url(../img/file-icon-dark.svg);
+}
+
+// Gutenbergでのスクロールバー
+.hcb_wrap textarea.hcb_textarea {
+
+	&::placeholder {
+		color: rgba(255, 255, 255, 0.4);
+		font-style: italic;
+	}
+
+	&::-ms-input-placeholder {
+		color: rgba(255, 255, 255, 0.4);
+		font-style: italic;
+	}
+
+	&::-moz-placeholderm {
+		color: rgba(255, 255, 255, 0.4);
+		font-style: italic;
+	}
+
+	&::-webkit-input-placeholder {
+		color: rgba(255, 255, 255, 0.4);
+		font-style: italic;
+	}
 }
