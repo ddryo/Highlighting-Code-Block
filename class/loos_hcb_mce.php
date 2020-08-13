@@ -7,10 +7,10 @@ class LOOS_HCB_Mce {
 	 * The constructor
 	 */
 	public function __construct() {
-		add_action( 'mce_css', ['\LOOS_HCB_Mce', 'hook_mce_css'] );
-		add_action( 'mce_external_plugins', ['\LOOS_HCB_Mce', 'hook_mce_external_plugins'], 20 );
-		add_action( 'tiny_mce_before_init', ['\LOOS_HCB_Mce', 'hook_tiny_mce_before_init'] );
-		add_action( 'mce_buttons_2', ['\LOOS_HCB_Mce', 'hook_mce_buttons_2'] );
+		add_action( 'mce_css', ['LOOS_HCB_Mce', 'hook_mce_css'] );
+		add_action( 'mce_external_plugins', ['LOOS_HCB_Mce', 'hook_mce_external_plugins'], 20 );
+		add_action( 'tiny_mce_before_init', ['LOOS_HCB_Mce', 'hook_tiny_mce_before_init'] );
+		add_action( 'mce_buttons_2', ['LOOS_HCB_Mce', 'hook_mce_buttons_2'] );
 	}
 
 	/**
@@ -20,9 +20,9 @@ class LOOS_HCB_Mce {
 
 		if ( ! empty( $mce_css ) ) $mce_css .= ',';
 
-		$mce_css .= LOOS_HCB_URL .'build/css/hcb_editor.css' . '?v=' . LOOS_HCB_VERSION;
+		$mce_css .= LOOS_HCB_URL .'build/css/hcb_editor.css';
 		$mce_css .= ',';
-		$mce_css .= LOOS_HCB::$editor_coloring_css_url . '?v=' . LOOS_HCB_VERSION;
+		$mce_css .= LOOS_HCB::$editor_coloring_css_url;
 		return $mce_css;
 	}
 
@@ -30,7 +30,7 @@ class LOOS_HCB_Mce {
 	 * Set script to Add Tinymce Button
 	 */
 	public static function hook_mce_external_plugins( $plugins ) {
-		$plugins[ 'hcb_external_script' ] = plugins_url( 'assets/js/hcb_mce_button.js', LOOS_HCB_FILE );
+		$plugins[ 'hcb_external_script' ] = LOOS_HCB_URL . 'assets/js/hcb_mce_button.js';
 		return $plugins;
 	}
 

@@ -11,6 +11,10 @@ class LOOS_HCB {
 		'settings'  => 'loos_hcb_settings',
 	];
 
+	/**
+	 * 設定ページのスラッグ
+	 */
+	const MENU_SLUG = 'hcb_settings';
 
 	/**
 	 * Default Settings (インストール時にDBへ保存)
@@ -24,11 +28,9 @@ class LOOS_HCB {
 		'fontsize_pc'     => '14px',
 		'fontsize_sp'     => '13px',
 		'font_family'     => 'Menlo, Consolas, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;',
-		// 'block_width'     => '',
 		'prism_css_path'  => '',
 		'prism_js_path'   => '',
 	];
-
 
 	/**
 	 * Default Languages
@@ -52,20 +54,13 @@ class LOOS_HCB {
 		'bash:"Bash",'."\n" .
 		'git:"Git",';
 
-
 	/**
-	 * $val for DataBase Setiing
+	 * variables
 	 */
 	public static $settings = '';
-
-
-	/**
-	 * $val for Prism files
-	 */
 	public static $prism_js_url  = '';
 	public static $coloring_css_url = '';
 	public static $editor_coloring_css_url = '';
-
 
 	/**
 	 * The constructor
@@ -73,12 +68,23 @@ class LOOS_HCB {
 	public function __construct() {
 		$this->init();
 		$this->set_path();
-		$this->add_hooks();
 		new LOOS_HCB_Scripts();
 		new LOOS_HCB_Mce();
 		new LOOS_HCB_Menu();
-	}
 
+		// Set linenum
+		add_filter( 'the_content' , function( $content ) {
+
+			$content = str_replace( 'prism on-numbers', 'prism line-numbers', $content );
+
+			//個別設定が未定義のブロックはベース設定に依存
+			if ( 'on' === LOOS_HCB::$settings[ 'show_linenum' ] ) {
+				$content = str_replace( 'prism undefined-numbers', 'prism line-numbers', $content );
+			}
+			return $content;
+
+		} , 99);
+	}
 
 	/**
 	 * Set HCB Settings
@@ -140,25 +146,5 @@ class LOOS_HCB {
 
 		// Set editor coloring file url
 		self::$editor_coloring_css_url = LOOS_HCB_URL. 'build/css/editor_'. self::$settings[ 'editor_coloring' ] . '.css';
-	}
-
-
-	/**
-	 * Add Other hooks
-	 */
-	private function add_hooks() {
-
-		// Set linenum
-		add_filter( 'the_content' , function( $content ) {
-
-			$content = str_replace( 'prism on-numbers', 'prism line-numbers', $content );
-
-			//個別設定が未定義のブロックはベース設定に依存
-			if ( 'on' === LOOS_HCB::$settings[ 'show_linenum' ] ) {
-				$content = str_replace( 'prism undefined-numbers', 'prism line-numbers', $content );
-			}
-			return $content;
-
-		} , 99);
 	}
 }

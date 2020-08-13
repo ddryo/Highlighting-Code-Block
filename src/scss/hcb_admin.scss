@@ -4,16 +4,18 @@
 	min-width: 16em;
 }
 
-.hcb_col2_wrap {
+.hcb_field_textarea.support_langs {
 	display: flex;
 	margin-bottom: 1em;
 
-	.hcb_col_item {
-
-		&:first-child {
-			margin-right: 2em;
-		}
+	textarea {
+		margin-right: 2em;
 	}
+}
+
+#font_family {
+	width: 400px;
+	max-width: 100%;
 }
 
 pre.default_support_langs {
