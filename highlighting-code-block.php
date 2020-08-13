@@ -3,7 +3,7 @@
  * Plugin Name: Highlighting Code Block
  * Plugin URI: https://wordpress.org/plugins/highlighting-code-block/
  * Description: Add code block with syntax highlighting using prism.js. (Available for Gutenberg and Classic Editor)
- * Version: 1.2.2
+ * Version: 1.2.3
  * Author: LOOS, Inc.
  * Author URI: https://loos-web-studio.com/
  * License: GPL2 or later
@@ -39,7 +39,7 @@ if ( ! defined( 'LOOS_HCB_DOMAIN' ) ) {
  * Defined HCB const.
  */
 if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
-	define( 'LOOS_HCB_VERSION', ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? date('mdGis') : '1.2.2');
+	define( 'LOOS_HCB_VERSION', ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? date('mdGis') : '1.2.3');
 }
 if ( ! defined( 'LOOS_HCB_FILE' ) ) {
 	define( 'LOOS_HCB_FILE', __FILE__ );

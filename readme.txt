@@ -1,10 +1,10 @@
 === Highlighting Code Block ===
 Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
-Tags: code, syntax, code highlighting, syntax highlighting, syntax highlight, block, editor, Guternberg,
+Tags: block, editor, guternberg, code, syntax, highlight, code highlighting, syntax highlight
 Requires at least: 5.0
-Tested up to: 5.4
-Stable tag: 1.2.2
+Tested up to: 5.5
+Stable tag: 1.2.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -95,7 +95,10 @@ The following languages are available by default.
 
 == Changelog ==
 
-= 1.2.1 =
+= 1.2.3 =
+Fixed block.json file.
+
+= 1.2.2 =
 - Adjustments for registering "block libraries".
 - Abolished the block width adjustment function.
 - Abolished the ability to remove <br> from the <code> tag.
