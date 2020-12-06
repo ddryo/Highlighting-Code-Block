@@ -1,0 +1,13 @@
+{
+    "core": null,
+    "config": {
+        "WP_DEBUG": true
+    },
+    "themes": [
+        ".",
+        "~/DEV/Themes/Arkhe/arkhe"
+    ],
+    "plugins": [
+        "."
+    ]
+}
