@@ -167,7 +167,14 @@ $hcbPaddingY: 1.75em;
 	line-height: 20px;
 	text-align: center;
 	content: attr(data-lang);
+
+
 }
+// コピーボタンがある時
+.hcb_wrap .hcb-clipboard + pre::before {
+	right: 26px;
+}
+
 
 .hcb_wrap pre[data-file]::before {
 	padding: 0 8px 0 20px;
@@ -180,3 +187,42 @@ $hcbPaddingY: 1.75em;
 .hcb_wrap pre[data-show-lang="0"]:not([data-file])::before {
 	content: none;
 }
+
+.hcb_wrap .hcb-clipboard {
+	position: absolute;
+	top: 0;
+	right: 0;
+	z-index: 1;
+	box-sizing: border-box;
+	width: 20px;
+	height: 20px;
+	// min-width: 4em;
+	padding: 0;
+	// font-size: 12px;
+	// font-family: Arial, Helvetica, sans-serif;
+	// line-height: 20px;
+	text-align: center;
+	background-color: rgba(#fff, 0.8);
+	background-image: url(../../assets/img/clipborad.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 16px auto;
+	border: none;
+	border-radius: 1px;
+}
+
+.hcb_wrap .hcb-clipboard.-done {
+	background-image: url(../../assets/img/copied.svg);
+
+	&::before {
+		position: absolute;
+		right: 0;
+		bottom: 100%;
+		font-size: 14px;
+		font-family: Arial, Helvetica, sans-serif;
+		line-height: 1.5;
+		content: "Copied!";
+	}
+}
+
+

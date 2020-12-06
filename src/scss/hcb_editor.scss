@@ -60,7 +60,10 @@
 		background: inherit !important;
 	}
 
-	.select_wrap {
+	// 設定エリア
+	.hcb_controls {
+		display: flex;
+		flex-wrap: wrap;
 		padding: 8px 8px;
 
 		&::after {
@@ -71,26 +74,32 @@
 			content: "";
 		}
 
-		select {
-			float: left;
-			width: 10em;
-			margin: 0;
+		.components-base-control {
+			flex-basis: 50%;
+			max-width: 25rem;
+
+			select {
+				width: 100%;
+				// margin: 0;
+			}
 		}
 
 		.filename_input {
-			float: right;
-			width: 10em;
+			flex-basis: 20%;
+			// float: right;
+			min-width: 10em;
 			height: 28px;
-			margin-left: 1em;
+			margin-left: auto;
 			padding: 0 8px;
 			line-height: 28px;
 		}
 
 		.num_input {
-			float: right;
-			width: 10em;
+			flex-basis: 20%;
+			// float: right;
+			min-width: 10em;
 			height: 28px;
-			margin-left: 1em;
+			margin-left: 16px;
 			padding: 0 8px;
 			line-height: 28px;
 		}
@@ -111,6 +120,35 @@
 		content: attr(data-lang);
 	}
 }
+
+.hcb_codewrap {
+	position: relative;
+	padding-right: 1em;
+}
+
+.hcb_linenum {
+	position: absolute;
+	top: 1em;
+	left: 1em;
+	display: none;
+	width: 0;
+	height: calc(100% - 2em);
+	border-right: solid 1px rgba(150, 150, 150, 0.5);
+}
+
+.hcb-block[data-show-linenum] {
+
+	.hcb_linenum {
+		display: block;
+	}
+
+	textarea.hcb_textarea {
+		width: calc(100% - 2em);
+		margin-left: 2em !important;
+		padding-left: 0.5em;
+	}
+}
+
 
 
 /* Lang Name (ブロックだけ) */

@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 // Dark
+.hcb_codewrap,
 .hcb_wrap pre,
 .hcb_wrap textarea.hcb_textarea {
 	color: #fff !important;
@@ -25,7 +26,7 @@
 }
 
 .hcb-block[data-file]::before {
-	background-image: url(../img/file-icon-dark.svg);
+	background-image: url(../../assets/img/file-icon-dark.svg);
 }
 
 // Gutenbergでのスクロールバー

@@ -2,8 +2,8 @@
 Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
 Tags: block, editor, guternberg, code, syntax, highlight, code highlighting, syntax highlight
-Requires at least: 5.0
-Tested up to: 5.5
+Requires at least: 5.5
+Tested up to: 5.6
 Stable tag: 1.2.6
 Requires PHP: 5.6
 License: GPLv2 or later

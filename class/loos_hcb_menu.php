@@ -44,7 +44,15 @@ add_action( 'admin_init', function() {
 			'args' => [
 				'type' => 'checkbox',
 				'label' => __( 'Show line count in code block', 'loos-hcb' ),
-				'desc' => __( 'If checked, the number of lines will be displayed on the left end of the code on the site display side.', 'loos-hcb' ), 
+				'desc' => __( 'If checked, the number of lines will be displayed on the left end of the code on the site display side.', 'loos-hcb' ),
+			]
+		],
+		'show_copy' => [
+			'title' => __( 'Copy button', 'loos-hcb' ),
+			'args' => [
+				'type' => 'checkbox',
+				'label' => __( 'Show copy button in code block', 'loos-hcb' ),
+				'desc' => '', 
 			]
 		],
 		'font_smoothing' => [

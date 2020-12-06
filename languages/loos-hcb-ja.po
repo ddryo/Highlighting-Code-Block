@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Highlighting Code Block\n"
-"POT-Creation-Date: 2020-08-13 15:26+0900\n"
-"PO-Revision-Date: 2020-08-13 15:26+0900\n"
+"POT-Creation-Date: 2020-12-06 19:43+0900\n"
+"PO-Revision-Date: 2020-12-06 19:44+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.4.2\n"
 "X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
@@ -22,6 +22,7 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
 "X-Poedit-SearchPathExcluded-2: src/js/code-block/_utils.js\n"
+"X-Poedit-SearchPathExcluded-3: assets/js\n"
 
 #: src/js/code-block/_panels.js:18
 msgid "HCB settings"
@@ -55,147 +56,98 @@ msgstr "言語を表示する"
 msgid "Do not display language"
 msgstr "言語を表示しない"
 
-#: src/js/code-block/index.js:164
-msgid "\"data-line\" value"
-msgstr "data-line属性値"
-
-#: src/js/code-block/index.js:173
+#: src/js/code-block/index.js:204
 msgid "file name"
 msgstr "ファイル名"
 
-#: class/loos_hcb_menu.php:28 class/loos_hcb_menu.php:29
+#: src/js/code-block/index.js:213
+msgid "\"data-line\" value"
+msgstr "data-line属性値"
+
+#: class/loos_hcb_menu.php:8
 msgid "[HCB] Settings"
 msgstr "[HCB] 設定"
 
-#: class/loos_hcb_menu.php:42
-msgid "Highlighting Code Block settings"
-msgstr "Highlighting Code Block 設定"
-
-#: class/loos_hcb_menu.php:68
+#: class/loos_hcb_menu.php:28
 msgid "Basic settings"
 msgstr "基本設定"
 
-#: class/loos_hcb_menu.php:75
+#: class/loos_hcb_menu.php:35
 msgid "Display language name"
 msgstr "言語の表示"
 
-#: class/loos_hcb_menu.php:82
+#: class/loos_hcb_menu.php:38
 msgid "Display language name in code block"
 msgstr "コードブロックに言語名を表示する"
 
-#: class/loos_hcb_menu.php:83
+#: class/loos_hcb_menu.php:39
 msgid ""
 "If checked, the language type is displayed in the code on the site display "
 "side."
 msgstr "チェックすると、サイト表示側のコードに言語の種類が表示されます。"
 
-#: class/loos_hcb_menu.php:90
+#: class/loos_hcb_menu.php:43
 msgid "Display settings for the number of rows"
 msgstr "行数の表示設定"
 
-#: class/loos_hcb_menu.php:97
+#: class/loos_hcb_menu.php:46
 msgid "Show line count in code block"
 msgstr "コードブロックに行数を表示する"
 
-#: class/loos_hcb_menu.php:98
+#: class/loos_hcb_menu.php:47
 msgid ""
 "If checked, the number of lines will be displayed on the left end of the "
 "code on the site display side."
 msgstr "チェックすると、サイト表示側のコードの左端に行数が表示されます。"
 
-#: class/loos_hcb_menu.php:104
+#: class/loos_hcb_menu.php:51
+msgid "Copy button"
+msgstr "コピーボタン"
+
+#: class/loos_hcb_menu.php:54
+msgid "Show copy button in code block"
+msgstr "コードブロックにコピーボタンを表示する"
+
+#: class/loos_hcb_menu.php:59
 msgid "Font smoothing"
 msgstr "フォントスムージング"
 
-#: class/loos_hcb_menu.php:111
+#: class/loos_hcb_menu.php:62
 msgid "Turn on font smoothing"
 msgstr "フォントスムージングをオンにする"
 
-#: class/loos_hcb_menu.php:113
+#: class/loos_hcb_menu.php:64
 #, php-format
 msgid "Add %s and %s to the code block."
 msgstr "コードブロックに %s と %s が追加されます。"
 
-#: class/loos_hcb_menu.php:122
+#: class/loos_hcb_menu.php:71
 msgid "Cord coloring (front side)"
 msgstr "コードカラーリング（フロント側）"
 
-#: class/loos_hcb_menu.php:138
+#: class/loos_hcb_menu.php:81
 msgid "Code coloring (editor side)"
 msgstr "コードカラーリング（エディター側）"
 
-#: class/loos_hcb_menu.php:154 class/loos_hcb_menu.php:170
+#: class/loos_hcb_menu.php:91 class/loos_hcb_menu.php:97
 msgid "Font Size"
 msgstr "フォントサイズ"
 
-#: class/loos_hcb_menu.php:187
+#: class/loos_hcb_menu.php:103
 msgid "\"Font-family\" in code"
 msgstr "コードの “font-family”"
 
-#: class/loos_hcb_menu.php:197
-msgid "Default"
-msgstr "デフォルト"
-
-#: class/loos_hcb_menu.php:224
+#: class/loos_hcb_menu.php:130
 msgid "Advanced settings"
 msgstr "高度な設定"
 
-#: class/loos_hcb_menu.php:233
-msgid "Language set to use"
-msgstr "使用する言語セット"
-
-#: class/loos_hcb_menu.php:242
-#, php-format
-msgid "Write in the format of %s, separated by \",\" (comma)."
-msgstr "%s の形式で、”,”（カンマ）区切りで記述してください。"
-
-#: class/loos_hcb_menu.php:243
-msgid "class-key:\"language-name\""
-msgstr "クラスキー:”言語名”"
-
-#: class/loos_hcb_menu.php:245
-msgid ""
-"\"class-key\" is the class name used in prism.js (the part corresponding to "
-"\"◯◯\" in \"lang- ◯◯\")"
-msgstr ""
-"「クラスキー」は、prism.jsで使用されるクラス名（「lang-◯◯」の「◯◯」に該当する"
-"部分)です。"
-
-#: class/loos_hcb_menu.php:246
-msgid ""
-"* If you use a language that is not supported by default, please use it "
-"together with \"Original prism.js\" setting."
-msgstr ""
-"※ デフォルトでサポートされていない言語を使用する場合、「独自prism.js」設定と"
-"併用してください。"
-
-#: class/loos_hcb_menu.php:275
-msgid "Original coloring file"
-msgstr "独自カラーリングファイル"
-
-#: class/loos_hcb_menu.php:285
-msgid "Load your own CSS file for code coloring."
-msgstr "あなたが用意したコードカラーリング用のCSSファイルを読み込みます。"
-
-#: class/loos_hcb_menu.php:291
-msgid "Original prism.js"
-msgstr "独自prism.js"
-
-#: class/loos_hcb_menu.php:301
-msgid "You can use the prism.js file corresponding to your own language set."
-msgstr "自分専用の言語セットに対応したprism.jsファイルを使用できます。"
-
-#: class/loos_hcb_menu.php:307
-msgid "help"
-msgstr "ヘルプ"
-
-#: class/loos_hcb_menu.php:313
+#: class/loos_hcb_menu.php:135
 msgid "When you use each original file, please upload it in the theme folder."
 msgstr ""
 "各独自ファイルを使用する場合は、テーマフォルダの中にアップロードしてくださ"
 "い。"
 
-#: class/loos_hcb_menu.php:315
+#: class/loos_hcb_menu.php:136
 msgid ""
 "If you set the path to your own file, the default coloring file and prism.js "
 "file will not be loaded.."
@@ -203,14 +155,67 @@ msgstr ""
 "独自ファイルへのパスを設定すると、デフォルトのカラーリングファイルやprism.js"
 "ファイルは読み込まれなくなります。"
 
-#: class/loos_hcb_menu.php:318
+#: class/loos_hcb_menu.php:138
 #, php-format
 msgid "* The currently loaded prism.js file can be downloaded at %s."
 msgstr "※ 現在読み込んでいるprism.jsファイルは、 %s でダウンロードできます。"
 
-#: class/loos_hcb_menu.php:319
+#: class/loos_hcb_menu.php:139
 msgid "Here"
 msgstr "こちら"
+
+#: class/loos_hcb_menu.php:144
+msgid "Language set to use"
+msgstr "使用する言語セット"
+
+#: class/loos_hcb_menu.php:149
+#, php-format
+msgid "Write in the format of %s, separated by \",\" (comma)."
+msgstr "%s の形式で、”,”（カンマ）区切りで記述してください。"
+
+#: class/loos_hcb_menu.php:150
+msgid "class-key:\"language-name\""
+msgstr "クラスキー:”言語名”"
+
+#: class/loos_hcb_menu.php:152
+msgid ""
+"\"class-key\" is the class name used in prism.js (the part corresponding to "
+"\"◯◯\" in \"lang- ◯◯\")"
+msgstr ""
+"「クラスキー」は、prism.jsで使用されるクラス名（「lang-◯◯」の「◯◯」に該当する"
+"部分)です。"
+
+#: class/loos_hcb_menu.php:153
+msgid ""
+"* If you use a language that is not supported by default, please use it "
+"together with \"Original prism.js\" setting."
+msgstr ""
+"※ デフォルトでサポートされていない言語を使用する場合、「独自prism.js」設定と"
+"併用してください。"
+
+#: class/loos_hcb_menu.php:158
+msgid "Original coloring file"
+msgstr "独自カラーリングファイル"
+
+#: class/loos_hcb_menu.php:161
+msgid "Load your own CSS file for code coloring."
+msgstr "あなたが用意したコードカラーリング用のCSSファイルを読み込みます。"
+
+#: class/loos_hcb_menu.php:165
+msgid "Original prism.js"
+msgstr "独自prism.js"
+
+#: class/loos_hcb_menu.php:168
+msgid "You can use the prism.js file corresponding to your own language set."
+msgstr "自分専用の言語セットに対応したprism.jsファイルを使用できます。"
+
+#: class/loos_hcb_menu.php:172
+msgid "help"
+msgstr "ヘルプ"
+
+#: class/loos_hcb_menu.php:203
+msgid "Highlighting Code Block settings"
+msgstr "Highlighting Code Block 設定"
 
 #. Plugin Name of the plugin/theme
 msgid "Highlighting Code Block"
@@ -229,12 +234,18 @@ msgstr ""
 "す。（Gutenbergとクラシックエディター共に利用可能）"
 
 #. Author of the plugin/theme
-msgid "LOOS WEB STUDIO"
-msgstr "LOOS WEB STUDIO"
+msgid "LOOS, Inc."
+msgstr ""
 
 #. Author URI of the plugin/theme
 msgid "https://loos-web-studio.com/"
 msgstr "https://loos-web-studio.com/"
+
+#~ msgid "Default"
+#~ msgstr "デフォルト"
+
+#~ msgid "LOOS WEB STUDIO"
+#~ msgstr "LOOS WEB STUDIO"
 
 #~ msgid "Block editor maximum width"
 #~ msgstr "ブロックエディターの最大幅"

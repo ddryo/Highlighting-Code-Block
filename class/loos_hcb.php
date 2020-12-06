@@ -22,6 +22,7 @@ class LOOS_HCB {
 	const DEFAULT_SETTINGS = [
 		'show_lang'       => 'on',
 		'show_linenum'    => 'on',
+		'show_copy'       => 'on',
 		'font_smoothing'  => 'off',
 		'front_coloring'  => 'light',
 		'editor_coloring' => 'light',

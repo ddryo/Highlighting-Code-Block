@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, createBlock } from '@wordpress/blocks';
 import {
@@ -40,7 +39,25 @@ const textDomain = 'loos-hcb';
  */
 let hcbLangs = window.hcbLangs;
 if ('object' !== typeof hcbLangs) {
-	hcbLangs = {html:"HTML",css:"CSS",scss:"SCSS",js:"JavaScript",ts:"TypeScript",php:"PHP",ruby:"Ruby",python:"Python",swift:"Swift",c:"C",csharp:"C#",cpp:"C++",objectivec:"Objective-C",sql:"SQL",json:"JSON",bash:"Bash",git:"Git"};
+	hcbLangs = {
+		html: 'HTML',
+		css: 'CSS',
+		scss: 'SCSS',
+		js: 'JavaScript',
+		ts: 'TypeScript',
+		php: 'PHP',
+		ruby: 'Ruby',
+		python: 'Python',
+		swift: 'Swift',
+		c: 'C',
+		csharp: 'C#',
+		cpp: 'C++',
+		objectivec: 'Objective-C',
+		sql: 'SQL',
+		json: 'JSON',
+		bash: 'Bash',
+		git: 'Git',
+	};
 }
 
 /**
@@ -89,6 +106,7 @@ registerBlockType(metadata.name, {
 			langName,
 			dataLineNum,
 			isShowLang,
+			isLineShow,
 		} = attributes;
 		const blockClass = classnames('hcb_wrap', 'hcb-block', className);
 
@@ -118,6 +136,24 @@ registerBlockType(metadata.name, {
 		// let preClass = 'prism ' + isLineShow + '-numbers lang-' + langType;
 		// setAttributes({ preClass: preClass });
 
+		const hcbShowLang = window.hcbVars?.showLang;
+		const hcbShowLinenum = window.hcbVars?.showLinenum;
+		// console.log(hcbShowLinenum, window.hcbVars);
+
+		let dataShowLang = '0';
+		if ('1' === isShowLang) {
+			dataShowLang = '1';
+		} else if ('' === isShowLang && 'on' === hcbShowLang) {
+			dataShowLang = '1';
+		}
+
+		let dataShowLinenum = null;
+		if ('on' === isLineShow) {
+			dataShowLinenum = '1';
+		} else if ('undefined' === isLineShow && 'on' === hcbShowLinenum) {
+			dataShowLinenum = '1';
+		}
+
 		return (
 			<>
 				<InspectorControls>
@@ -128,18 +164,22 @@ registerBlockType(metadata.name, {
 					data-file={fileName || null}
 					data-lang={langName || null}
 					// data-line={dataLineNum || null}
-					data-show-lang={isShowLang || null}
+					data-show-lang={dataShowLang}
+					data-show-linenum={dataShowLinenum}
 				>
-					<textarea
-						className='hcb_textarea'
-						placeholder='Your Code...'
-						value={code}
-						onChange={(e) => {
-							setAttributes({ code: e.target.value });
-							setHeightCodeBlocks(e.target);
-						}}
-					></textarea>
-					<div className='select_wrap'>
+					<div className='hcb_codewrap'>
+						<div className='hcb_linenum'></div>
+						<textarea
+							className='hcb_textarea'
+							placeholder='Your Code...'
+							value={code}
+							onChange={(e) => {
+								setAttributes({ code: e.target.value });
+								setHeightCodeBlocks(e.target);
+							}}
+						></textarea>
+					</div>
+					<div className='hcb_controls'>
 						<SelectControl
 							value={attributes.langType}
 							options={langList}
@@ -159,20 +199,20 @@ registerBlockType(metadata.name, {
 						/>
 						<input
 							type='text'
-							className='num_input'
-							value={dataLineNum}
-							placeholder={__('"data-line" value', textDomain)} //data-line属性値
-							onChange={(e) => {
-								setAttributes({ dataLineNum: e.target.value });
-							}}
-						/>
-						<input
-							type='text'
 							className='filename_input'
 							value={fileName}
 							placeholder={__('file name', textDomain)} //ファイル名
 							onChange={(e) => {
 								setAttributes({ fileName: e.target.value });
+							}}
+						/>
+						<input
+							type='text'
+							className='num_input'
+							value={dataLineNum}
+							placeholder={__('"data-line" value', textDomain)} //data-line属性値
+							onChange={(e) => {
+								setAttributes({ dataLineNum: e.target.value });
 							}}
 						/>
 					</div>
@@ -203,10 +243,7 @@ registerBlockType(metadata.name, {
 					data-line={dataLineNum || null}
 					data-show-lang={isShowLang || null}
 				>
-					<RichText.Content
-						tagName='code'
-						value={sanitizeCodeblock(code)}
-					/>
+					<RichText.Content tagName='code' value={sanitizeCodeblock(code)} />
 				</pre>
 			</div>
 		);

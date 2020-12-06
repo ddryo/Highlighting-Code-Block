@@ -50,11 +50,23 @@ class LOOS_HCB_Scripts {
 		// Inline Style
 		wp_add_inline_style( 'hcb-style', LOOS_HCB_Scripts::get_inline_style() );
 
+		// clipboard.js
+		$is_show_copy = LOOS_HCB::$settings['show_copy'];
+		if ( $is_show_copy ) {
+			wp_enqueue_script( 'clipboard' );
+		}
+
 		// Prism.js
 		wp_enqueue_script( 'hcb-prism', LOOS_HCB::$prism_js_url, [], LOOS_HCB_VERSION, true );
+		// wp_add_inline_script( 'hcb-prism', 'window.Prism = window.Prism || {}; Prism.manual = true;', 'before' );
 
 		// HCB script
 		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL .'build/js/hcb_script.js', ['hcb-prism'], LOOS_HCB_VERSION, true );
+
+		// スクリプトに渡すグローバル変数
+		wp_localize_script( 'hcb-script', 'hcbVars', [
+			'showCopy' => $is_show_copy,
+		] );
 
 	}
 
@@ -91,7 +103,7 @@ class LOOS_HCB_Scripts {
 		);
 
 		// Inline Style
-		wp_add_inline_style( 'hcb-gutenberg-style', LOOS_HCB_Scripts::get_inline_style( 'block' ) );
+		// wp_add_inline_style( 'hcb-gutenberg-style', LOOS_HCB_Scripts::get_inline_style( 'block' ) );
 
 		// 翻訳登録用の空ファイル
 		wp_enqueue_script(
@@ -108,39 +120,39 @@ class LOOS_HCB_Scripts {
 			'loos-hcb',
 			LOOS_HCB_PATH . 'languages'
 		);
+
+		// 管理画面側に渡すグローバル変数
+		wp_localize_script( 'hcb-blocks', 'hcbVars', [
+			'showLang'    => LOOS_HCB::$settings[ 'show_lang' ],
+			'showLinenum' => LOOS_HCB::$settings[ 'show_linenum' ],
+		] );
 	}
 
 
 	/**
 	 * インラインスタイルの生成
 	 */
-	public static function get_inline_style( $flag = 'front' ) {
+	public static function get_inline_style() {
 
 		$inline_css = '';
 		$hcb = LOOS_HCB::$settings;
 
-		if ( 'front' === $flag ) {
-			// Font size
-			$inline_css .= '.hcb_wrap pre.prism{font-size: '. $hcb['fontsize_pc'] .'}'.
-				'@media screen and (max-width: 599px){.hcb_wrap pre.prism{font-size: '. $hcb['fontsize_sp'] .'}}';
-			// Code Lang
-			if ( 'off' === $hcb[ 'show_lang' ] ) {
-				$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{ content: none;}';
-			}
-			// Font smoothing
-			if ( 'on' === $hcb[ 'font_smoothing' ] ) {
-				$inline_css .= '.hcb_wrap pre{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}';
-			}
-			// Font family
-			if ( $hcb[ 'font_family' ] ) {
-				$inline_css .= '.hcb_wrap pre{font-family:'. $hcb[ 'font_family' ] .'}';
-			}
-		} elseif ( 'block' === $flag ) {
-			// Code Lang
-			if ( 'off' === LOOS_HCB::$settings[ 'show_lang' ] ) {
-				$inline_css .= '.hcb-block:not([data-file]):not([data-show-lang])::before{ content: none;}';
-			}
+		// Font size
+		$inline_css .= '.hcb_wrap pre.prism{font-size: '. $hcb['fontsize_pc'] .'}'.
+			'@media screen and (max-width: 599px){.hcb_wrap pre.prism{font-size: '. $hcb['fontsize_sp'] .'}}';
+		// Code Lang
+		if ( 'off' === $hcb[ 'show_lang' ] ) {
+			$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{ content: none;}';
 		}
+		// Font smoothing
+		if ( 'on' === $hcb[ 'font_smoothing' ] ) {
+			$inline_css .= '.hcb_wrap pre{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}';
+		}
+		// Font family
+		if ( $hcb[ 'font_family' ] ) {
+			$inline_css .= '.hcb_wrap pre{font-family:'. $hcb[ 'font_family' ] .'}';
+		}
+		
 		return $inline_css;
 	}
 
