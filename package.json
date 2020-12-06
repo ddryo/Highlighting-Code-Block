@@ -7,7 +7,7 @@
         "start": "wp-scripts start",
         "build:js": "wp-scripts build",
         "build:css": "run-s scss postcss",
-        "build": "run-s build:css build:blocks",
+        "build": "run-s build:css build:js",
         "watch:js": "nodemon --watch src/js -e js -x \"npm run build:js\"",
         "watch:css": "nodemon --watch src -e scss -x \"npm run build:scss\"",
         "watch": "run-p watch:css watch:js",
