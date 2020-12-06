@@ -1,38 +1,29 @@
 /**
- * WordPress dependencies
+ * @WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, createBlock } from '@wordpress/blocks';
-import {
-	RichText,
-	InspectorControls,
-	// InnerBlocks,
-	// BlockControls,
-} from '@wordpress/block-editor';
-
+import { RichText } from '@wordpress/block-editor';
 import { SelectControl } from '@wordpress/components';
+import { useEffect } from '@wordpress/element';
+// import { useSelect } from '@wordpress/data';
 
 /**
- * External dependencies
+ * @Inner dependencies
  */
-import classnames from 'classnames';
 import hcbIcon from './_icon';
+import HcbSidebar from './_sidebar';
 import { setHeightCodeBlocks, sanitizeCodeblock } from './_utils';
 
 /**
- * InspectorControls
+ * @Other dependencies
  */
-import HcbSidePanels from './_panels';
+import classnames from 'classnames';
 
 /**
  * metadata
  */
 import metadata from './block.json';
-
-/**
- * テキストドメイン
- */
-const textDomain = 'loos-hcb';
 
 /**
  * 言語情報をグローバル変数から受け取る。
@@ -59,6 +50,20 @@ if ('object' !== typeof hcbLangs) {
 		git: 'Git',
 	};
 }
+
+const langList = [
+	{
+		value: '',
+		label: '- Lang Select -',
+	},
+];
+
+Object.keys(hcbLangs).forEach((key) => {
+	langList.push({
+		value: key,
+		label: hcbLangs[key],
+	});
+});
 
 /**
  * Register Highlighting Code Block
@@ -111,34 +116,22 @@ registerBlockType(metadata.name, {
 		const blockClass = classnames('hcb_wrap', 'hcb-block', className);
 
 		// コードの textarea 高さセット
-		setTimeout(() => {
-			// ちょっと遅らせないと null になる
-			const hcbBlock = document.getElementById('block-' + clientId);
-			const hcbTextarea = hcbBlock.querySelector('.hcb_textarea');
-			setHeightCodeBlocks(hcbTextarea);
-		}, 10);
+		useEffect(() => {
+			// console.log('useEffect');
+			setTimeout(() => {
+				// ちょっと遅らせないと null になる
+				const hcbBlock = document.getElementById('block-' + clientId);
+				const hcbTextarea = hcbBlock.querySelector('.hcb_textarea');
+				setHeightCodeBlocks(hcbTextarea);
+			}, 10);
+		}, [clientId, code]);
 
-		const langList = [
-			{
-				value: '',
-				label: '- Lang Select -',
-			},
-		];
-
-		Object.keys(hcbLangs).forEach((key) => {
-			langList.push({
-				value: key,
-				label: hcbLangs[key],
-			});
-		});
-
-		//preタグにつけるクラス名を生成して保存
+		// preタグにつけるクラス名を生成して保存
 		// let preClass = 'prism ' + isLineShow + '-numbers lang-' + langType;
 		// setAttributes({ preClass: preClass });
 
 		const hcbShowLang = window.hcbVars?.showLang;
 		const hcbShowLinenum = window.hcbVars?.showLinenum;
-		// console.log(hcbShowLinenum, window.hcbVars);
 
 		let dataShowLang = '0';
 		if ('1' === isShowLang) {
@@ -156,9 +149,7 @@ registerBlockType(metadata.name, {
 
 		return (
 			<>
-				<InspectorControls>
-					<HcbSidePanels {...props} />
-				</InspectorControls>
+				<HcbSidebar {...{ attributes, setAttributes }} />
 				<div
 					className={blockClass}
 					data-file={fileName || null}
@@ -201,7 +192,7 @@ registerBlockType(metadata.name, {
 							type='text'
 							className='filename_input'
 							value={fileName}
-							placeholder={__('file name', textDomain)} //ファイル名
+							placeholder={__('file name', 'loos-hcb')} //ファイル名
 							onChange={(e) => {
 								setAttributes({ fileName: e.target.value });
 							}}
@@ -210,7 +201,7 @@ registerBlockType(metadata.name, {
 							type='text'
 							className='num_input'
 							value={dataLineNum}
-							placeholder={__('"data-line" value', textDomain)} //data-line属性値
+							placeholder={__('"data-line" value', 'loos-hcb')} //data-line属性値
 							onChange={(e) => {
 								setAttributes({ dataLineNum: e.target.value });
 							}}

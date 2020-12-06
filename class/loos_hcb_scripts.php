@@ -159,6 +159,7 @@ class LOOS_HCB_Scripts {
 
 	/**
 	 * Add code to Admin Head.
+	 * TinyMCEでも必要なので admin_head にフックさせている。
 	 */
 	public static function hook_admin_head() {
 
