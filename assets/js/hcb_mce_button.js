@@ -1,3 +1,5 @@
+/* eslint no-var: 0 */
+
 /**
  * Sanitize function
  */
@@ -14,12 +16,31 @@ function sanitizeCodeblock(str) {
 
 (function () {
 	//グローバル変数の受け取り
-	let globalHcbLangs = window.hcbLangs;
+	var globalHcbLangs = window.hcbLangs; // eslint-disable-line
+	var tinymce = window.tinymce; // eslint-disable-line
 	if (typeof globalHcbLangs !== 'object') {
-		globalHcbLangs = {html:"HTML",css:"CSS",scss:"SCSS",js:"JavaScript",ts:"TypeScript",php:"PHP",ruby:"Ruby",python:"Python",swift:"Swift",c:"C",csharp:"C#",cpp:"C++",objectivec:"Objective-C",sql:"SQL",json:"JSON",bash:"Bash",git:"Git"};
+		globalHcbLangs = {
+			html: 'HTML',
+			css: 'CSS',
+			scss: 'SCSS',
+			js: 'JavaScript',
+			ts: 'TypeScript',
+			php: 'PHP',
+			ruby: 'Ruby',
+			python: 'Python',
+			swift: 'Swift',
+			c: 'C',
+			csharp: 'C#',
+			cpp: 'C++',
+			objectivec: 'Objective-C',
+			sql: 'SQL',
+			json: 'JSON',
+			bash: 'Bash',
+			git: 'Git',
+		};
 	}
 
-	const varluesArr = [{ text: 'Plane Text', value: 'plane' }];
+	const varluesArr = [{ text: 'Plain Text', value: 'plain' }];
 
 	Object.keys(globalHcbLangs).forEach(function (key) {
 		varluesArr.push({ text: globalHcbLangs[key], value: key });
@@ -29,30 +50,33 @@ function sanitizeCodeblock(str) {
 		init(editor, url) {
 			editor.addButton('hcb_select', {
 				title: 'Highlighting Code Block',
-				text: 'コードブロック',
+				text: 'Code Block',
 				type: 'listbox',
 				values: varluesArr,
 				onselect(e) {
-					const thisV = this.value();
-					const thisT = this.text();
+					// var thisElem = e.target; //this;
+					var thisV = e.target.value();
 					if (thisV === '') return;
-					const selected_text = editor.selection.getContent({
+
+					var thisT = e.target.text();
+					var selectedText = editor.selection.getContent({
 						format: 'text',
 					});
-					if (selected_text) {
-						var return_text = sanitizeCodeblock(selected_text);
+					var returnText = '';
+					if (selectedText) {
+						returnText = sanitizeCodeblock(selectedText);
 					} else {
-						var return_text = '/* Your code... */';
+						returnText = '/* Your code... */';
 					}
-					return_text =
+					returnText =
 						'<div class="hcb_wrap"><pre class="prism undefined-numbers lang-' +
 						thisV +
 						'" data-lang="' +
 						thisT +
 						'"><code>' +
-						return_text +
+						returnText +
 						'</code></pre></div>';
-					editor.execCommand('mceInsertContent', false, return_text);
+					editor.execCommand('mceInsertContent', false, returnText);
 				},
 			});
 		},
@@ -61,8 +85,5 @@ function sanitizeCodeblock(str) {
 		},
 	});
 
-	tinymce.PluginManager.add(
-		'hcb_external_script',
-		tinymce.plugins.hcb_external_script
-	);
+	tinymce.PluginManager.add('hcb_external_script', tinymce.plugins.hcb_external_script);
 })();

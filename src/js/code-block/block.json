@@ -21,7 +21,7 @@
         },
         "langType": {
             "type": "string",
-            "default": "plane"
+            "default": ""
         },
         "langName": {
             "type": "string",

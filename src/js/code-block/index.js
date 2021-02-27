@@ -13,6 +13,7 @@ import { useEffect } from '@wordpress/element';
  */
 import hcbIcon from './_icon';
 import HcbSidebar from './_sidebar';
+import deprecated from './_deprecated';
 import { setHeightCodeBlocks, sanitizeCodeblock } from './_utils';
 
 /**
@@ -212,18 +213,13 @@ registerBlockType(metadata.name, {
 		);
 	},
 	save: ({ attributes }) => {
-		const {
-			code,
-			langType,
-			fileName,
-			langName,
-			dataLineNum,
-			isLineShow,
-			isShowLang,
-		} = attributes;
+		const { code, fileName, langName, dataLineNum, isLineShow, isShowLang } = attributes;
+		const langType = attributes.langType || 'plain';
 
-		// preタグにつけるクラス
-		const preClass = 'prism ' + isLineShow + '-numbers lang-' + langType;
+		let preClass = classnames('prism', `lang-${langType}`);
+		if ('undefined' !== isLineShow) {
+			preClass = classnames(preClass, `${isLineShow}-numbers`);
+		}
 
 		return (
 			<div className='hcb_wrap'>
@@ -239,4 +235,5 @@ registerBlockType(metadata.name, {
 			</div>
 		);
 	},
+	deprecated,
 });
