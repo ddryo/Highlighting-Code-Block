@@ -75,12 +75,13 @@ class LOOS_HCB {
 
 		// Set linenum
 		add_filter( 'the_content' , function( $content ) {
-
 			$content = str_replace( 'prism on-numbers', 'prism line-numbers', $content );
+			// $content = preg_replace( '/class="prism([^"]*)on-numbers"/', 'class="prism$1line-numbers"', $content );
 
 			//個別設定が未定義のブロックはベース設定に依存
 			if ( 'on' === LOOS_HCB::$settings[ 'show_linenum' ] ) {
 				$content = str_replace( 'prism undefined-numbers', 'prism line-numbers', $content );
+				// $content = preg_replace( '/class="prism([^"]*)undefined-numbers"/', 'class="prism$1line-numbers"', $content );
 			}
 			return $content;
 

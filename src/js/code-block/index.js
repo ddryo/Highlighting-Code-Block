@@ -215,11 +215,7 @@ registerBlockType(metadata.name, {
 	save: ({ attributes }) => {
 		const { code, fileName, langName, dataLineNum, isLineShow, isShowLang } = attributes;
 		const langType = attributes.langType || 'plain';
-
-		let preClass = classnames('prism', `lang-${langType}`);
-		if ('undefined' !== isLineShow) {
-			preClass = classnames(preClass, `${isLineShow}-numbers`);
-		}
+		const preClass = classnames('prism', `${isLineShow}-numbers`, `lang-${langType}`);
 
 		return (
 			<div className='hcb_wrap'>
