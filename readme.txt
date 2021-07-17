@@ -2,9 +2,9 @@
 Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
 Tags: block, editor, guternberg, code, syntax, highlight, code highlighting, syntax highlight
-Requires at least: 5.5
-Tested up to: 5.7
-Stable tag: 1.2.9
+Requires at least: 5.6
+Tested up to: 5.8
+Stable tag: 1.3.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -33,9 +33,8 @@ Please see [this page](https://wemo.tech/2122/) for a detailed description of th
 
 = If it doesn't work =
 
-This plugin works only with PHP version 5.6 or later, WordPress 5.0 or later.
+This plugin works only with PHP version 5.6 or later, WordPress 5.6 or later.
 Please check your PHP version or WordPress version.
-
 
 
 = About settings =
@@ -94,6 +93,10 @@ The following languages are available by default.
 
 
 == Changelog ==
+
+= 1.3.0 =
+- Support for WordPress 5.8.
+- Required WordPress version raised to 5.6.
 
 = 1.2.9 =
 - Fixed a bug that the number of lines is not displayed.

@@ -1,4 +1,5 @@
 {
+    "apiVersion": 2,
     "name": "loos-hcb/code-block",
     "title": "Highlighing Code Block",
     "category": "formatting",

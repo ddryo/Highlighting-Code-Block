@@ -3,14 +3,16 @@
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, createBlock } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 import { SelectControl } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
+// import { addFilter, applyFilters, hasFilter } from '@wordpress/hooks';
 // import { useSelect } from '@wordpress/data';
 
 /**
  * @Inner dependencies
  */
+import metadata from './block.json';
 import hcbIcon from './_icon';
 import HcbSidebar from './_sidebar';
 import deprecated from './_deprecated';
@@ -20,11 +22,6 @@ import { setHeightCodeBlocks, sanitizeCodeblock } from './_utils';
  * @Other dependencies
  */
 import classnames from 'classnames';
-
-/**
- * metadata
- */
-import metadata from './block.json';
 
 /**
  * 言語情報をグローバル変数から受け取る。
@@ -71,10 +68,6 @@ Object.keys(hcbLangs).forEach((key) => {
  */
 registerBlockType(metadata.name, {
 	icon: hcbIcon,
-	title: metadata.title,
-	category: metadata.category,
-	keywords: metadata.keywords,
-	supports: metadata.supports,
 	attributes: metadata.attributes,
 	transforms: {
 		from: [
@@ -148,17 +141,19 @@ registerBlockType(metadata.name, {
 			dataShowLinenum = '1';
 		}
 
+		const blockProps = useBlockProps({
+			className: blockClass,
+			'data-file': fileName || null,
+			'data-lang': langName || null,
+			'data-show-lang': dataShowLang,
+			'data-show-linenum': dataShowLinenum,
+			// 'data-line': dataLineNum || null,
+		});
+
 		return (
 			<>
 				<HcbSidebar {...{ attributes, setAttributes }} />
-				<div
-					className={blockClass}
-					data-file={fileName || null}
-					data-lang={langName || null}
-					// data-line={dataLineNum || null}
-					data-show-lang={dataShowLang}
-					data-show-linenum={dataShowLinenum}
-				>
+				<div {...blockProps}>
 					<div className='hcb_codewrap'>
 						<div className='hcb_linenum'></div>
 						<textarea
@@ -217,8 +212,11 @@ registerBlockType(metadata.name, {
 		const langType = attributes.langType || 'plain';
 		const preClass = classnames('prism', `${isLineShow}-numbers`, `lang-${langType}`);
 
+		const blockProps = useBlockProps.save({
+			className: 'hcb_wrap',
+		});
 		return (
-			<div className='hcb_wrap'>
+			<div {...blockProps}>
 				<pre
 					className={preClass}
 					data-file={fileName || null}
