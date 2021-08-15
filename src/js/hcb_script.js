@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	// clipboard
 	(function () {
-		if ('on' !== window.hcbVars.showCopy || !window.ClipboardJS) return;
+		if (!window.ClipboardJS) return;
 
 		let clipCt = 1;
 

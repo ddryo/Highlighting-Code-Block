@@ -52,7 +52,7 @@ class LOOS_HCB_Scripts {
 
 		// clipboard.js
 		$is_show_copy = LOOS_HCB::$settings['show_copy'];
-		if ( $is_show_copy ) {
+		if ( $is_show_copy === 'on' ) {
 			wp_enqueue_script( 'clipboard' );
 		}
 
@@ -62,11 +62,6 @@ class LOOS_HCB_Scripts {
 
 		// HCB script
 		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL .'build/js/hcb_script.js', ['hcb-prism'], LOOS_HCB_VERSION, true );
-
-		// スクリプトに渡すグローバル変数
-		wp_localize_script( 'hcb-script', 'hcbVars', [
-			'showCopy' => $is_show_copy,
-		] );
 
 	}
 
