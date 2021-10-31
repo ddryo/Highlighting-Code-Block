@@ -34,14 +34,14 @@ class LOOS_HCB_Scripts {
 		wp_enqueue_style( 'hcb-style', LOOS_HCB_URL . '/build/css/hcb_style.css', [], LOOS_HCB_VERSION );
 
 		// Coloring style
-		wp_enqueue_style( 'hcb-coloring', LOOS_HCB::$coloring_css_url, ['hcb-style'], LOOS_HCB_VERSION );
+		wp_enqueue_style( 'hcb-coloring', LOOS_HCB::$coloring_css_url, [ 'hcb-style' ], LOOS_HCB_VERSION );
 
 		// Inline Style
 		wp_add_inline_style( 'hcb-style', LOOS_HCB_Scripts::get_inline_style() );
 
 		// clipboard.js
 		$is_show_copy = LOOS_HCB::$settings['show_copy'];
-		if ( $is_show_copy === 'on' ) {
+		if ( 'on' === $is_show_copy ) {
 			wp_enqueue_script( 'clipboard' );
 		}
 
@@ -50,7 +50,7 @@ class LOOS_HCB_Scripts {
 		// wp_add_inline_script( 'hcb-prism', 'window.Prism = window.Prism || {}; Prism.manual = true;', 'before' );
 
 		// HCB script
-		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL . '/build/js/hcb_script.js', ['hcb-prism'], LOOS_HCB_VERSION, true );
+		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL . '/build/js/hcb_script.js', [ 'hcb-prism' ], LOOS_HCB_VERSION, true );
 
 	}
 
@@ -122,8 +122,8 @@ class LOOS_HCB_Scripts {
 		$hcb = LOOS_HCB::$settings;
 
 		// Font size
-		$inline_css .= '.hcb_wrap pre.prism{font-size: '. $hcb['fontsize_pc'] .'}'.
-			'@media screen and (max-width: 599px){.hcb_wrap pre.prism{font-size: '. $hcb['fontsize_sp'] .'}}';
+		$inline_css .= '.hcb_wrap pre.prism{font-size: '. $hcb[ 'fontsize_pc' ] .'}'.
+			'@media screen and (max-width: 599px){.hcb_wrap pre.prism{font-size: '. $hcb[ 'fontsize_sp' ] .'}}';
 		// Code Lang
 		if ( 'off' === $hcb[ 'show_lang' ] ) {
 			$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{ content: none;}';

@@ -12,7 +12,7 @@ module.exports = {
         'selector-class-pattern': null,
         // 'indentation': 'tab',
         // 'max-empty-lines': [1, { ignore: ["comments"] }],
-        // 'string-quotes': 'double', //ダブルクォーテーションに (wordpress　でそうなってる)
+        // 'string-quotes': 'double', //ダブルクォーテーションに (wordpress でそうなってる)
         // 'no-duplicate-selectors': null, //同じセレクタの出現に関するエラーを出さない
         'function-url-quotes': 'never', //不必要なクォーテーションを禁止( 自動Fixできないので注意 )
         'no-descending-specificity': null, //セレクタの詳細度に関する警告を出さない
