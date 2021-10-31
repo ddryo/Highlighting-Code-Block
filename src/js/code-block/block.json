@@ -16,10 +16,6 @@
             "source": "text",
             "selector": "code"
         },
-        "className": {
-            "type": "string",
-            "default": ""
-        },
         "langType": {
             "type": "string",
             "default": ""
@@ -46,6 +42,6 @@
         }
     },
     "textdomain": "loos-hcb",
-    "editorScript": "file:../../build/js/code-block/index.js",
-    "editorStyle": "file:../../build/css/hcb_editor.css"
+    "editorScript": "file:../../../build/js/code-block/index.js",
+    "editorStyle": "file:../../../build/css/hcb_editor.css"
 }

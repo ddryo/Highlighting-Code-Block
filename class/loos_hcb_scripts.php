@@ -19,20 +19,9 @@ class LOOS_HCB_Scripts {
 	 */
 	public static function hook_init() {
 
-		// ブロックのスクリプト登録
-		$asset = include( LOOS_HCB_PATH. 'build/js/code-block/index.asset.php' );
-		wp_register_script(
-			'hcb-code-block',
-			LOOS_HCB_URL .'build/js/code-block/index.js',
-			$asset['dependencies'],
-			$asset['version'],
-			true
-		);
-
-		// ブロックの登録
-		$metadata = json_decode( file_get_contents( LOOS_HCB_PATH . 'src/js/code-block/block.json' ), true );
-		$metadata = array_merge( $metadata, [ 'editor_script' => 'hcb-code-block' ] );
-		register_block_type( 'loos-hcb/code-block', $metadata );
+		if ( function_exists( 'register_block_type_from_metadata' ) ) {
+			register_block_type_from_metadata( LOOS_HCB_PATH . '/src/js/code-block' );
+		}
 	}
 
 
@@ -42,7 +31,7 @@ class LOOS_HCB_Scripts {
 	public static function hook_wp_enqueue_scripts() {
 
 		// HCB style
-		wp_enqueue_style( 'hcb-style', LOOS_HCB_URL .'build/css/hcb_style.css', [], LOOS_HCB_VERSION );
+		wp_enqueue_style( 'hcb-style', LOOS_HCB_URL . '/build/css/hcb_style.css', [], LOOS_HCB_VERSION );
 
 		// Coloring style
 		wp_enqueue_style( 'hcb-coloring', LOOS_HCB::$coloring_css_url, ['hcb-style'], LOOS_HCB_VERSION );
@@ -61,7 +50,7 @@ class LOOS_HCB_Scripts {
 		// wp_add_inline_script( 'hcb-prism', 'window.Prism = window.Prism || {}; Prism.manual = true;', 'before' );
 
 		// HCB script
-		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL .'build/js/hcb_script.js', ['hcb-prism'], LOOS_HCB_VERSION, true );
+		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL . '/build/js/hcb_script.js', ['hcb-prism'], LOOS_HCB_VERSION, true );
 
 	}
 
@@ -71,7 +60,7 @@ class LOOS_HCB_Scripts {
 	 */
 	public static function hook_admin_enqueue_scripts( $hook_suffix ) {
 		if ( 'settings_page_hcb_settings' === $hook_suffix ) {
-			wp_enqueue_style( 'hcb-admin', LOOS_HCB_URL .'build/css/hcb_admin.css', [], LOOS_HCB_VERSION );
+			wp_enqueue_style( 'hcb-admin', LOOS_HCB_URL . '/build/css/hcb_admin.css', [], LOOS_HCB_VERSION );
 		}
 	}
 
@@ -84,7 +73,7 @@ class LOOS_HCB_Scripts {
 		// Editor Style
 		wp_enqueue_style( 
 			'hcb-editor-style',
-			LOOS_HCB_URL .'build/css/hcb_editor.css',
+			LOOS_HCB_URL . '/build/css/hcb_editor.css',
 			[],
 			LOOS_HCB_VERSION
 		);
@@ -103,7 +92,7 @@ class LOOS_HCB_Scripts {
 		// 翻訳登録用の空ファイル
 		wp_enqueue_script(
 			'hcb-blocks',
-			LOOS_HCB_URL .'assets/js/hcb.js',
+			LOOS_HCB_URL . '/assets/js/hcb.js',
 			[],
 			LOOS_HCB_VERSION,
 			false
@@ -113,7 +102,7 @@ class LOOS_HCB_Scripts {
 		wp_set_script_translations(
 			'hcb-blocks',
 			'loos-hcb',
-			LOOS_HCB_PATH . 'languages'
+			LOOS_HCB_PATH . '/languages'
 		);
 
 		// 管理画面側に渡すグローバル変数

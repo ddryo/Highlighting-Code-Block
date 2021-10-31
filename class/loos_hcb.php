@@ -133,7 +133,7 @@ class LOOS_HCB {
 
 		} else {
 
-			self::$prism_js_url = LOOS_HCB_URL .'assets/js/prism.js';
+			self::$prism_js_url = LOOS_HCB_URL . '/assets/js/prism.js';
 		}
 
 		// Set front coloring file url
@@ -143,10 +143,10 @@ class LOOS_HCB {
 
 		} else {
 
-			self::$coloring_css_url = LOOS_HCB_URL .'build/css/coloring_'. self::$settings[ 'front_coloring' ] .'.css';
+			self::$coloring_css_url = LOOS_HCB_URL . '/build/css/coloring_' . self::$settings[ 'front_coloring' ] . '.css';
 		}
 
 		// Set editor coloring file url
-		self::$editor_coloring_css_url = LOOS_HCB_URL. 'build/css/editor_'. self::$settings[ 'editor_coloring' ] . '.css';
+		self::$editor_coloring_css_url = LOOS_HCB_URL . '/build/css/editor_' . self::$settings[ 'editor_coloring' ] . '.css';
 	}
 }
