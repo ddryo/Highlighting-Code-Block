@@ -97,7 +97,7 @@ registerBlockType(metadata.name, {
 	},
 
 	edit: (props) => {
-		const { attributes, setAttributes, clientId, className } = props;
+		const { attributes, setAttributes, clientId } = props;
 		const {
 			code,
 			// langType,
@@ -107,7 +107,18 @@ registerBlockType(metadata.name, {
 			isShowLang,
 			isLineShow,
 		} = attributes;
-		const blockClass = classnames('hcb_wrap', 'hcb-block', className);
+		const blockClass = classnames('hcb_wrap', 'hcb-block');
+
+		// クラスの重複バグの修正
+
+		useEffect(() => {
+			const nowClass = attributes.className;
+			if (!nowClass) return;
+
+			const nowClasses = nowClass.split(' ');
+			const newClasses = [...new Set(nowClasses)]; // 重複削除
+			setAttributes({ className: classnames(newClasses) });
+		}, []);
 
 		// コードの textarea 高さセット
 		useEffect(() => {

@@ -20,19 +20,23 @@ class LOOS_HCB_Scripts {
 	public static function hook_init() {
 
 		// ブロックのスクリプト登録
-		$asset = include( LOOS_HCB_PATH. 'build/js/code-block/index.asset.php' );
-		wp_register_script(
-			'hcb-code-block',
-			LOOS_HCB_URL .'build/js/code-block/index.js',
-			$asset['dependencies'],
-			$asset['version'],
-			true
-		);
+		// $asset = include( LOOS_HCB_PATH. 'build/js/code-block/index.asset.php' );
+		// wp_register_script(
+		// 	'hcb-code-block',
+		// 	LOOS_HCB_URL .'build/js/code-block/index.js',
+		// 	$asset['dependencies'],
+		// 	$asset['version'],
+		// 	true
+		// );
 
-		// ブロックの登録
-		$metadata = json_decode( file_get_contents( LOOS_HCB_PATH . 'src/js/code-block/block.json' ), true );
-		$metadata = array_merge( $metadata, [ 'editor_script' => 'hcb-code-block' ] );
-		register_block_type( 'loos-hcb/code-block', $metadata );
+		// // ブロックの登録
+		// $metadata = json_decode( file_get_contents( LOOS_HCB_PATH . 'src/js/code-block/block.json' ), true );
+		// $metadata = array_merge( $metadata, [ 'editor_script' => 'hcb-code-block' ] );
+		// register_block_type( 'loos-hcb/code-block', $metadata );
+
+		if ( function_exists( 'register_block_type_from_metadata' ) ) {
+			register_block_type_from_metadata( LOOS_HCB_PATH . 'src/js/code-block' );
+		}
 	}
 
 
