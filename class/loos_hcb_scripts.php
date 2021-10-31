@@ -19,8 +19,20 @@ class LOOS_HCB_Scripts {
 	 */
 	public static function hook_init() {
 
+		// ブロックのスクリプト登録
+		$asset = include( LOOS_HCB_PATH . '/build/js/code-block/index.asset.php' );
+		wp_register_script(
+			'hcb-code-block',
+			LOOS_HCB_URL . '/build/js/code-block/index.js',
+			$asset['dependencies'],
+			$asset['version'],
+			true
+		);
+
 		if ( function_exists( 'register_block_type_from_metadata' ) ) {
-			register_block_type_from_metadata( LOOS_HCB_PATH . '/src/js/code-block' );
+			register_block_type_from_metadata( LOOS_HCB_PATH . '/src/js/code-block', [
+				'editor_script' => 'hcb-code-block'
+			] );
 		}
 	}
 
@@ -152,6 +164,13 @@ class LOOS_HCB_Scripts {
 		$langs = str_replace(["\r\n", "\r", "\n"], '', $langs);
 		$langs = trim( $langs, ',' );
 
-		echo '<script id="hcb-langs">var hcbLangs = {'. trim( $langs ) .'};</script>' . PHP_EOL;
+		$code = 'var hcbLangs = {'. trim( $langs ) .'};';
+
+		// for tinyMCE
+		echo '<script id="hcb-langs">' . $code . '</script>' . PHP_EOL;
+
+		// for Gutenberg
+		wp_add_inline_script( 'hcb-code-block', $code, 'before' );
+		
 	}
 }
