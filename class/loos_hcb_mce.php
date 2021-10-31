@@ -20,7 +20,7 @@ class LOOS_HCB_Mce {
 
 		if ( ! empty( $mce_css ) ) $mce_css .= ',';
 
-		$mce_css .= LOOS_HCB_URL .'build/css/hcb_editor.css';
+		$mce_css .= LOOS_HCB_URL . '/build/css/hcb_editor.css';
 		$mce_css .= ',';
 		$mce_css .= LOOS_HCB::$editor_coloring_css_url;
 		return $mce_css;
@@ -30,7 +30,7 @@ class LOOS_HCB_Mce {
 	 * Set script to Add Tinymce Button
 	 */
 	public static function hook_mce_external_plugins( $plugins ) {
-		$plugins[ 'hcb_external_script' ] = LOOS_HCB_URL . 'assets/js/hcb_mce_button.js';
+		$plugins[ 'hcb_external_script' ] = LOOS_HCB_URL . '/assets/js/hcb_mce_button.js';
 		return $plugins;
 	}
 
