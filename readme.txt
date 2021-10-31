@@ -4,7 +4,7 @@ Donate link: https://wemo.tech/2122/
 Tags: block, editor, guternberg, code, syntax, highlight, code highlighting, syntax highlight
 Requires at least: 5.6
 Tested up to: 5.8
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -93,6 +93,9 @@ The following languages are available by default.
 
 
 == Changelog ==
+
+= 1.4.1 =
+- Fixed a bug where changing the settings in the languages list did not change the choices in the block.
 
 = 1.4.0 =
 - Fixed a bug that amplified the class of the block.
