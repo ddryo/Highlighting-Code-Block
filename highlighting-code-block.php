@@ -17,10 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /**
  * Defined HCB const.
  */
-define( 'LOOS_HCB_VERSION', ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? date('mdGis') : '1.4.1');
 define( 'LOOS_HCB_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 define( 'LOOS_HCB_URL', plugins_url( '/', __FILE__ ) );
-// define( 'LOOS_HCB_BASENAME', plugin_basename( __FILE__ ) );
+
+// プラグインのバージョン
+$file_data = get_file_data( __FILE__, [ 'version' => 'Version' ] );
+if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
+	define( 'LOOS_HCB_VERSION', $file_data['version'] );
+}
 
 /**
  * Autoload Class files.
