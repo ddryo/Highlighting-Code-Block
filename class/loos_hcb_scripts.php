@@ -41,7 +41,7 @@ class LOOS_HCB_Scripts {
 	public static function hook_wp_enqueue_scripts() {
 
 		// ファイルに付与するクエリ
-		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? wp_date( 'mdGis' ) : LOOS_HCB_VERSION;
+		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? wp_date( 'mdGis' ) : LOOS_HCB_VER;
 
 		// HCB style
 		wp_enqueue_style( 'hcb-style', LOOS_HCB_URL . '/build/css/hcb_style.css', [], $ver );
@@ -73,7 +73,7 @@ class LOOS_HCB_Scripts {
 	public static function hook_admin_enqueue_scripts( $hook_suffix ) {
 
 		// ファイルに付与するクエリ
-		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? wp_date( 'mdGis' ) : LOOS_HCB_VERSION;
+		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? wp_date( 'mdGis' ) : LOOS_HCB_VER;
 
 		if ( 'settings_page_hcb_settings' === $hook_suffix ) {
 			wp_enqueue_style( 'hcb-admin', LOOS_HCB_URL . '/build/css/hcb_admin.css', [], $ver );
@@ -87,7 +87,7 @@ class LOOS_HCB_Scripts {
 	public static function hook_enqueue_block_editor_assets() {
 
 		// ファイルに付与するクエリ
-		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? wp_date( 'mdGis' ) : LOOS_HCB_VERSION;
+		$ver = ( defined( 'WP_DEBUG' ) && WP_DEBUG ) ? wp_date( 'mdGis' ) : LOOS_HCB_VER;
 
 		// Editor Coloring
 		wp_enqueue_style( 'hcb-editor-coloring', LOOS_HCB::$editor_coloring_css_url, [], $ver );

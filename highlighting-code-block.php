@@ -22,8 +22,8 @@ define( 'LOOS_HCB_URL', plugins_url( '/', __FILE__ ) );
 
 // プラグインのバージョン
 $file_data = get_file_data( __FILE__, [ 'version' => 'Version' ] );
-if ( ! defined( 'LOOS_HCB_VERSION' ) ) {
-	define( 'LOOS_HCB_VERSION', $file_data['version'] );
+if ( ! defined( 'LOOS_HCB_VER' ) ) {
+	define( 'LOOS_HCB_VER', $file_data['version'] );
 }
 
 /**
