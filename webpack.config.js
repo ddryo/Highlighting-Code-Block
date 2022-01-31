@@ -1,5 +1,5 @@
-const defaultConfig = require('@wordpress/scripts/config/webpack.config');
-const path = require('path');
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+const path = require( 'path' );
 
 /**
  * CleanWebpackPlugin （ビルド先のほかのファイルを勝手に削除するやつ） はオフに。
@@ -20,12 +20,12 @@ module.exports = {
 
 	//アウトプット先
 	output: {
-		path: path.resolve(__dirname, 'build/js'),
+		path: path.resolve( __dirname, 'build/js' ),
 		filename: '[name].js',
 	},
 	resolve: {
 		alias: {
-			'@blocks': path.resolve(__dirname, 'src/blocks/'),
+			'@blocks': path.resolve( __dirname, 'src/blocks/' ),
 		},
 	},
 	performance: { hints: false },

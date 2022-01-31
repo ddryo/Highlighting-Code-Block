@@ -1,7 +1,7 @@
 module.exports = {
     plugins: ['stylelint-scss'],
     extends: [
-        'stylelint-config-wordpress',
+        '@wordpress/stylelint-config/scss',
         'stylelint-config-rational-order',
         // 'stylelint-prettier/recommended',
     ],
@@ -10,6 +10,7 @@ module.exports = {
         // 'prettier/prettier': [true, { 'singleQuote': false, 'useTabs': true }], //Prettierルールの書き換え？
         'max-line-length': null, //max文字数を無視
         'selector-class-pattern': null,
+        'selector-id-pattern': null,
         // 'indentation': 'tab',
         // 'max-empty-lines': [1, { ignore: ["comments"] }],
         // 'string-quotes': 'double', //ダブルクォーテーションに (wordpress でそうなってる)
