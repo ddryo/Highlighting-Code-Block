@@ -6,29 +6,45 @@
 }
 
 .hcb_wrap {
-	position: relative;
-	border: solid 1px #f1f1f1;
 
+	&.hcb_wrap {
+		position: relative;
+		border: solid 1px #f1f1f1;
+
+		pre,
+		textarea.hcb_textarea {
+			position: static;
+			display: block;
+			box-sizing: border-box;
+			width: 100%;
+			margin: 0 !important;
+			padding: 1.5em;
+			overflow-x: auto;
+			color: var(--hcb-color--text, #1f1e1e);
+			font-size: var(--hcb-font-size, 14px);
+			font-family: var(--hcb-font-family, "Menlo", "Consolas", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif);
+			line-height: 1.8;
+			white-space: pre !important;
+			overflow-wrap: break-word;
+			tab-size: 2;
+			background: var(--hcb-color--bg, #f7f6f6);
+			border: none;
+			border-radius: 0;
+		}
+	}
+
+	.hcb_codewrap {
+		position: relative;
+		padding-right: 1em;
+		color: var(--hcb-color--text, #1f1e1e);
+		background: var(--hcb-color--bg, #f7f6f6);
+	}
+
+
+	// スクロールバー
 	pre,
 	textarea.hcb_textarea {
-		position: static;
-		display: block;
-		box-sizing: border-box;
-		width: 100%;
-		margin: 0 !important;
-		padding: 1.5em;
-		overflow-x: auto;
-		font-size: 14px;
-		font-family: Menlo, Consolas, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-		line-height: 1.8;
-		white-space: pre !important;
-		// overflow-y: hidden;
-		overflow-wrap: break-word;
-		tab-size: 2;
-		border: none;
-		border-radius: 0;
 
-		// スクロールバー
 		&::-webkit-scrollbar {
 			height: 8px;
 			border: none;
@@ -105,35 +121,16 @@
 		}
 	}
 
-	pre::before {
+	// エディダーではオン・オフが分かるように縦線だけ表示
+	.hcb_linenum {
 		position: absolute;
-		top: 0;
-		right: 0;
-		display: block;
-		width: max-content;
-		min-width: 3em;
-		padding: 0 8px;
-		font-size: 12px;
-		font-family: Arial, Helvetica, sans-serif;
-		line-height: 24px;
-		text-align: center;
-		content: attr(data-lang);
+		top: 1em;
+		left: 1em;
+		display: none;
+		width: 0;
+		height: calc(100% - 2em);
+		border-right: solid 1px rgba(150, 150, 150, 0.5);
 	}
-}
-
-.hcb_codewrap {
-	position: relative;
-	padding-right: 1em;
-}
-
-.hcb_linenum {
-	position: absolute;
-	top: 1em;
-	left: 1em;
-	display: none;
-	width: 0;
-	height: calc(100% - 2em);
-	border-right: solid 1px rgba(150, 150, 150, 0.5);
 }
 
 .hcb-block[data-show-linenum] {
@@ -150,27 +147,29 @@
 }
 
 
-
-/* Lang Name (ブロックだけ) */
+// Lang Name
+.hcb_wrap pre::before, // for Classic
 .hcb-block::before {
 	position: absolute;
 	top: 0;
 	right: 0;
 	z-index: 1;
 	box-sizing: border-box;
-	//   display: block;
-	//   width: max-content;
 	min-width: 4em;
 	padding: 0 10px;
+	color: var(--hcb-color--lang--text, #1f1e1e);
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	line-height: 20px;
 	text-align: center;
+	background-color: var(--hcb-color--lang--bg, #dedede);
 	content: attr(data-lang);
 }
 
+
 .hcb-block[data-file]::before {
 	padding: 0 8px 0 20px;
+	background-image: var(--hcb-file-icon);
 	background-repeat: no-repeat;
 	background-position: center left 8px;
 	background-size: auto 10px;
@@ -179,4 +178,13 @@
 
 .hcb-block[data-show-lang="0"]:not([data-file])::before {
 	content: none;
+}
+
+
+// デバイスプレビュー
+.wp-embed-responsive {
+
+	.hcb_controls {
+		display: none;
+	}
 }

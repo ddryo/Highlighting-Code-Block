@@ -1,35 +1,16 @@
 @charset "UTF-8";
 
-// Dark
-.hcb_codewrap,
-.hcb_wrap pre,
-.hcb_wrap textarea.hcb_textarea {
-	color: #fff !important;
-	background: #34352e !important;
+body {
+	--hcb-color--text: #f8f8f2;
+	--hcb-color--text-shadow: rg1a1a1ab(136, 132, 132);
+	--hcb-color--bg: #34352e;
+	--hcb-color--lang--text: #fff;
+	--hcb-color--lang--bg: #111;
+	--hcb-file-icon: url(../../assets/img/file-icon-dark.svg);
 }
 
-.hcb_wrap pre code,
-.hcb_wrap textarea.hcb_textarea {
-	text-shadow: 0 0 1px #333;
-}
 
-// クラシックブロック用
-.hcb_wrap pre.prism::before {
-	color: #333;
-	background: #ebebeb;
-}
-
-// Lang Name
-.hcb-block::before {
-	color: #fff;
-	background-color: #111;
-}
-
-.hcb-block[data-file]::before {
-	background-image: url(../../assets/img/file-icon-dark.svg);
-}
-
-// Gutenbergでのスクロールバー
+// Gutenbergでのプレースホルダー
 .hcb_wrap textarea.hcb_textarea {
 
 	&::placeholder {
@@ -37,16 +18,8 @@
 		font-style: italic;
 	}
 
-	&::-ms-input-placeholder {
-		color: rgba(255, 255, 255, 0.4);
-		font-style: italic;
-	}
-
-	&::-moz-placeholderm {
-		color: rgba(255, 255, 255, 0.4);
-		font-style: italic;
-	}
-
+	&::-ms-input-placeholder,
+	&::-moz-placeholder,
 	&::-webkit-input-placeholder {
 		color: rgba(255, 255, 255, 0.4);
 		font-style: italic;

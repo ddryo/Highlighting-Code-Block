@@ -3,46 +3,20 @@
 /*
   Light coloring
 */
-
-/* Bace Color*/
-.hcb_wrap pre.prism,
-.hcb_wrap pre.prism code {
-	color: #1f1e1e;
-	text-shadow: 0 1px #fff;
-	background: #f7f6f6;
+body {
+	--hcb-color--text: #1f1e1e;
+	--hcb-color--text-shadow: #fff;
+	--hcb-color--bg: #f7f6f6;
+	--hcb-color--lang--text: #1f1e1e;
+	--hcb-color--lang--bg: #dedede;
+	--hcb-color--line-numbers: #999;
+	--hcb-color--highlight: rgba(150, 120, 100, 0.1);
+	--hcb-color--highlight-text: #f5f2f0;
+	--hcb-color--highlight-bg: #b1aead;
+	--hcb-file-icon: url(../../assets/img/file-icon-light.svg);
+	--hcb-color--scrollbar-track: rgba(0, 0, 0, 0.05);
+	--hcb-color--scrollbar-thumb: #0000001a;
 }
-
-/* Lang Name */
-.hcb_wrap pre::before {
-	color: #1f1e1e;
-	background-color: #dedede;
-}
-
-.hcb_wrap pre[data-file]::before {
-	// background-color: #dedede;
-	background-image: url(../../assets/img/file-icon-light.svg);
-}
-
-/* line highkight */
-.line-highlight {
-	background: rgba(153, 122, 102, 0.1);
-}
-
-.line-highlight::before,
-.line-highlight[data-end]::after {
-	color: hsl(24, 20%, 95%);
-	background-color: rgba(0, 0, 0, 0.2);
-}
-
-/* line numbers */
-.line-numbers .line-numbers-rows {
-	border-right: 1px solid #999;
-}
-
-.line-numbers-rows > span::before {
-	color: #999;
-}
-
 
 /* ---------------------
   Syntax Highlight

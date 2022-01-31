@@ -3,44 +3,19 @@
 /*
   Dark coloring
 */
-
-/* Bace Color*/
-.hcb_wrap pre,
-.hcb_wrap pre code {
-	color: #f8f8f2;
-	text-shadow: 0 1px #1a1a1a;
-	background: #34352e;
-}
-
-/* Lang Name */
-.hcb_wrap pre::before {
-	color: #fff;
-	background-color: #111;
-}
-
-.hcb_wrap pre[data-file]::before {
-	background-image: url(../../assets/img/file-icon-dark.svg);
-}
-
-/* line highkight */
-.line-highlight {
-	background: rgba(255, 251, 247, 0.1);
-}
-
-.line-highlight::before,
-.line-highlight[data-end]::after {
-	color: #fcfcfc;
-	text-shadow: none;
-	background-color: rgba(175, 167, 161, 0.4);
-}
-
-/* line numbers */
-.line-numbers .line-numbers-rows {
-	border-right: 1px solid #999;
-}
-
-.line-numbers-rows > span::before {
-	color: #999;
+body {
+	--hcb-color--text: #f8f8f2;
+	--hcb-color--text-shadow: rg1a1a1ab(136, 132, 132);
+	--hcb-color--bg: #34352e;
+	--hcb-color--lang--text: #fff;
+	--hcb-color--lang--bg: #111;
+	--hcb-color--line-numbers: #999;
+	--hcb-color--highlight: rgba(255, 250, 245, 0.1);
+	--hcb-color--highlight-text: #fcfcfc;
+	--hcb-color--highlight-bg: #afa7a166;
+	--hcb-file-icon: url(../../assets/img/file-icon-dark.svg);
+	--hcb-color--scrollbar-track: rgba(255, 255, 255, 0.1);
+	--hcb-color--scrollbar-thumb: rgba(255, 255, 255, 0.2);
 }
 
 

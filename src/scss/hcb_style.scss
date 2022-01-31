@@ -2,227 +2,243 @@
     カラーリングに関係ない共通設定
  */
 $hcbPaddingY: 1.75em;
+$hcbLineNumPadding: 3.75em;
 
-/* scrollbar */
-.hcb_wrap pre::-webkit-scrollbar {
-	height: 6px;
-}
-
-.hcb_wrap pre::-webkit-scrollbar-track {
-	background: #f7f7f7;
-	border: none;
-}
-
-.hcb_wrap pre::-webkit-scrollbar-thumb {
-	background: rgba(0, 0, 0, 0.1);
-	border-radius: 3px;
-}
-
-/* code wrapper*/
 .hcb_wrap {
-	position: relative;
-	z-index: 0;
-	display: block;
-	margin-top: 2em;
-	margin-bottom: 2em;
-	padding: 0;
 
-	code,
-	pre {
+	// ベース（テーマに上書きされないよう、クラス２重にして詳細度あげておく）
+	&.hcb_wrap {
+		position: relative;
+		z-index: 0;
+		display: block;
+		margin-top: 2em;
+		margin-bottom: 2em;
+		padding: 0;
+
+		pre {
+			position: static;
+			display: block;
+			box-sizing: border-box;
+			margin: 0;
+			padding: $hcbPaddingY 1.5em;
+			overflow: auto;
+			font-size: var(--hcb-font-size, 14px);
+			font-family: var(--hcb-font-family, "Menlo", "Consolas", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif);
+			line-height: 1;
+			letter-spacing: 0.1px;
+			border-radius: 0;
+			-webkit-overflow-scrolling: touch;
+
+			@media screen and (max-width: 599px) {
+				font-size: var(--hcb-font-size--mobile, 13px);
+			}
+		}
+
+		code,
+		pre {
+			color: var(--hcb-color--text, #1f1e1e);
+			white-space: pre;
+			text-align: left;
+			text-shadow: 0 1px var(--hcb-color--text-shadow, #fff);
+			word-wrap: normal;
+			word-break: normal;
+			word-spacing: normal;
+			tab-size: 4;
+			hyphens: none;
+			background: var(--hcb-color--bg, #f7f6f6);
+			border: none;
+		}
+
+		code,
+		span {
+			box-sizing: border-box;
+			font-size: inherit;
+			font-family: inherit;
+			line-height: 1.5;
+		}
+	}
+
+
+	// line highlight
+	.line-highlight {
+		position: absolute;
+		right: 0;
+		left: 0;
+		margin-top: $hcbPaddingY;
+		padding: 0;
+		font-size: inherit;
+		line-height: inherit;
 		white-space: pre;
-		text-align: left;
-		word-wrap: normal;
-		word-break: normal;
-		word-spacing: normal;
-		tab-size: 4;
-		hyphens: none;
+		background: var(--hcb-color--highlight, rgba(150, 120, 100, 0.1));
+		pointer-events: none;
+
+		&::before,
+		&[data-end]::after {
+			position: absolute;
+			top: 0;
+			left: 0;
+			box-sizing: border-box;
+			min-width: 1.5em;
+			padding: 1px 2px;
+			color: var(--hcb-color--highlight-text, #f5f2f0);
+			font-weight: bold;
+			font-size: 12px;
+			line-height: inherit;
+			text-align: center;
+			text-shadow: none;
+			vertical-align: middle;
+			background-color: var(--hcb-color--highlight-bg, #b1aead);
+			border-radius: 0;
+			content: attr(data-start);
+		}
+
+		&[data-end]::after {
+			top: auto;
+			bottom: 0;
+			content: attr(data-end);
+		}
+	}
+
+	// 行数表示ある時はハイライトの行表示を消す
+	.line-numbers .line-highlight::before,
+	.line-numbers .line-highlight::after {
+		content: none;
+	}
+
+	// line numbers
+	pre.line-numbers {
+		position: static; // pre の親の .hcb_wrap に追従
+		padding-left: $hcbLineNumPadding;
+		counter-reset: linenumber;
+
+		> code {
+			position: relative;
+			white-space: inherit;
+		}
+	}
+
+	.line-numbers .line-numbers-rows {
+		position: absolute;
+		top: -2px;
+		left: -$hcbLineNumPadding;
+		width: 3em; // works for line-numbers below 1000 lines
+		font-size: inherit;
+		letter-spacing: -1px;
+		border-right: 1px solid var(--hcb-color--line-numbers, #999);
+		// -webkit-user-select: none;
+		// -moz-user-select: none;
+		// -ms-user-select: none;
+		user-select: none;
+		pointer-events: none;
+	}
+
+	.line-numbers-rows > span {
+		display: block;
+		counter-increment: linenumber;
+		pointer-events: none;
+	}
+
+	.line-numbers-rows > span::before {
+		display: block;
+		padding-right: 0.8em;
+		color: var(--hcb-color--line-numbers, #999);
+		text-align: right;
+		content: counter(linenumber);
+	}
+
+	// Lang Name
+	pre::before {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		box-sizing: border-box;
+		min-width: 4em;
+		padding: 0 10px;
+		color: var(--hcb-color--lang--text, #1f1e1e);
+		font-size: 12px;
+		font-family: Arial, Helvetica, sans-serif;
+		line-height: 20px;
+		text-align: center;
+		background-color: var(--hcb-color--lang--bg, #dedede);
+		content: attr(data-lang);
+	}
+
+	// コピーボタンがある時
+	.hcb-clipboard + pre::before {
+		right: 26px;
+	}
+
+	// ファイル名を表示する時
+	pre[data-file]::before {
+		padding: 0 8px 0 20px;
+		// background-colorを打ち消さないように分けて書く
+		background-image: var(--hcb-file-icon);
+		background-repeat: no-repeat;
+		background-position: center left 8px;
+		background-size: auto 10px;
+		content: attr(data-file);
+	}
+
+	// 強制オフ時
+	pre[data-show-lang="0"]:not([data-file])::before {
+		content: none;
+	}
+
+	// コピーボタン
+	.hcb-clipboard {
+		position: absolute;
+		top: 0;
+		right: 0;
+		z-index: 1;
+		box-sizing: border-box;
+		width: 20px;
+		height: 20px;
+		padding: 0;
+		text-align: center;
+		background-color: rgba(#fff, 0.8);
+		background-image: url(../../assets/img/clipborad.svg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 16px auto;
+		border: none;
+		border-radius: 1px;
+
+		&.-done {
+			background-image: url(../../assets/img/copied.svg);
+
+			&::before {
+				position: absolute;
+				right: 0;
+				bottom: 100%;
+				font-size: 14px;
+				font-family: Arial, Helvetica, sans-serif;
+				line-height: 1.5;
+				content: "Copied!";
+			}
+		}
+	}
+
+	// scrollbar
+	pre::-webkit-scrollbar {
+		height: 6px;
+	}
+
+	pre::-webkit-scrollbar-track {
+		background: var(--hcb-color--scrollbar-track, rgba(150, 150, 150, 0.1));
 		border: none;
 	}
 
-	pre {
-		position: static;
-		display: block;
-		box-sizing: border-box;
-		margin: 0;
-		padding: $hcbPaddingY 1.5em;
-		overflow: auto;
-		font-family: Menlo, Consolas, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
-		line-height: 1;
-		letter-spacing: 0.1px;
-		border-radius: 0;
-		-webkit-overflow-scrolling: touch;
-		// z-index: 0;
-	}
-
-	code,
-	span {
-		box-sizing: border-box;
-		font-size: inherit;
-		font-family: inherit;
-		line-height: 1.5;
+	pre::-webkit-scrollbar-thumb {
+		background: var(--hcb-color--scrollbar-thumb, rgba(150, 150, 150, 0.25));
+		border-radius: 3px;
 	}
 }
 
-/* Inline code */
+
+// Inline code
 :not(pre) > code.prism {
 	padding: 0.1em;
 	white-space: normal;
 	border-radius: 0.3em;
 }
-
-/* line highlight */
-.hcb_wrap .line-highlight {
-	position: absolute;
-	right: 0;
-	left: 0;
-	margin-top: $hcbPaddingY;
-	padding: 0;
-	font-size: inherit;
-	line-height: inherit;
-	white-space: pre;
-	pointer-events: none;
-}
-
-.hcb_wrap .line-highlight::before,
-.hcb_wrap .line-highlight[data-end]::after {
-	position: absolute;
-	top: 0;
-	left: 0;
-	box-sizing: border-box;
-	min-width: 1.5em; // ?
-	padding: 1px 2px;
-	font-weight: bold;
-	font-size: 12px;
-	line-height: inherit;
-	text-align: center;
-	text-shadow: none;
-	vertical-align: middle;
-	border-radius: 0;
-	content: attr(data-start);
-}
-
-.hcb_wrap .line-highlight[data-end]::after {
-	top: auto;
-	bottom: 0;
-	content: attr(data-end);
-}
-
-.hcb_wrap .line-numbers .line-highlight::before,
-.hcb_wrap .line-numbers .line-highlight::after {
-	content: none;
-}
-
-/* line numbers */
-.hcb_wrap pre.line-numbers {
-	position: static; /* relative -> hcb_wrap */
-	padding-left: 3.75em;
-	counter-reset: linenumber;
-}
-
-.hcb_wrap pre.line-numbers > code {
-	position: relative;
-	white-space: inherit;
-}
-
-.hcb_wrap .line-numbers .line-numbers-rows {
-	position: absolute;
-	top: -2px;
-	left: -3.75em;
-	width: 3em; /* works for line-numbers below 1000 lines */
-	font-size: inherit;
-	letter-spacing: -1px;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
-	pointer-events: none;
-}
-
-.hcb_wrap .line-numbers-rows > span {
-	display: block;
-	counter-increment: linenumber;
-	pointer-events: none;
-}
-
-.hcb_wrap .line-numbers-rows > span::before {
-	display: block;
-	padding-right: 0.8em;
-	text-align: right;
-	content: counter(linenumber);
-}
-
-/* Lang Name */
-.hcb_wrap pre::before {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 1;
-	box-sizing: border-box;
-	//   display: block;
-	//   width: max-content;
-	min-width: 4em;
-	padding: 0 10px;
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	line-height: 20px;
-	text-align: center;
-	content: attr(data-lang);
-
-
-}
-// コピーボタンがある時
-.hcb_wrap .hcb-clipboard + pre::before {
-	right: 26px;
-}
-
-
-.hcb_wrap pre[data-file]::before {
-	padding: 0 8px 0 20px;
-	background-repeat: no-repeat;
-	background-position: center left 8px;
-	background-size: auto 10px;
-	content: attr(data-file);
-}
-
-.hcb_wrap pre[data-show-lang="0"]:not([data-file])::before {
-	content: none;
-}
-
-.hcb_wrap .hcb-clipboard {
-	position: absolute;
-	top: 0;
-	right: 0;
-	z-index: 1;
-	box-sizing: border-box;
-	width: 20px;
-	height: 20px;
-	// min-width: 4em;
-	padding: 0;
-	// font-size: 12px;
-	// font-family: Arial, Helvetica, sans-serif;
-	// line-height: 20px;
-	text-align: center;
-	background-color: rgba(#fff, 0.8);
-	background-image: url(../../assets/img/clipborad.svg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: 16px auto;
-	border: none;
-	border-radius: 1px;
-}
-
-.hcb_wrap .hcb-clipboard.-done {
-	background-image: url(../../assets/img/copied.svg);
-
-	&::before {
-		position: absolute;
-		right: 0;
-		bottom: 100%;
-		font-size: 14px;
-		font-family: Arial, Helvetica, sans-serif;
-		line-height: 1.5;
-		content: "Copied!";
-	}
-}
-
-

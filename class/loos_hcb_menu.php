@@ -104,6 +104,7 @@ add_action( 'admin_init', function() {
 			'args' => [
 				'type' => 'textarea',
 				'rows' => 2,
+				'desc' => 'Default: <code>"Menlo", "Consolas", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif</code>',
 			]
 		],
 	];
