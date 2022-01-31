@@ -46,6 +46,12 @@ class LOOS_HCB_Mce {
 		// Text editor indent
 		$init[ 'indent' ] = true;
 
+		// インラインスタイル
+		if ( ! isset( $mceInit['content_style'] ) ) {
+			$init['content_style'] = ''; // content_styleがまだなければ空でセット
+		}
+		$init['content_style'] .= LOOS_HCB_Scripts::get_inline_style();
+
 		return $init;
 	}
 
