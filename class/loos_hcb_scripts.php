@@ -50,7 +50,7 @@ class LOOS_HCB_Scripts {
 		wp_enqueue_style( 'hcb-coloring', LOOS_HCB::$coloring_css_url, [ 'hcb-style' ], $ver );
 
 		// Inline Style
-		wp_add_inline_style( 'hcb-style', LOOS_HCB_Scripts::get_inline_style() );
+		wp_add_inline_style( 'hcb-style', LOOS_HCB::get_inline_style() );
 
 		// clipboard.js
 		$is_show_copy = LOOS_HCB::$settings['show_copy'];
@@ -94,7 +94,7 @@ class LOOS_HCB_Scripts {
 
 		// Editor Style
 		wp_enqueue_style( 'hcb-editor-style', LOOS_HCB_URL . '/build/css/hcb_editor.css', [ 'hcb-editor-coloring' ], $ver );
-		wp_add_inline_style( 'hcb-editor-style', LOOS_HCB_Scripts::get_inline_style() );
+		wp_add_inline_style( 'hcb-editor-style', LOOS_HCB::get_inline_style() );
 
 		// 翻訳登録用の空ファイル
 		wp_enqueue_script( 'hcb-blocks', LOOS_HCB_URL . '/assets/js/hcb.js', [], $ver, false );
@@ -107,37 +107,6 @@ class LOOS_HCB_Scripts {
 			'showLang'    => LOOS_HCB::$settings[ 'show_lang' ],
 			'showLinenum' => LOOS_HCB::$settings[ 'show_linenum' ],
 		] );
-	}
-
-
-	/**
-	 * インラインスタイルの生成
-	 */
-	public static function get_inline_style() {
-
-		$inline_css = '';
-		$HCB = LOOS_HCB::$settings;
-
-		// Font size
-		$inline_css .= ':root{--hcb-font-size: '. $HCB[ 'fontsize_pc' ] .'}';
-		$inline_css .= ':root{--hcb-font-size--mobile: '. $HCB[ 'fontsize_sp' ] .'}';
-
-		// Font family
-		if ( $HCB[ 'font_family' ] ) {
-			$inline_css .= ':root{--hcb-font-family:'. $HCB[ 'font_family' ] .'}';
-		}
-
-		// Code Lang
-		if ( 'off' === $HCB[ 'show_lang' ] ) {
-			$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{content: none;}';
-		}
-
-		// Font smoothing
-		if ( 'on' === $HCB[ 'font_smoothing' ] ) {
-			$inline_css .= '.hcb_wrap pre{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}';
-		}
-
-		return $inline_css;
 	}
 
 

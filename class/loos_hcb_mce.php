@@ -47,10 +47,18 @@ class LOOS_HCB_Mce {
 		$init[ 'indent' ] = true;
 
 		// インラインスタイル
-		if ( ! isset( $mceInit['content_style'] ) ) {
+		if ( ! isset( $init['content_style'] ) ) {
 			$init['content_style'] = ''; // content_styleがまだなければ空でセット
 		}
-		$init['content_style'] .= LOOS_HCB_Scripts::get_inline_style();
+
+		$inline_css = LOOS_HCB::get_inline_style();
+		if ( $inline_css ) {
+			$inline_css = str_replace( '\\', '', $inline_css );  // contentのバックスラッシュで変になってしまうのでtinymceは別途指定
+			$inline_css = preg_replace( '/(?:\n|\r|\r\n)/su', '', $inline_css );
+			$inline_css = str_replace( '"', "'", $inline_css ); // " があるとエラーになる
+	
+			$init['content_style'] .= $inline_css;
+		}
 
 		return $init;
 	}
@@ -60,6 +68,6 @@ class LOOS_HCB_Mce {
 	 */
 	public static function hook_mce_buttons_2( $buttons ) {
 		$buttons[] = 'hcb_select';
-			return $buttons;
+		return $buttons;
 	}
 }

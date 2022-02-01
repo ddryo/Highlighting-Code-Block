@@ -149,4 +149,35 @@ class LOOS_HCB {
 		// Set editor coloring file url
 		self::$editor_coloring_css_url = LOOS_HCB_URL . '/build/css/editor_' . self::$settings[ 'editor_coloring' ] . '.css';
 	}
+
+
+	/**
+	 * インラインスタイルの生成
+	 */
+	public static function get_inline_style() {
+
+		$inline_css = '';
+		$HCB = LOOS_HCB::$settings;
+
+		// Font size
+		$inline_css .= ':root{--hcb-font-size: '. $HCB[ 'fontsize_pc' ] .'}';
+		$inline_css .= ':root{--hcb-font-size--mobile: '. $HCB[ 'fontsize_sp' ] .'}';
+
+		// Font family
+		if ( $HCB[ 'font_family' ] ) {
+			$inline_css .= ':root{--hcb-font-family:'. $HCB[ 'font_family' ] .'}';
+		}
+
+		// Code Lang
+		if ( 'off' === $HCB[ 'show_lang' ] ) {
+			$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{content: none;}';
+		}
+
+		// Font smoothing
+		if ( 'on' === $HCB[ 'font_smoothing' ] ) {
+			$inline_css .= '.hcb_wrap pre{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}';
+		}
+
+		return $inline_css;
+	}
 }
