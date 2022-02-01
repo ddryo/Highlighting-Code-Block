@@ -181,8 +181,17 @@
 }
 
 
+// ブロック非選択時
+[data-type="loos-hcb/code-block"]:not(.is-selected) {
+
+	.hcb_controls {
+		display: none;
+	}
+}
+
+
 // デバイスプレビュー
-.wp-embed-responsive {
+.wp-embed-responsive:not(.wp-editor) {
 
 	.hcb_controls {
 		display: none;
