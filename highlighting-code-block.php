@@ -38,21 +38,15 @@ spl_autoload_register( function( $classname ) {
 /**
  * Activation hooks.
  */
-register_activation_hook( __FILE__, ['LOOS_HCB_Activation', 'plugin_activate'] );
-register_uninstall_hook( __FILE__, ['LOOS_HCB_Activation', 'plugin_uninstall'] );
+register_activation_hook( __FILE__, ['LOOS_HCB_Activation', 'plugin_activate' ] );
+register_uninstall_hook( __FILE__, ['LOOS_HCB_Activation', 'plugin_uninstall' ] );
 
 /**
  * Start
  */
 add_action( 'plugins_loaded', function() {
-	// 翻訳
-	// $locale = apply_filters( 'plugin_locale', determine_locale(), 'loos-hcb' );
-	// load_textdomain( 'loos-hcb', LOOS_HCB_PATH . '/languages/loos-hcb-' . $locale . '.mo' );
-	if ( 'ja' === determine_locale() ) {
-		load_textdomain( 'loos-hcb', LOOS_HCB_PATH . '/languages/loos-hcb-ja.mo' );
-	} else {
-		load_plugin_textdomain( 'loos-hcb' );
-	}
+	// 翻訳ファイルの読み込み
+	load_plugin_textdomain( 'loos-hcb', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 
 	// 実行
 	new LOOS_HCB();
