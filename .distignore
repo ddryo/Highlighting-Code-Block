@@ -3,6 +3,7 @@
 /.github
 /node_modules
 /bin
+/vendor
 
 .distignore
 .gitignore
@@ -16,3 +17,4 @@ package-lock.json
 postcss.config.js
 webpack.config.js
 README.md
+phpcs.xml
