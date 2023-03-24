@@ -36,32 +36,33 @@ class LOOS_HCB {
 	/**
 	 * Default Languages
 	 */
-	const DEFAULT_LANGS = ''.
-		'html:"HTML",'."\n" .
-		'css:"CSS",'."\n" .
-		'scss:"SCSS",'."\n" .
-		'js:"JavaScript",'."\n" .
-		'ts:"TypeScript",'."\n" .
-		'php:"PHP",'."\n" .
-		'ruby:"Ruby",'."\n" .
-		'python:"Python",'."\n" .
-		'swift:"Swift",'."\n" .
-		'c:"C",'."\n" .
-		'csharp:"C#",'."\n" .
-		'cpp:"C++",'."\n" .
-		'objectivec:"Objective-C",'."\n" .
-		'sql:"SQL",'."\n" .
-		'json:"JSON",'."\n" .
-		'bash:"Bash",'."\n" .
+	const DEFAULT_LANGS = '' .
+		'html:"HTML",' . "\n" .
+		'css:"CSS",' . "\n" .
+		'scss:"SCSS",' . "\n" .
+		'js:"JavaScript",' . "\n" .
+		'ts:"TypeScript",' . "\n" .
+		'php:"PHP",' . "\n" .
+		'ruby:"Ruby",' . "\n" .
+		'python:"Python",' . "\n" .
+		'swift:"Swift",' . "\n" .
+		'c:"C",' . "\n" .
+		'csharp:"C#",' . "\n" .
+		'cpp:"C++",' . "\n" .
+		'objectivec:"Objective-C",' . "\n" .
+		'sql:"SQL",' . "\n" .
+		'json:"JSON",' . "\n" .
+		'bash:"Bash",' . "\n" .
 		'git:"Git",';
 
 	/**
 	 * variables
 	 */
-	public static $settings = '';
-	public static $prism_js_url  = '';
-	public static $coloring_css_url = '';
-	public static $editor_coloring_css_url = '';
+	public static $settings             = '';
+	public static $custom_prism_path    = '';
+	public static $custom_coloring_path = '';
+	public static $front_css_path       = '';
+	public static $editor_css_path      = '';
 
 	/**
 	 * The constructor
@@ -74,18 +75,18 @@ class LOOS_HCB {
 		new LOOS_HCB_Menu();
 
 		// Set linenum
-		add_filter( 'the_content' , function( $content ) {
+		add_filter( 'the_content', function( $content ) {
 			$content = str_replace( 'prism on-numbers', 'prism line-numbers', $content );
 			// $content = preg_replace( '/class="prism([^"]*)on-numbers"/', 'class="prism$1line-numbers"', $content );
 
 			//個別設定が未定義のブロックはベース設定に依存
-			if ( 'on' === LOOS_HCB::$settings[ 'show_linenum' ] ) {
+			if ( 'on' === LOOS_HCB::$settings['show_linenum'] ) {
 				$content = str_replace( 'prism undefined-numbers', 'prism line-numbers', $content );
 				// $content = preg_replace( '/class="prism([^"]*)undefined-numbers"/', 'class="prism$1line-numbers"', $content );
 			}
 			return $content;
 
-		} , 99);
+		}, 99);
 	}
 
 	/**
@@ -94,26 +95,25 @@ class LOOS_HCB {
 	private function init() {
 
 		// Get Option for HCB Setiings
-		$option = get_option( self::DB_NAME[ 'settings' ] ) ?: [];
+		$option = get_option( self::DB_NAME['settings'] ) ?: [];
 
 		// v1.2.2での変更
 		if ( is_admin() && isset( $option['support_langs'] ) ) {
-			
-			$support_langs      = str_replace(["\r\n", "\r", "\n"], '', $option['support_langs']);
-			$default_langs      = str_replace(["\n"], '', self::DEFAULT_LANGS);
+
+			$support_langs = str_replace( ["\r\n", "\r", "\n" ], '', $option['support_langs'] );
+			$default_langs = str_replace( ["\n" ], '', self::DEFAULT_LANGS );
 
 			if ( $default_langs === $support_langs ) {
 				unset( $option['support_langs'] );
 
 				// DB更新
-				update_option( LOOS_HCB::DB_NAME[ 'settings' ], $option );
+				update_option( self::DB_NAME['settings'], $option );
 			}
 		}
 
 		// Get default settings
-		$default = self::DEFAULT_SETTINGS;
+		$default                  = self::DEFAULT_SETTINGS;
 		$default['support_langs'] = self::DEFAULT_LANGS;
-
 
 		// Merge to default
 		self::$settings = array_merge( $default, $option );
@@ -127,27 +127,17 @@ class LOOS_HCB {
 	private function set_path() {
 
 		// Set Prism.js file url
-		if ( self::$settings[ 'prism_js_path' ] ) {
-
-			self::$prism_js_url = get_stylesheet_directory_uri() . '/' . self::$settings[ 'prism_js_path' ];
-
-		} else {
-
-			self::$prism_js_url = LOOS_HCB_URL . '/assets/js/prism.js';
+		if ( self::$settings['prism_js_path'] ) {
+			self::$custom_prism_path = get_stylesheet_directory_uri() . '/' . self::$settings['prism_js_path'];
 		}
 
 		// Set front coloring file url
-		if ( self::$settings[ 'prism_css_path' ] ) {
-
-			self::$coloring_css_url = get_stylesheet_directory_uri() . '/' . self::$settings[ 'prism_css_path' ];
-
-		} else {
-
-			self::$coloring_css_url = LOOS_HCB_URL . '/build/css/coloring_' . self::$settings[ 'front_coloring' ] . '.css';
+		if ( self::$settings['prism_css_path'] ) {
+			self::$custom_coloring_path = get_stylesheet_directory_uri() . '/' . self::$settings['prism_css_path'];
 		}
 
-		// Set editor coloring file url
-		self::$editor_coloring_css_url = LOOS_HCB_URL . '/build/css/editor_' . self::$settings[ 'editor_coloring' ] . '.css';
+		self::$front_css_path  = LOOS_HCB_URL . '/build/css/hcb--' . self::$settings['front_coloring'] . '.css';
+		self::$editor_css_path = LOOS_HCB_URL . '/build/css/hcb-editor--' . self::$settings['editor_coloring'] . '.css';
 	}
 
 
@@ -157,24 +147,24 @@ class LOOS_HCB {
 	public static function get_inline_style() {
 
 		$inline_css = '';
-		$HCB = LOOS_HCB::$settings;
+		$HCB        = self::$settings;
 
 		// Font size
-		$inline_css .= ':root{--hcb-font-size: '. $HCB[ 'fontsize_pc' ] .'}';
-		$inline_css .= ':root{--hcb-font-size--mobile: '. $HCB[ 'fontsize_sp' ] .'}';
+		$inline_css .= ':root{--hcb-font-size: ' . $HCB['fontsize_pc'] . '}';
+		$inline_css .= ':root{--hcb-font-size--mobile: ' . $HCB['fontsize_sp'] . '}';
 
 		// Font family
-		if ( $HCB[ 'font_family' ] ) {
-			$inline_css .= ':root{--hcb-font-family:'. $HCB[ 'font_family' ] .'}';
+		if ( $HCB['font_family'] ) {
+			$inline_css .= ':root{--hcb-font-family:' . $HCB['font_family'] . '}';
 		}
 
 		// Code Lang
-		if ( 'off' === $HCB[ 'show_lang' ] ) {
+		if ( 'off' === $HCB['show_lang'] ) {
 			$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{content: none;}';
 		}
 
 		// Font smoothing
-		if ( 'on' === $HCB[ 'font_smoothing' ] ) {
+		if ( 'on' === $HCB['font_smoothing'] ) {
 			$inline_css .= '.hcb_wrap pre{-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}';
 		}
 

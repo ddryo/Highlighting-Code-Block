@@ -97,8 +97,8 @@ export default ( { attributes, setAttributes, clientId } ) => {
 	// let preClass = 'prism ' + isLineShow + '-numbers lang-' + langType;
 	// setAttributes({ preClass: preClass });
 
-	const hcbShowLang = window.hcbVars?.showLang;
-	const hcbShowLinenum = window.hcbVars?.showLinenum;
+	const hcbShowLang = window.hcbEditorVars?.showLang;
+	const hcbShowLinenum = window.hcbEditorVars?.showLinenum;
 
 	let dataShowLang = '0';
 	if ( '1' === isShowLang ) {

@@ -34,13 +34,12 @@ const writeCSS = ( filePath, css ) => {
 const src = 'src/scss';
 const dist = 'build/css';
 const files = [
-	'hcb_style',
-	'hcb_editor',
-	'hcb_admin',
-	'editor_light',
-	'editor_dark',
-	'coloring_light',
-	'coloring_dark',
+	'hcb',
+	'hcb--light',
+	'hcb--dark',
+	'hcb-editor--light',
+	'hcb-editor--dark',
+	'hcb-admin',
 ];
 
 files.forEach( ( fileName ) => {
