@@ -130,7 +130,13 @@ class LOOS_HCB_Scripts {
 	public static function hook_admin_head() {
 
 		$langs = LOOS_HCB::$settings['support_langs'];
-		$langs = mb_convert_kana( $langs, 'as' ); //全角の文字やスペースがあれば半角に直す
+
+		// Replace full-width characters and spaces with half-width equivalents
+		$langs = str_replace(
+			['　', '＂', '＇', '：', '；', '，' ],
+			[' ', '"', "'", ':', ';', ',' ],
+			$langs
+		);
 		$langs = str_replace( ["\r\n", "\r", "\n" ], '', $langs );
 		$langs = trim( $langs, ',' );
 
