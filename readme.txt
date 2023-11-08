@@ -18,26 +18,37 @@ Add code block with syntax highlighting using prism.js. (Available for Gutenberg
 It supports both "Block Editor" and "Classic Editor".
 (However, we recommend using it in the "Block Editor".)
 
-Please see [this page](https://wemo.tech/2122/) for a detailed description of this plugin.(Japanese article)
+Please see the following page for a detailed explanation of this plugin.
 
-= How to use （For Block Editor） =
+URL: [https://loos.co.jp/en/documents/highlighting-code-block/](https://loos.co.jp/en/documents/highlighting-code-block/)
+
+
+### Source code
+
+The source code of this plugin is available on Github.
+
+URL: [https://github.com/ddryo/Highlighting-Code-Block](https://github.com/ddryo/Highlighting-Code-Block)
+
+### How to use
+
+#### How to use （For Block Editor）
 - Open the "Formatting" category of the Block Inserter.
 - There is a custom block named "Highlighing Code Block".
 - Select it, the block will be inserted.
 - Select the language of the code and enter any code.
 
-= How to use （For Classic Editor） =
+#### How to use （For Classic Editor）
 - You should see a select box labeled "Code Block" on the toolbar (2nd row by default).
 - When you select a language from the select box, a code block (pre tag) is inserted.
 
 
-= If it doesn't work =
+#### If it doesn't work
 
 This plugin works only with PHP version 5.6 or later, WordPress 5.6 or later.
 Please check your PHP version or WordPress version.
 
 
-= About settings =
+#### About settings
 
 The menu "[HCB] Settings" should be added to "Settings" in the left menu of the management screen.
 Settings related to this plugin are set in this menu.
@@ -93,6 +104,10 @@ The following languages are available by default.
 
 
 == Changelog ==
+
+= 1.8.0 =
+- Support for WordPress 6.4.
+- Support for PHP 8.2.
 
 = 1.7.0 =
 - Support for WordPress 6.2.
