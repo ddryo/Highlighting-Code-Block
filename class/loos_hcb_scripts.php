@@ -32,6 +32,17 @@ class LOOS_HCB_Scripts {
 
 		// ブロックの登録
 		register_block_type_from_metadata( LOOS_HCB_PATH . '/src/js/code-block' );
+
+		// エディタに渡すグローバル変数
+		wp_add_inline_script(
+			'hcb-code-block',
+			'var hcbLangs = ' . self::get_lang_obj_str() . ';',
+			'before'
+		);
+		wp_localize_script( 'hcb-code-block', 'hcbVars', [
+			'showLang'    => LOOS_HCB::$settings['show_lang'],
+			'showLinenum' => LOOS_HCB::$settings['show_linenum'],
+		] );
 	}
 
 
@@ -114,12 +125,6 @@ class LOOS_HCB_Scripts {
 
 		// 翻訳jsonファイルの読み込み
 		wp_set_script_translations( 'hcb-blocks', 'loos-hcb', LOOS_HCB_PATH . '/languages' );
-
-		// 管理画面側に渡すグローバル変数
-		wp_localize_script( 'hcb-blocks', 'hcbEditorVars', [
-			'showLang'    => LOOS_HCB::$settings['show_lang'],
-			'showLinenum' => LOOS_HCB::$settings['show_linenum'],
-		] );
 	}
 
 
@@ -127,8 +132,7 @@ class LOOS_HCB_Scripts {
 	 * Add code to Admin Head.
 	 * TinyMCEでも必要なので admin_head にフックさせている。
 	 */
-	public static function hook_admin_head() {
-
+	public static function get_lang_obj_str() {
 		$langs = LOOS_HCB::$settings['support_langs'];
 
 		// Replace full-width characters and spaces with half-width equivalents
@@ -140,12 +144,13 @@ class LOOS_HCB_Scripts {
 		$langs = str_replace( ["\r\n", "\r", "\n" ], '', $langs );
 		$langs = trim( $langs, ',' );
 
-		$code = 'var hcbLangs = {' . trim( $langs ) . '};';
+		return '{' . trim( $langs ) . '}';
+	}
 
-		// for tinyMCE
-		echo '<script id="hcb-langs">' . wp_kses( $code, [] ) . '</script>' . PHP_EOL;
-
-		// for Gutenberg
-		wp_add_inline_script( 'hcb-code-block', $code, 'before' );
+	/**
+	 * Add code to Admin Head. (for TinyMCE)
+	 */
+	public static function hook_admin_head() {
+		echo '<script id="hcb-langs">var hcbLangs = ' . wp_kses( self::get_lang_obj_str(), [] ) . ';</script>' . PHP_EOL;
 	}
 }

@@ -150,17 +150,17 @@ class LOOS_HCB {
 		$HCB        = self::$settings;
 
 		// Font size
-		$inline_css .= ':root{--hcb-font-size: ' . $HCB['fontsize_pc'] . '}';
-		$inline_css .= ':root{--hcb-font-size--mobile: ' . $HCB['fontsize_sp'] . '}';
+		$inline_css .= ':root{--hcb--fz--base: ' . $HCB['fontsize_pc'] . '}';
+		$inline_css .= ':root{--hcb--fz--mobile: ' . $HCB['fontsize_sp'] . '}';
 
 		// Font family
 		if ( $HCB['font_family'] ) {
-			$inline_css .= ':root{--hcb-font-family:' . $HCB['font_family'] . '}';
+			$inline_css .= ':root{--hcb--ff:' . $HCB['font_family'] . '}';
 		}
 
-		// Code Lang
+		// Code Lang (Default)
 		if ( 'off' === $HCB['show_lang'] ) {
-			$inline_css .= '.hcb_wrap pre:not([data-file]):not([data-show-lang])::before{content: none;}';
+			$inline_css .= '.hcb_wrap{--hcb--data-label: none;--hcb--btn-offset: 0px;}';
 		}
 
 		// Font smoothing

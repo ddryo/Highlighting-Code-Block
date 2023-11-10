@@ -1,0 +1,45 @@
+
+// 設定エリア
+// .hcb-langBtnItem {
+// 	height: auto !important;
+// 	min-height: unset !important;
+// 	line-height: 1.5 !important;
+// }
+.hcb-code-in-label {
+	padding: 2px;
+	font-size: 0.95em;
+	text-transform: lowercase;
+}
+
+.hcb-datapreview {
+	position: absolute;
+	right: 0;
+	bottom: var(--hcb--scbarH, 0);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	padding: 2px 4px;
+	color: inherit;
+	font-size: 12px;
+	line-height: 1.25;
+	background-color: inherit;
+	border-radius: var(--hcb--radius);
+	opacity: 0.75;
+}
+
+// ブロック非選択時
+// [data-type="loos-hcb/code-block"]:not(.is-selected) {
+
+// 	.hcb_controls {
+// 		display: none;
+// 	}
+// }
+
+
+// デバイスプレビュー
+// .wp-embed-responsive.editor-styles-wrapper {
+
+// 	.hcb_controls {
+// 		display: none;
+// 	}
+// }

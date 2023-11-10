@@ -1,0 +1,45 @@
+/*
+	カラーリングに関係ない共通設定
+	一部、設定によって、PHPから出力されるインラインスタイルで上書きされる
+ */
+:root {
+	--hcb--fz: var(--hcb--fz--base, 14px);
+	--hcb--ff: "Menlo", "Consolas", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif;
+	--hcb--pY: 1.75em;
+	--hcb--pX: 1.5em;
+	--hcb--radius: 3px;
+	--hcb--linenumW: 3.5ch; // It works if the line number is less than or equal to 999
+	--hcb--data-label: attr(data-lang);
+	--hcb--btn-offset: 20px;
+
+	// デフォルトカラー
+	--hcb-color--text: #1f1e1e;
+	--hcb-color--text-shadow: unset;
+	--hcb-color--bg: rgb(248, 246, 246);
+	--hcb-color--lang--text: #1f1e1e;
+	--hcb-color--lang--bg: #e8e8e8;
+	--hcb-color--line-numbers: #999;
+	--hcb-color--highlight: rgba(150, 120, 100, 0.1);
+	--hcb-file-icon: url(../../assets/img/file-icon-light.svg);
+	--hcb-color--scrollbar-track: rgba(150, 150, 150, 0.1);
+	--hcb-color--scrollbar-thumb: rgba(150, 150, 150, 0.25);
+
+
+	// --hcb--c: #1f1e1e;
+	// --hcb--bgc: rgb(248, 246, 246);
+	// --hcb--tsh: 1px 1px rgb(240, 240, 240);
+	// --hcb--data-label--c: #1f1e1e;
+	// --hcb--data-label--bgc: #e8e8e8;
+	// --hcb--line-numbers--c: #999;
+	// --hcb--highlight: rgba(150, 120, 100, 0.1);
+	// --hcb--file-icon: url(../../assets/img/file-icon-light.svg);
+	// --hcb--scbar-track: rgba(0, 0, 0, 0.05);
+	// --hcb--scbar-thumb: #0000001a;
+}
+
+@media screen and (max-width: 599px) {
+
+	:root {
+		--hcb--fz: var(--hcb--fz--mobile, 13px);
+	}
+}

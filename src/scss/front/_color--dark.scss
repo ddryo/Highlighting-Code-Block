@@ -1,19 +1,18 @@
 /*
   Dark coloring
 */
-body {
-	--hcb-color--text: #f8f8f2;
-	--hcb-color--text-shadow: rg1a1a1ab(136, 132, 132);
-	--hcb-color--bg: #34352e;
+:root {
+	--hcb-color--text: #f9f9f6;
+	--hcb-color--text-shadow: transparent;
+	--hcb-color--bg: #2d2e29;
 	--hcb-color--lang--text: #fff;
-	--hcb-color--lang--bg: #111;
-	--hcb-color--line-numbers: #999;
+	--hcb-color--lang--bg: #20211f;
+	--hcb-color--line-numbers: #a3a3a3;
 	--hcb-color--highlight: rgba(255, 250, 245, 0.1);
-	--hcb-color--highlight-text: #fcfcfc;
-	--hcb-color--highlight-bg: #afa7a166;
 	--hcb-file-icon: url(../../assets/img/file-icon-dark.svg);
 	--hcb-color--scrollbar-track: rgba(255, 255, 255, 0.1);
 	--hcb-color--scrollbar-thumb: rgba(255, 255, 255, 0.2);
+
 }
 
 

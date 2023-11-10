@@ -14,6 +14,9 @@ devDependencies:
   '@wordpress/scripts':
     specifier: ^26.1.0
     version: 26.1.0(node-sass@8.0.0)(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
+  '@wordpress/stylelint-config':
+    specifier: ^21.28.0
+    version: 21.28.0(postcss@8.4.31)(stylelint@14.3.0)
   autoprefixer:
     specifier: ^10.4.2
     version: 10.4.2(postcss@8.4.31)

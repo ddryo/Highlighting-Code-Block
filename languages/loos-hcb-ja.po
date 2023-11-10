@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Highlighting Code Block\n"
-"POT-Creation-Date: 2023-03-24 15:35+0900\n"
-"PO-Revision-Date: 2023-03-24 15:35+0900\n"
+"POT-Creation-Date: 2023-11-10 00:11+0900\n"
+"PO-Revision-Date: 2023-11-10 00:12+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -25,45 +25,53 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: assets/js\n"
 "X-Poedit-SearchPathExcluded-4: vendor\n"
 
-#: src/js/code-block/_sidebar.js:14
+#: src/js/code-block/edit.js:172
 msgid "HCB settings"
 msgstr "HCB設定"
 
-#: src/js/code-block/_sidebar.js:16
-msgid "Settings for displaying the number of lines"
-msgstr "行数の表示に関する設定"
+#: src/js/code-block/edit.js:174
+msgid "Language"
+msgstr "言語"
 
-#: src/js/code-block/_sidebar.js:20 src/js/code-block/_sidebar.js:42
+#: src/js/code-block/edit.js:186
+msgid "Display number of rows"
+msgstr "行数の表示"
+
+#: src/js/code-block/edit.js:190 src/js/code-block/edit.js:211
 msgid "Do not set individually"
 msgstr "個別で設定はしない"
 
-#: src/js/code-block/_sidebar.js:24
+#: src/js/code-block/edit.js:194
 msgid "Display row count"
 msgstr "行数を表示する"
 
-#: src/js/code-block/_sidebar.js:28
+#: src/js/code-block/edit.js:198
 msgid "Do not display row count"
 msgstr "行数を表示しない"
 
-#: src/js/code-block/_sidebar.js:38
-msgid "Settings for displaying language name"
-msgstr "言語名の表示に関する設定"
+#: src/js/code-block/edit.js:207 class/loos_hcb_menu.php:35
+msgid "Display language name"
+msgstr "言語の表示"
 
-#: src/js/code-block/_sidebar.js:46
+#: src/js/code-block/edit.js:215
 msgid "Display language"
 msgstr "言語を表示する"
 
-#: src/js/code-block/_sidebar.js:50
+#: src/js/code-block/edit.js:219
 msgid "Do not display language"
 msgstr "言語を表示しない"
 
-#: src/js/code-block/edit.js:165
-msgid "file name"
+#: src/js/code-block/edit.js:228
+msgid "File name"
 msgstr "ファイル名"
 
-#: src/js/code-block/edit.js:174
-msgid "\"data-line\" value"
-msgstr "data-line属性値"
+#: src/js/code-block/edit.js:238
+msgid "Highlight Number"
+msgstr "ハイライトする行番号"
+
+#: src/js/code-block/edit.js:254
+msgid "First line number"
+msgstr "開始行番号"
 
 #: class/loos_hcb_menu.php:8
 msgid "[HCB] Settings"
@@ -72,10 +80,6 @@ msgstr "[HCB] 設定"
 #: class/loos_hcb_menu.php:28
 msgid "Basic settings"
 msgstr "基本設定"
-
-#: class/loos_hcb_menu.php:35
-msgid "Display language name"
-msgstr "言語の表示"
 
 #: class/loos_hcb_menu.php:38
 msgid "Display language name in code block"
@@ -218,7 +222,7 @@ msgstr "ヘルプ"
 msgid "Highlighting Code Block settings"
 msgstr "Highlighting Code Block 設定"
 
-#: class/loos_hcb_scripts.php:62
+#: class/loos_hcb_scripts.php:82
 msgid "Copy code to clipboard"
 msgstr "コードをクリップボードにコピーする"
 
@@ -240,11 +244,25 @@ msgstr ""
 
 #. Author of the plugin/theme
 msgid "LOOS, Inc."
-msgstr ""
+msgstr "LOOS, Inc."
 
 #. Author URI of the plugin/theme
 msgid "https://loos-web-studio.com/"
 msgstr "https://loos-web-studio.com/"
+
+#~ msgid "\"data-line\" value"
+#~ msgstr "data-line属性値"
+
+#, fuzzy
+#~| msgid "\"data-line\" value"
+#~ msgid "\"data-start\" value"
+#~ msgstr "data-line属性値"
+
+#~ msgid "Settings for displaying the number of lines"
+#~ msgstr "行数の表示に関する設定"
+
+#~ msgid "Settings for displaying language name"
+#~ msgstr "言語名の表示に関する設定"
 
 #~ msgid "Default"
 #~ msgstr "デフォルト"

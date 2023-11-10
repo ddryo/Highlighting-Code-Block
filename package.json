@@ -16,6 +16,7 @@
         "@wordpress/browserslist-config": "^4.1.0",
         "@wordpress/env": "^4.2.0",
         "@wordpress/scripts": "^26.1.0",
+        "@wordpress/stylelint-config": "^21.28.0",
         "autoprefixer": "^10.4.2",
         "classnames": "^2.3.1",
         "cross-env": "^7.0.3",

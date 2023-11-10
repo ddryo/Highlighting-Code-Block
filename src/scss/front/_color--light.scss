@@ -1,19 +1,8 @@
 /*
   Light coloring
 */
-body {
-	--hcb-color--text: #1f1e1e;
-	--hcb-color--text-shadow: #fff;
-	--hcb-color--bg: #f7f6f6;
-	--hcb-color--lang--text: #1f1e1e;
-	--hcb-color--lang--bg: #dedede;
-	--hcb-color--line-numbers: #999;
-	--hcb-color--highlight: rgba(150, 120, 100, 0.1);
-	--hcb-color--highlight-text: #f5f2f0;
-	--hcb-color--highlight-bg: #b1aead;
-	--hcb-file-icon: url(../../assets/img/file-icon-light.svg);
-	--hcb-color--scrollbar-track: rgba(0, 0, 0, 0.05);
-	--hcb-color--scrollbar-thumb: #0000001a;
+:root {
+	--hcb-color--text-shadow: rgb(240, 240, 240);
 }
 
 /* ---------------------

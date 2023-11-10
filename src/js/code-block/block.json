@@ -32,6 +32,10 @@
             "type": "string",
             "default": ""
         },
+		"dataStart": {
+            "type": "number",
+            "default": 1
+        },
         "isLineShow": {
             "type": "string",
             "default": "undefined"
