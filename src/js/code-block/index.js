@@ -10,13 +10,13 @@ import { registerBlockType, createBlock } from '@wordpress/blocks';
 import edit from './edit';
 import save from './save';
 import metadata from './block.json';
-import hcbIcon from './_icon';
+import hcbIcon from './icon';
 import deprecated from './_deprecated';
 
 /**
  * Register Highlighting Code Block
  */
-registerBlockType( metadata.name, {
+registerBlockType(metadata.name, {
 	icon: hcbIcon,
 	// attributes: metadata.attributes,
 	transforms: {
@@ -24,11 +24,11 @@ registerBlockType( metadata.name, {
 			//どのブロックタイプから変更できるようにするか
 			{
 				type: 'block',
-				blocks: [ 'core/code' ], //整形済みブロック : 'core/preformatted',
-				transform: ( attributes ) => {
-					return createBlock( 'loos-hcb/code-block', {
+				blocks: ['core/code'], //整形済みブロック : 'core/preformatted',
+				transform: (attributes) => {
+					return createBlock('loos-hcb/code-block', {
 						code: attributes.content,
-					} );
+					});
 				},
 			},
 		],
@@ -36,11 +36,11 @@ registerBlockType( metadata.name, {
 			//どのブロックタイプへ変更できるようにするか
 			{
 				type: 'block',
-				blocks: [ 'core/code' ],
-				transform: ( attributes ) => {
-					return createBlock( 'core/code', {
+				blocks: ['core/code'],
+				transform: (attributes) => {
+					return createBlock('core/code', {
 						content: attributes.code,
-					} );
+					});
 				},
 			},
 		],
@@ -48,4 +48,4 @@ registerBlockType( metadata.name, {
 	edit,
 	save,
 	deprecated,
-} );
+});
