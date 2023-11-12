@@ -20,8 +20,8 @@
 	> .hcb_codewrap {
 		position: relative;
 		padding-right: 0.75em;
-		color: var(--hcb-color--text);
-		background: var(--hcb-color--bg);
+		color: var(--hcb--c);
+		background: var(--hcb--bgc);
 		border-radius: var(--hcb--radius);
 	}
 }
@@ -29,11 +29,11 @@
 .hcb_wrap > pre,
 .hcb_codewrap,
 .hcb_textarea {
-	color: var(--hcb-color--text) !important;
+	color: var(--hcb--c) !important;
 	font-size: var(--hcb--fz, 14px) !important;
 	font-family: var(--hcb--ff) !important;
 	line-height: 1.5 !important;
-	background: var(--hcb-color--bg) !important;
+	background: var(--hcb--bgc) !important;
 }
 
 
@@ -60,12 +60,12 @@
 	}
 
 	&::-webkit-scrollbar-track {
-		background: var(--hcb-color--scrollbar-track);
+		background: var(--hcb--scbar-track--bgc);
 		border: none;
 	}
 
 	&::-webkit-scrollbar-thumb {
-		background: var(--hcb-color--scrollbar-thumb);
+		background: var(--hcb--scbar-thumb--bgc);
 		border-radius: 3px;
 	}
 }
@@ -109,7 +109,7 @@
 	left: calc(var(--hcb--linenumW) / 2 + 0.5em);
 	width: 0;
 	height: calc(100% - var(--hcb--pY) * 2);
-	color: var(--hcb-color--line-numbers);
+	color: var(--hcb--line-numbers--c);
 	border-right: solid 1px currentcolor;
 
 	> .hcb-startNum {
@@ -150,12 +150,12 @@
 	box-sizing: border-box;
 	min-width: 4em;
 	padding: 0 10px;
-	color: var(--hcb-color--lang--text);
+	color: var(--hcb--data-label--c);
 	font-size: 0.925em;
 	font-family: inherit;
 	line-height: 20px;
 	text-align: center;
-	background-color: var(--hcb-color--lang--bg);
+	background-color: var(--hcb--data-label--bgc);
 	border-radius: 0 var(--hcb--radius);
 	content: var(--hcb--data-label);
 }
@@ -172,7 +172,7 @@
 // [data-file] があれば、lang 非表示でも表示する
 .hcb-block[data-file]::before {
 	padding: 0 8px 0 20px;
-	background-image: var(--hcb-file-icon);
+	background-image: var(--hcb--file-icon);
 	background-repeat: no-repeat;
 	background-position: center left 8px;
 	background-size: auto 10px;

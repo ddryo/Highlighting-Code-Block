@@ -2,16 +2,16 @@
   Dark coloring
 */
 :root {
-	--hcb-color--text: #f9f9f6;
-	--hcb-color--text-shadow: transparent;
-	--hcb-color--bg: #2d2e29;
-	--hcb-color--lang--text: #fff;
-	--hcb-color--lang--bg: #20211f;
-	--hcb-color--line-numbers: #a3a3a3;
-	--hcb-color--highlight: rgba(255, 250, 245, 0.1);
-	--hcb-file-icon: url(../../assets/img/file-icon-dark.svg);
-	--hcb-color--scrollbar-track: rgba(255, 255, 255, 0.1);
-	--hcb-color--scrollbar-thumb: rgba(255, 255, 255, 0.2);
+	--hcb--c: #f9f9f6;
+	// --hcb--tsh: none;
+	--hcb--bgc: #2d2e29;
+	--hcb--data-label--c: #fff;
+	--hcb--data-label--bgc: #20211f;
+	--hcb--line-numbers--c: #a3a3a3;
+	--hcb--highlight-color: rgba(255, 250, 245, 0.1);
+	--hcb--file-icon: url(../../assets/img/file-icon-dark.svg);
+	--hcb--scbar-track--bgc: rgba(255, 255, 255, 0.1);
+	--hcb--scbar-thumb--bgc: rgba(255, 255, 255, 0.2);
 
 }
 

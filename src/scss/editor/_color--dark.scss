@@ -1,12 +1,11 @@
 :root {
-	--hcb-color--text: #f8f8f2;
-	--hcb-color--text-shadow: rg1a1a1ab(136, 132, 132);
-	--hcb-color--bg: #34352e;
-	--hcb-color--lang--text: #fff;
-	--hcb-color--lang--bg: #111;
-	--hcb-file-icon: url(../../assets/img/file-icon-dark.svg);
-	--hcb-color--scrollbar-track: rgba(255, 255, 255, 0.1);
-	--hcb-color--scrollbar-thumb: rgba(255, 255, 255, 0.2);
+	--hcb--c: #f8f8f2;
+	--hcb--bgc: #34352e;
+	--hcb--data-label--c: #fff;
+	--hcb--data-label--bgc: #111;
+	--hcb--file-icon: url(../../assets/img/file-icon-dark.svg);
+	--hcb--scbar-track--bgc: rgba(255, 255, 255, 0.1);
+	--hcb--scbar-thumb--bgc: rgba(255, 255, 255, 0.2);
 
 	// --hcb--placeholder--c: rgba(255, 255, 255, 0.4);
 }

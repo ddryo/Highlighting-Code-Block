@@ -28,16 +28,16 @@
 
 	> pre,
 	> pre > code {
-		color: var(--hcb-color--text, #1f1e1e);
+		color: var(--hcb--c);
 		white-space: pre;
 		text-align: left;
-		text-shadow: 1px 1px var(--hcb-color--text-shadow, transparent);
+		text-shadow: var(--hcb--tsh);
 		word-wrap: normal;
 		word-break: normal;
 		word-spacing: normal;
 		tab-size: 4;
 		hyphens: none;
-		background: var(--hcb-color--bg, #f7f6f6);
+		background: var(--hcb--bgc);
 		border: none;
 	}
 
@@ -69,7 +69,7 @@
 		font-size: inherit;
 		line-height: inherit;
 		white-space: pre;
-		background: var(--hcb-color--highlight);
+		background: var(--hcb--highlight-color);
 		pointer-events: none;
 
 
@@ -82,13 +82,13 @@
 		// 	box-sizing: border-box;
 		// 	min-width: 1.5em;
 		// 	padding: 1px 2px;
-		// 	color: var(--hcb-color--highlight-text, #f5f2f0);
+		// 	color: var(--hcb--highlight-c);
 		// 	font-size: 12px;
 		// 	line-height: inherit;
 		// 	text-align: center;
 		// 	text-shadow: none;
 		// 	vertical-align: middle;
-		// 	background-color: var(--hcb-color--highlight-bg, #b1aead);
+		// 	background-color: var(--hcb--highlight-bgc);
 		// 	border-radius: 0;
 		// }
 
@@ -121,7 +121,7 @@
 		min-width: var(--hcb--linenumW);
 		font-size: inherit;
 		// letter-spacing: -1px;
-		border-right: 1px solid var(--hcb-color--line-numbers);
+		border-right: 1px solid var(--hcb--line-numbers--c);
 		user-select: none;
 		pointer-events: none;
 	}
@@ -136,7 +136,7 @@
 
 	.line-numbers-rows > span::before {
 		display: block;
-		color: var(--hcb-color--line-numbers);
+		color: var(--hcb--line-numbers--c);
 		content: counter(linenumber);
 	}
 
@@ -146,12 +146,12 @@
 	}
 
 	> pre::-webkit-scrollbar-track {
-		background: var(--hcb-color--scrollbar-track);
+		background: var(--hcb--scbar-track--bgc);
 		border: none;
 	}
 
 	> pre::-webkit-scrollbar-thumb {
-		background: var(--hcb-color--scrollbar-thumb);
+		background: var(--hcb--scbar-thumb--bgc);
 		border-radius: 3px;
 	}
 }
@@ -174,12 +174,12 @@
 	box-sizing: border-box;
 	min-width: 4em;
 	padding: 0 10px;
-	color: var(--hcb-color--lang--text);
+	color: var(--hcb--data-label--c);
 	font-size: 0.925em;
 	font-family: inherit;
 	line-height: 20px;
 	text-align: center;
-	background-color: var(--hcb-color--lang--bg);
+	background-color: var(--hcb--data-label--bgc);
 	border-radius: 0 var(--hcb--radius);
 	content: var(--hcb--data-label);
 }
@@ -204,7 +204,7 @@
 .hcb_wrap > pre[data-file]::before {
 	padding: 0 8px 0 20px;
 	// background-colorを打ち消さないように分けて書く
-	background-image: var(--hcb-file-icon);
+	background-image: var(--hcb--file-icon);
 	background-repeat: no-repeat;
 	background-position: center left 8px;
 	background-size: auto 10px;
