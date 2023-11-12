@@ -20,7 +20,7 @@ class LOOS_HCB_Scripts {
 	 */
 	public static function register_hcb_block() {
 
-		// ブロックのスクリプト登録 ( memo: wp_add_inline_script() で紐付けるために wp_register_script 必要 )
+		// ブロックのスクリプト登録 ( memo: wp_add_inline_script() でグローバル変数を紐付けるために wp_register_script() で登録している )
 		$asset = include LOOS_HCB_PATH . '/build/js/code-block/index.asset.php';
 		wp_register_script(
 			'hcb-code-block',
@@ -31,7 +31,7 @@ class LOOS_HCB_Scripts {
 		);
 
 		// ブロックの登録
-		register_block_type_from_metadata( LOOS_HCB_PATH . '/src/js/code-block' );
+		register_block_type_from_metadata( LOOS_HCB_PATH . '/build/js/code-block' );
 
 		// エディタに渡すグローバル変数
 		wp_add_inline_script(
