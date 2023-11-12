@@ -3,8 +3,8 @@ Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
 Tags: block, editor, guternberg, code, syntax, highlight, code highlighting, syntax highlight
 Requires at least: 5.6
-Tested up to: 6.2
-Stable tag: 1.7.0
+Tested up to: 6.4
+Stable tag: 2.0.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -105,9 +105,12 @@ The following languages are available by default.
 
 == Changelog ==
 
-= 1.8.0 =
+= 2.0.0 =
 - Support for WordPress 6.4.
 - Support for PHP 8.2.
+- The CSS and Block UI have been significantly adjusted.
+- CSS custom properties have also been renamed and cleaned up overall.
+- Added `data-start` attribute settings to blocks.
 
 = 1.7.0 =
 - Support for WordPress 6.2.
