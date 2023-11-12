@@ -7,11 +7,7 @@ module.exports = {
 		alert: false,
 		document: false,
 		console: false,
-		fetch: false,
-		location: false,
-		navigator: false,
-		IntersectionObserver: false,
-		IntersectionObserverEntry: false,
+		ClipboardJS: false,
 	},
 
 	rules: {
