@@ -1,3 +1,5 @@
-# Highlighting-Code-Block
+# Highlighting Code Block
 
-WordPress プラグイン、[Highlighting Code Block](https://wordpress.org/plugins/highlighting-code-block/)。
+This is a WordPress plugin that allows you to easily use **Code Blocks with syntax highlighting**.
+
+→ [Click here for the plugin details page.](https://wordpress.org/plugins/highlighting-code-block/)
