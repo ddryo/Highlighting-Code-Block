@@ -199,7 +199,7 @@ export default ({ attributes, setAttributes, clientId }) => {
 						}}
 					/>
 					<SelectControl
-						label={__('Display number of rows', 'loos-hcb')} // 行数の表示
+						label={__('Display line numbers', 'loos-hcb')} // 行数の表示
 						value={isLineShow}
 						options={[
 							{

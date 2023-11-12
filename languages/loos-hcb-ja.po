@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Highlighting Code Block\n"
-"POT-Creation-Date: 2023-11-10 00:11+0900\n"
-"PO-Revision-Date: 2023-11-10 00:12+0900\n"
+"POT-Creation-Date: 2023-11-12 23:45+0900\n"
+"PO-Revision-Date: 2023-11-12 23:45+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja_JP\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: highlighting-code-block.php\n"
@@ -25,51 +25,51 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-3: assets/js\n"
 "X-Poedit-SearchPathExcluded-4: vendor\n"
 
-#: src/js/code-block/edit.js:172
-msgid "HCB settings"
-msgstr "HCB設定"
-
-#: src/js/code-block/edit.js:174
+#: src/js/code-block/edit.js:168 src/js/code-block/edit.js:190
 msgid "Language"
 msgstr "言語"
 
-#: src/js/code-block/edit.js:186
-msgid "Display number of rows"
+#: src/js/code-block/edit.js:188
+msgid "HCB settings"
+msgstr "HCB設定"
+
+#: src/js/code-block/edit.js:202
+msgid "Display line numbers"
 msgstr "行数の表示"
 
-#: src/js/code-block/edit.js:190 src/js/code-block/edit.js:211
+#: src/js/code-block/edit.js:206 src/js/code-block/edit.js:227
 msgid "Do not set individually"
 msgstr "個別で設定はしない"
 
-#: src/js/code-block/edit.js:194
+#: src/js/code-block/edit.js:210
 msgid "Display row count"
 msgstr "行数を表示する"
 
-#: src/js/code-block/edit.js:198
+#: src/js/code-block/edit.js:214
 msgid "Do not display row count"
 msgstr "行数を表示しない"
 
-#: src/js/code-block/edit.js:207 class/loos_hcb_menu.php:35
+#: src/js/code-block/edit.js:223 class/loos_hcb_menu.php:35
 msgid "Display language name"
 msgstr "言語の表示"
 
-#: src/js/code-block/edit.js:215
+#: src/js/code-block/edit.js:231
 msgid "Display language"
 msgstr "言語を表示する"
 
-#: src/js/code-block/edit.js:219
+#: src/js/code-block/edit.js:235
 msgid "Do not display language"
 msgstr "言語を表示しない"
 
-#: src/js/code-block/edit.js:228
+#: src/js/code-block/edit.js:244
 msgid "File name"
 msgstr "ファイル名"
 
-#: src/js/code-block/edit.js:238
+#: src/js/code-block/edit.js:254
 msgid "Highlight Number"
 msgstr "ハイライトする行番号"
 
-#: src/js/code-block/edit.js:254
+#: src/js/code-block/edit.js:269
 msgid "First line number"
 msgstr "開始行番号"
 
@@ -249,6 +249,9 @@ msgstr "LOOS, Inc."
 #. Author URI of the plugin/theme
 msgid "https://loos-web-studio.com/"
 msgstr "https://loos-web-studio.com/"
+
+#~ msgid "Display Language name"
+#~ msgstr "言語の表示"
 
 #~ msgid "\"data-line\" value"
 #~ msgstr "data-line属性値"
