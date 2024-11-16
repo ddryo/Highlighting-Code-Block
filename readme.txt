@@ -3,8 +3,8 @@ Contributors: looswebstudio
 Donate link: https://wemo.tech/2122/
 Tags: block, editor, guternberg, code, syntax, highlight, code highlighting, syntax highlight
 Requires at least: 5.6
-Tested up to: 6.4
-Stable tag: 2.0.1
+Tested up to: 6.7
+Stable tag: 2.1.0
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -104,6 +104,9 @@ The following languages are available by default.
 
 
 == Changelog ==
+
+= 2.1.0 =
+- Support for WordPress 6.7.
 
 = 2.0.1 =
 - Some text of setting items has been changed.
