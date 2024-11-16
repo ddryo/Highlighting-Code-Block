@@ -9,9 +9,10 @@
  * Author URI: https://loos-web-studio.com/
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain: loos-hcb
+ * Text Domain: highlighting-code-block
  * Domain Path: /languages
  */
+
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
@@ -38,16 +39,19 @@ spl_autoload_register( function( $classname ) {
 /**
  * Activation hooks.
  */
-register_activation_hook( __FILE__, ['LOOS_HCB_Activation', 'plugin_activate' ] );
-register_uninstall_hook( __FILE__, ['LOOS_HCB_Activation', 'plugin_uninstall' ] );
+register_activation_hook( __FILE__, [ 'LOOS_HCB_Activation', 'plugin_activate' ] );
+register_uninstall_hook( __FILE__, [ 'LOOS_HCB_Activation', 'plugin_uninstall' ] );
+
+/**
+ * 翻訳ファイルの読み込み
+ */
+add_action( 'init', function() {
+	load_plugin_textdomain( 'highlighting-code-block' );
+}, 0);
 
 /**
  * Start
  */
 add_action( 'plugins_loaded', function() {
-	// 翻訳ファイルの読み込み
-	load_plugin_textdomain( 'loos-hcb', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
-
-	// 実行
 	new LOOS_HCB();
 });

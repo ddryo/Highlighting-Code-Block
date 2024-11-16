@@ -5,13 +5,13 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Add HCB setting page.
  */
 add_action( 'admin_menu', function() {
-	$pagename = __( '[HCB] Settings', 'loos-hcb' );
+	$pagename = __( '[HCB] Settings', 'highlighting-code-block' );
 	add_options_page(
 		$pagename,
 		$pagename,
 		'manage_options',
 		LOOS_HCB::MENU_SLUG,
-		['LOOS_HCB_Menu', 'hcb_settings_cb']
+		[ 'LOOS_HCB_Menu', 'hcb_settings_cb' ]
 	);
 });
 
@@ -25,98 +25,98 @@ add_action( 'admin_init', function() {
 	//「基本設定」セクション
 	add_settings_section(
 		'hcb_setting_section',
-		__( 'Basic settings', 'loos-hcb' ),
+		__( 'Basic settings', 'highlighting-code-block' ),
 		'',
 		LOOS_HCB::MENU_SLUG
 	);
 
 	$basic_sections = [
-		'show_lang' => [
-			'title' => __( 'Display language name', 'loos-hcb' ),
-			'args' => [
-				'type' => 'checkbox',
-				'label' => __( 'Display language name in code block', 'loos-hcb' ),
-				'desc' => __( 'If checked, the language type is displayed in the code on the site display side.', 'loos-hcb' )
-			]
+		'show_lang'       => [
+			'title' => __( 'Display language name', 'highlighting-code-block' ),
+			'args'  => [
+				'type'  => 'checkbox',
+				'label' => __( 'Display language name in code block', 'highlighting-code-block' ),
+				'desc'  => __( 'If checked, the language type is displayed in the code on the site display side.', 'highlighting-code-block' ),
+			],
 		],
-		'show_linenum' => [
-			'title' => __( 'Display settings for the number of rows', 'loos-hcb' ),
-			'args' => [
-				'type' => 'checkbox',
-				'label' => __( 'Show line count in code block', 'loos-hcb' ),
-				'desc' => __( 'If checked, the number of lines will be displayed on the left end of the code on the site display side.', 'loos-hcb' ),
-			]
+		'show_linenum'    => [
+			'title' => __( 'Display settings for the number of rows', 'highlighting-code-block' ),
+			'args'  => [
+				'type'  => 'checkbox',
+				'label' => __( 'Show line count in code block', 'highlighting-code-block' ),
+				'desc'  => __( 'If checked, the number of lines will be displayed on the left end of the code on the site display side.', 'highlighting-code-block' ),
+			],
 		],
-		'show_copy' => [
-			'title' => __( 'Copy button', 'loos-hcb' ),
-			'args' => [
-				'type' => 'checkbox',
-				'label' => __( 'Show copy button in code block', 'loos-hcb' ),
-				'desc' => '', 
-			]
+		'show_copy'       => [
+			'title' => __( 'Copy button', 'highlighting-code-block' ),
+			'args'  => [
+				'type'  => 'checkbox',
+				'label' => __( 'Show copy button in code block', 'highlighting-code-block' ),
+				'desc'  => '',
+			],
 		],
-		'font_smoothing' => [
-			'title' => __( 'Font smoothing', 'loos-hcb' ),
-			'args' => [
-				'type' => 'checkbox',
-				'label' => __( 'Turn on font smoothing', 'loos-hcb' ),
-				'desc' => sprintf(
-					__( 'Add %s and %s to the code block.', 'loos-hcb' ),
+		'font_smoothing'  => [
+			'title' => __( 'Font smoothing', 'highlighting-code-block' ),
+			'args'  => [
+				'type'  => 'checkbox',
+				'label' => __( 'Turn on font smoothing', 'highlighting-code-block' ),
+				'desc'  => sprintf(
+					__( 'Add %1$s and %2$s to the code block.', 'highlighting-code-block' ),
 					'<code>-webkit-font-smoothing: antialiased;</code>',
 					'<code>-moz-osx-font-smoothing: grayscale;</code>'
 				),
-			]
+			],
 		],
-		'front_coloring' => [
-			'title' => __( 'Cord coloring (front side)', 'loos-hcb' ),
-			'args' => [
-				'type' => 'radio',
+		'front_coloring'  => [
+			'title' => __( 'Cord coloring (front side)', 'highlighting-code-block' ),
+			'args'  => [
+				'type'    => 'radio',
 				'choices' => [
 					'Light' => 'light',
-					'Dark' => 'dark',
-				]
-			]
+					'Dark'  => 'dark',
+				],
+			],
 		],
 		'editor_coloring' => [
-			'title' => __( 'Code coloring (editor side)', 'loos-hcb' ),
-			'args' => [
-				'type' => 'radio',
+			'title' => __( 'Code coloring (editor side)', 'highlighting-code-block' ),
+			'args'  => [
+				'type'    => 'radio',
 				'choices' => [
 					'Light' => 'light',
-					'Dark' => 'dark',
-				]
-			]
+					'Dark'  => 'dark',
+				],
+			],
 		],
-		'fontsize_pc' => [
-			'title' => __( 'Font Size', 'loos-hcb' ) . '(PC)',
-			'args' => [
+		'fontsize_pc'     => [
+			'title' => __( 'Font Size', 'highlighting-code-block' ) . '(PC)',
+			'args'  => [
 				'before' => 'font-size: ',
-			]
+			],
 		],
-		'fontsize_sp' => [
-			'title' => __( 'Font Size', 'loos-hcb' ) . '(SP)',
-			'args' => [
+		'fontsize_sp'     => [
+			'title' => __( 'Font Size', 'highlighting-code-block' ) . '(SP)',
+			'args'  => [
 				'before' => 'font-size: ',
-			]
+			],
 		],
-		'font_family' => [
-			'title' => __( '"Font-family" in code', 'loos-hcb' ),
-			'args' => [
+		'font_family'     => [
+			'title' => __( '"Font-family" in code', 'highlighting-code-block' ),
+			'args'  => [
 				'type' => 'textarea',
 				'rows' => 2,
 				'desc' => 'Default: <code>"Menlo", "Consolas", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", sans-serif</code>',
-			]
+			],
 		],
 	];
 
 	foreach ( $basic_sections as $id => $data ) {
-		$args = $data['args'];
+		$args       = $data['args'];
 		$args['id'] = $id;
 
 		add_settings_field(
 			$id,
 			$data['title'],
-			['LOOS_HCB_Menu', 'settings_field_cb'],
+			[ 'LOOS_HCB_Menu', 'settings_field_cb' ],
 			LOOS_HCB::MENU_SLUG,
 			'hcb_setting_section',
 			$args
@@ -128,64 +128,64 @@ add_action( 'admin_init', function() {
 	 */
 	add_settings_section(
 		'hcb_setting_advanced',
-		__( 'Advanced settings', 'loos-hcb' ),
+		__( 'Advanced settings', 'highlighting-code-block' ),
 		'',
 		LOOS_HCB::MENU_SLUG
 	);
 
-	$help_desc = __('When you use each original file, please upload it in the theme folder.', 'loos-hcb' ) . '<br>' .
-		__('If you set the path to your own file, the default coloring file and prism.js file will not be loaded..','loos-hcb' ) . 
-		'<br>'. sprintf(
-			__('* The currently loaded prism.js file can be downloaded at %s.', 'loos-hcb' ),
-			'<a href="https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+csharp+bash+cpp+ruby+markup-templating+git+java+json+objectivec+php+sql+scss+python+typescript+swift&plugins=line-highlight+line-numbers" target="_blank">'. __( 'Here', 'loos-hcb' ) .'</a>'
+	$help_desc = __( 'When you use each original file, please upload it in the theme folder.', 'highlighting-code-block' ) . '<br>' .
+		__( 'If you set the path to your own file, the default coloring file and prism.js file will not be loaded..', 'highlighting-code-block' ) .
+		'<br>' . sprintf(
+			__( '* The currently loaded prism.js file can be downloaded at %s.', 'highlighting-code-block' ),
+			'<a href="https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+csharp+bash+cpp+ruby+markup-templating+git+java+json+objectivec+php+sql+scss+python+typescript+swift&plugins=line-highlight+line-numbers" target="_blank">' . __( 'Here', 'highlighting-code-block' ) . '</a>'
 		);
 
 	$advanced_sections = [
-		'support_langs' => [
-			'title' => __( 'Language set to use', 'loos-hcb' ),
-			'args' => [
-				'type' => 'textarea',
-				'rows' => 16,
-				'desc' => sprintf(
-						__( 'Write in the format of %s, separated by "," (comma).', 'loos-hcb' ),
-						'<code>'. __('class-key:"language-name"', 'loos-hcb' ) .'</code>'
-					). '<br>&emsp;- '.
-					__('"class-key" is the class name used in prism.js (the part corresponding to "◯◯" in "lang- ◯◯")', 'loos-hcb' ). 
-					'<br> '.__('* If you use a language that is not supported by default, please use it together with "Original prism.js" setting.', 'loos-hcb' ),
-				'after' => '<pre class="default_support_langs"><code>'. LOOS_HCB::DEFAULT_LANGS . '</code></pre>',
-			]
+		'support_langs'  => [
+			'title' => __( 'Language set to use', 'highlighting-code-block' ),
+			'args'  => [
+				'type'  => 'textarea',
+				'rows'  => 16,
+				'desc'  => sprintf(
+                    __( 'Write in the format of %s, separated by "," (comma).', 'highlighting-code-block' ),
+                    '<code>' . __( 'class-key:"language-name"', 'highlighting-code-block' ) . '</code>'
+                ) . '<br>&emsp;- ' .
+					__( '"class-key" is the class name used in prism.js (the part corresponding to "◯◯" in "lang- ◯◯")', 'highlighting-code-block' ) .
+					'<br> ' . __( '* If you use a language that is not supported by default, please use it together with "Original prism.js" setting.', 'highlighting-code-block' ),
+				'after' => '<pre class="default_support_langs"><code>' . LOOS_HCB::DEFAULT_LANGS . '</code></pre>',
+			],
 		],
 		'prism_css_path' => [
-			'title' => __('Original coloring file', 'loos-hcb' ),
-			'args' => [
+			'title' => __( 'Original coloring file', 'highlighting-code-block' ),
+			'args'  => [
 				'before' => get_stylesheet_directory_uri() . '/ ',
-				'desc' => __('Load your own CSS file for code coloring.', 'loos-hcb' ),
-			]
+				'desc'   => __( 'Load your own CSS file for code coloring.', 'highlighting-code-block' ),
+			],
 		],
-		'prism_js_path' => [
-			'title' => __('Original prism.js', 'loos-hcb' ),
-			'args' => [
+		'prism_js_path'  => [
+			'title' => __( 'Original prism.js', 'highlighting-code-block' ),
+			'args'  => [
 				'before' => get_stylesheet_directory_uri() . '/ ',
-				'desc' => __('You can use the prism.js file corresponding to your own language set.', 'loos-hcb' ),
-			]
+				'desc'   => __( 'You can use the prism.js file corresponding to your own language set.', 'highlighting-code-block' ),
+			],
 		],
-		'hcb_help' => [
-			'title' => __('help', 'loos-hcb' ),
-			'args' => [
+		'hcb_help'       => [
+			'title' => __( 'help', 'highlighting-code-block' ),
+			'args'  => [
 				'type' => '',
-				'desc' => $help_desc
-			]
+				'desc' => $help_desc,
+			],
 		],
 	];
 
 	foreach ( $advanced_sections as $id => $data ) {
-		$args = $data['args'];
+		$args       = $data['args'];
 		$args['id'] = $id;
 
 		add_settings_field(
 			$id,
 			$data['title'],
-			['LOOS_HCB_Menu', 'settings_field_cb'],
+			[ 'LOOS_HCB_Menu', 'settings_field_cb' ],
 			LOOS_HCB::MENU_SLUG,
 			'hcb_setting_advanced',
 			$args
@@ -200,8 +200,8 @@ class LOOS_HCB_Menu {
 	 * hcb_settings_cb
 	 */
 	public static function hcb_settings_cb() {
-		echo '<div class="wrap hcb_setting">'.
-		'<h1>'. __( 'Highlighting Code Block settings', 'loos-hcb' ) .'</h1>'.
+		echo '<div class="wrap hcb_setting">' .
+		'<h1>' . __( 'Highlighting Code Block settings', 'highlighting-code-block' ) . '</h1>' .
 		'<form action="options.php" method="post">';
 		do_settings_sections( LOOS_HCB::MENU_SLUG );
 		settings_fields( LOOS_HCB::MENU_SLUG ); // register_setting() の グループ名に一致させる
@@ -215,17 +215,17 @@ class LOOS_HCB_Menu {
 	public static function settings_field_cb( $args = [] ) {
 
 		$default = [
-			'id'    => '',
-			'type'   => 'input',
-			'input_type'   => 'text',
-			'choices' => [],
-			'label' => '',
-			'rows' => '',
-			'before' => '',
-			'after' => '',
-			'desc' => '',
+			'id'         => '',
+			'type'       => 'input',
+			'input_type' => 'text',
+			'choices'    => [],
+			'label'      => '',
+			'rows'       => '',
+			'before'     => '',
+			'after'      => '',
+			'desc'       => '',
 		];
-		$args = array_merge( $default, $args );
+		$args    = array_merge( $default, $args );
 
 		$type = $args['type'];
 		if ( 'input' === $type ) {
@@ -238,7 +238,7 @@ class LOOS_HCB_Menu {
 			self::field_textarea( $args );
 		}
 
-		if ( $args['desc'] ) echo '<p class="description">'. $args['desc'] .'</p>';
+		if ( $args['desc'] ) echo '<p class="description">' . $args['desc'] . '</p>';
 	}
 
 	/**
@@ -246,12 +246,11 @@ class LOOS_HCB_Menu {
 	 */
 	private static function field_input( $args ) {
 
-		$id = $args['id'];
-		$name = LOOS_HCB::DB_NAME['settings'] . '['. $id . ']';
-		$value = LOOS_HCB::$settings[$id];
+		$id    = $args['id'];
+		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
+		$value = LOOS_HCB::$settings[ $id ];
 
-		echo $args['before']. '<input id="' . $id . '" name="' . $name . '" type="'. $args['input_type']. '" value="'. $value .'" />'. $args['after'];
-
+		echo $args['before'] . '<input id="' . $id . '" name="' . $name . '" type="' . $args['input_type'] . '" value="' . $value . '" />' . $args['after'];
 	}
 
 	/**
@@ -259,13 +258,13 @@ class LOOS_HCB_Menu {
 	 */
 	private static function field_textarea( $args ) {
 
-		$id = $args['id'];
-		$name = LOOS_HCB::DB_NAME['settings'] . '['. $id . ']';
-		$value = LOOS_HCB::$settings[$id];
+		$id    = $args['id'];
+		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
+		$value = LOOS_HCB::$settings[ $id ];
 
-		echo '<div class="hcb_field_textarea '. $id .'">' .
-			'<textarea id="'. $id .'" name="'. $name . '" type="text" class="regular-text" rows="'. $args['rows'] . '" >'.
-			$value .'</textarea>'. $args['after'].
+		echo '<div class="hcb_field_textarea ' . $id . '">' .
+			'<textarea id="' . $id . '" name="' . $name . '" type="text" class="regular-text" rows="' . $args['rows'] . '" >' .
+			$value . '</textarea>' . $args['after'] .
 		'</div>';
 	}
 
@@ -274,22 +273,22 @@ class LOOS_HCB_Menu {
 	 */
 	private static function field_radio( $args ) {
 
-		$id = $args['id'];
-		$name = LOOS_HCB::DB_NAME['settings'] . '['. $id . ']';
-		$value = LOOS_HCB::$settings[$id];
+		$id    = $args['id'];
+		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
+		$value = LOOS_HCB::$settings[ $id ];
 
 		$fields = '';
 		foreach ( $args['choices'] as $key => $val ) {
-			$radio_id = $id .'_'. $val;
-			$checked = checked( $value, $val, false );
-			$props = 'name="'. $name .'" value="'. $val .'" '. $checked;
+			$radio_id = $id . '_' . $val;
+			$checked  = checked( $value, $val, false );
+			$props    = 'name="' . $name . '" value="' . $val . '" ' . $checked;
 
-			$fields .= '<label for="'. $radio_id. '">'.
-				'<input id="'. $radio_id .'" type="radio" '. $props . ' >'.
-				'<span>'. $key. '</span>'.
+			$fields .= '<label for="' . $radio_id . '">' .
+				'<input id="' . $radio_id . '" type="radio" ' . $props . ' >' .
+				'<span>' . $key . '</span>' .
 			'</label><br>';
 		}
-		echo '<fieldset>'. $fields .'</fieldset>';
+		echo '<fieldset>' . $fields . '</fieldset>';
 	}
 
 	/**
@@ -297,14 +296,13 @@ class LOOS_HCB_Menu {
 	 */
 	private static function field_checkbox( $args ) {
 
-		$id = $args['id'];
-		$name = LOOS_HCB::DB_NAME['settings'] . '['. $id . ']';
-		$value = LOOS_HCB::$settings[$id];
+		$id    = $args['id'];
+		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
+		$value = LOOS_HCB::$settings[ $id ];
 
 		$checked = checked( $value, 'on', false );
-		echo '<input type="hidden" name="'. $name.  '" value="off">'.
-		'<input type="checkbox" id="'. $id. '" name="'. $name . '" value="on" '. $checked. ' />'.
-		'<label for="'. $id. '">'. $args['label'] . '</label>';
+		echo '<input type="hidden" name="' . $name . '" value="off">' .
+		'<input type="checkbox" id="' . $id . '" name="' . $name . '" value="on" ' . $checked . ' />' .
+		'<label for="' . $id . '">' . $args['label'] . '</label>';
 	}
 }
-

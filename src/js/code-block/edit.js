@@ -165,7 +165,7 @@ export default ({ attributes, setAttributes, clientId }) => {
 			<BlockControls>
 				<ToolbarGroup
 					isCollapsed={true}
-					icon={<>{langName || __('Language', 'loos-hcb')}</>}
+					icon={<>{langName || __('Language', 'highlighting-code-block')}</>}
 					title='Lnaguage'
 					controls={langArray.map(([_langKey, _langName]) => {
 						return {
@@ -185,9 +185,9 @@ export default ({ attributes, setAttributes, clientId }) => {
 				/>
 			</BlockControls>
 			<InspectorControls>
-				<PanelBody title={__('HCB settings', 'loos-hcb')} initialOpen={true}>
+				<PanelBody title={__('HCB settings', 'highlighting-code-block')} initialOpen={true}>
 					<SelectControl
-						label={__('Language', 'loos-hcb')}
+						label={__('Language', 'highlighting-code-block')}
 						value={attributes.langType}
 						options={LANG_SELECT_OPTIONS}
 						onChange={(langKey) => {
@@ -199,19 +199,19 @@ export default ({ attributes, setAttributes, clientId }) => {
 						}}
 					/>
 					<SelectControl
-						label={__('Display line numbers', 'loos-hcb')} // 行数の表示
+						label={__('Display line numbers', 'highlighting-code-block')} // 行数の表示
 						value={isLineShow}
 						options={[
 							{
-								label: __('Do not set individually', 'loos-hcb'), //個別で設定はしない
+								label: __('Do not set individually', 'highlighting-code-block'), //個別で設定はしない
 								value: 'undefined',
 							},
 							{
-								label: __('Display row count', 'loos-hcb'), //行数を表示する
+								label: __('Display row count', 'highlighting-code-block'), //行数を表示する
 								value: 'on',
 							},
 							{
-								label: __('Do not display row count', 'loos-hcb'), //行数を表示しない
+								label: __('Do not display row count', 'highlighting-code-block'), //行数を表示しない
 								value: 'off',
 							},
 						]}
@@ -220,19 +220,19 @@ export default ({ attributes, setAttributes, clientId }) => {
 						}}
 					/>
 					<SelectControl
-						label={__('Display language name', 'loos-hcb')} // 言語名の表示に関する設定
+						label={__('Display language name', 'highlighting-code-block')} // 言語名の表示に関する設定
 						value={isShowLang}
 						options={[
 							{
-								label: __('Do not set individually', 'loos-hcb'), //個別で設定はしない
+								label: __('Do not set individually', 'highlighting-code-block'), //個別で設定はしない
 								value: '',
 							},
 							{
-								label: __('Display language', 'loos-hcb'), //言語を表示する
+								label: __('Display language', 'highlighting-code-block'), //言語を表示する
 								value: '1',
 							},
 							{
-								label: __('Do not display language', 'loos-hcb'), //言語を表示しない
+								label: __('Do not display language', 'highlighting-code-block'), //言語を表示しない
 								value: '0',
 							},
 						]}
@@ -241,7 +241,7 @@ export default ({ attributes, setAttributes, clientId }) => {
 						}}
 					/>
 					<TextControl
-						label={__('File name', 'loos-hcb')} // ファイル名
+						label={__('File name', 'highlighting-code-block')} // ファイル名
 						value={fileName}
 						onChange={(val) => {
 							setAttributes({ fileName: val });
@@ -251,7 +251,7 @@ export default ({ attributes, setAttributes, clientId }) => {
 						// ハイライトする行番号
 						label={
 							<>
-								{__('Highlight Number', 'loos-hcb') + ' ( '}
+								{__('Highlight Number', 'highlighting-code-block') + ' ( '}
 								<code className='hcb-code-in-label'>[data-line]</code>
 								{' )'}
 							</>
@@ -266,7 +266,7 @@ export default ({ attributes, setAttributes, clientId }) => {
 						// 開始行番号
 						label={
 							<>
-								{__('First line number', 'loos-hcb') + ' ( '}
+								{__('First line number', 'highlighting-code-block') + ' ( '}
 								<code className='hcb-code-in-label'>[data-start]</code>
 								{' )'}
 							</>

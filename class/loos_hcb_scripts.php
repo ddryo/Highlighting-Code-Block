@@ -7,11 +7,11 @@ class LOOS_HCB_Scripts {
 	 * The constructor
 	 */
 	public function __construct() {
-		add_action( 'init', ['LOOS_HCB_Scripts', 'register_hcb_block' ] );
-		add_action( 'wp_enqueue_scripts', ['LOOS_HCB_Scripts', 'hook_wp_enqueue_scripts' ], 20 );
-		add_action( 'admin_enqueue_scripts', ['LOOS_HCB_Scripts', 'hook_admin_enqueue_scripts' ] );
-		add_action( 'enqueue_block_editor_assets', ['LOOS_HCB_Scripts', 'hook_enqueue_block_editor_assets' ] );
-		add_action( 'admin_head', ['LOOS_HCB_Scripts', 'hook_admin_head' ], 1 );
+		add_action( 'init', [ 'LOOS_HCB_Scripts', 'register_hcb_block' ] );
+		add_action( 'wp_enqueue_scripts', [ 'LOOS_HCB_Scripts', 'hook_wp_enqueue_scripts' ], 20 );
+		add_action( 'admin_enqueue_scripts', [ 'LOOS_HCB_Scripts', 'hook_admin_enqueue_scripts' ] );
+		add_action( 'enqueue_block_editor_assets', [ 'LOOS_HCB_Scripts', 'hook_enqueue_block_editor_assets' ] );
+		add_action( 'admin_head', [ 'LOOS_HCB_Scripts', 'hook_admin_head' ], 1 );
 	}
 
 
@@ -79,7 +79,7 @@ class LOOS_HCB_Scripts {
 		$js_deps = [ 'hcb-prism' ];
 		$js_vars = [
 			'showCopyBtn'  => '',
-			'copyBtnLabel' => __( 'Copy code to clipboard', 'loos-hcb' ),
+			'copyBtnLabel' => __( 'Copy code to clipboard', 'highlighting-code-block' ),
 		];
 
 		if ( 'on' === LOOS_HCB::$settings['show_copy'] ) {
@@ -90,7 +90,6 @@ class LOOS_HCB_Scripts {
 		// HCB script
 		wp_enqueue_script( 'hcb-script', LOOS_HCB_URL . '/build/js/hcb_script.js', $js_deps, $ver, true );
 		wp_localize_script( 'hcb-script', 'hcbVars', $js_vars );
-
 	}
 
 
@@ -124,7 +123,7 @@ class LOOS_HCB_Scripts {
 		wp_enqueue_script( 'hcb-blocks', LOOS_HCB_URL . '/assets/js/hcb.js', [], $ver, false );
 
 		// 翻訳jsonファイルの読み込み
-		wp_set_script_translations( 'hcb-blocks', 'loos-hcb', LOOS_HCB_PATH . '/languages' );
+		wp_set_script_translations( 'hcb-blocks', 'highlighting-code-block', LOOS_HCB_PATH . '/languages' );
 	}
 
 
@@ -137,11 +136,11 @@ class LOOS_HCB_Scripts {
 
 		// Replace full-width characters and spaces with half-width equivalents
 		$langs = str_replace(
-			['　', '＂', '＇', '：', '；', '，' ],
-			[' ', '"', "'", ':', ';', ',' ],
+			[ '　', '＂', '＇', '：', '；', '，' ],
+			[ ' ', '"', "'", ':', ';', ',' ],
 			$langs
 		);
-		$langs = str_replace( ["\r\n", "\r", "\n" ], '', $langs );
+		$langs = str_replace( [ "\r\n", "\r", "\n" ], '', $langs );
 		$langs = trim( $langs, ',' );
 
 		return '{' . trim( $langs ) . '}';

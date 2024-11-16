@@ -8,7 +8,7 @@
         "build:js": "wp-scripts build",
         "build:css": "node sass-builder.js",
         "build": "npm run build:js && npm run build:css",
-        "po2json": "po2json languages/loos-hcb-ja.po languages/loos-hcb-ja-hcb-blocks.json -f jed"
+        "po2json": "po2json languages/highlighting-code-block-ja.po languages/highlighting-code-block-ja-hcb-blocks.json -f jed"
     },
     "author": "",
     "license": "ISC",
