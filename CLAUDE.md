@@ -10,24 +10,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 -   テキストドメイン: `highlighting-code-block`（PHP）/ `loos-hcb`（ブロック）
 -   ブロック名: `loos-hcb/code-block`
 
-## 開発コマンド
-
-```bash
-# ローカル WordPress 環境
-npx wp-env start          # .wp-env.json ベースで起動
-
-# ビルド
-nr build                  # JS + CSS 両方ビルド
-nr build:js               # wp-scripts build（Webpack）
-nr build:css              # node sass-builder.js（SCSS → PostCSS）
-nr start                  # wp-scripts start（JS のみ watch）
-
-# リント
-composer phpcs             # PHP CodeSniffer（phpcs.xml 設定）
-
-# 翻訳
-nr po2json                # PO → JSON（ブロック用翻訳ファイル生成）
-```
 
 ## アーキテクチャ
 
