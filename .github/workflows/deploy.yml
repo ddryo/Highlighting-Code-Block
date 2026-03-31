@@ -8,10 +8,10 @@ jobs:
     name: New tag
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@v1
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
       with:
-        node-version: 14.x
+        node-version: 20
     - name: Build
       run: |
         npm install
