@@ -83,7 +83,7 @@ CSS カスタムプロパティ（`--hcb--*`）でフォントサイズ、カラ
 1. `readme.txt` の Stable tag を更新
 2. `readme.txt` のチェンジログを追加
 3. `highlighting-code-block.php` のプラグインヘッダコメントのバージョンを更新
-4. `highlighting-code-block.php` の `LOOS_HCB_VER` 定数を更新
+
 
 翻訳ファイルを更新した場合は `nr po2json` で JSON を再生成する。
 
