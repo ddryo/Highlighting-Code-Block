@@ -2,7 +2,6 @@ module.exports = {
 	// plugins: ['stylelint-scss'],
 	extends: [
 		'@wordpress/stylelint-config/scss',
-		'stylelint-config-rational-order',
 		// 'stylelint-prettier/recommended',
 	],
 	ignoreFiles: ['./src/scss/inc/bass/**/*.scss', './**/*.js', './assets/**'],
