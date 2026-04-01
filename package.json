@@ -7,7 +7,7 @@
         "start": "wp-scripts start",
         "build:js": "wp-scripts build",
         "build:css": "node sass-builder.js",
-        "build": "npm run build:js && npm run build:css",
+        "build": "wp-scripts build && node sass-builder.js",
         "po2json": "po2json languages/highlighting-code-block-ja.po languages/highlighting-code-block-ja-hcb-blocks.json -f jed"
     },
     "author": "",
