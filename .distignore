@@ -6,16 +6,21 @@
 /vendor
 
 .distignore
-.gitignore
-CLAUDE.md
+.editorconfig
 .eslintignore
 .eslintrc.js
 .prettierrc.js
 .stylelintrc.js
-gulpfile.js
+.wp-env.json
+composer.json
+composer.lock
 package.json
 package-lock.json
+pnpm-lock.yaml
+yarn.lock
 postcss.config.js
+sass-builder.js
 webpack.config.js
+CLAUDE.md
 README.md
 phpcs.xml
