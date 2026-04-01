@@ -1,7 +1,7 @@
 /**
- * WP_SRC_DIRECTORY: src/js にセットしてることに注意。
+ * block.json のコピー先を JS の出力先と一致させるため、基準ディレクトリは src にする。
  */
-process.env.WP_SRC_DIRECTORY = 'src/js';
+process.env.WP_SRC_DIRECTORY = 'src';
 
 const defaultConfig = require('@wordpress/scripts/config/webpack.config');
 const path = require('path');
@@ -13,7 +13,7 @@ const path = require('path');
 
 /**
  * exports
- *  path.path/{WP_SRC_DIRECTORYからの相対パス} へ、cssやblock.jsonが吐き出されるので、関係性に注意。（@v.26時点）
+ *  path.path/{WP_SRC_DIRECTORYからの相対パス} へ block.json が吐き出されるので、JS の entry 名と揃える。
  */
 module.exports = {
 	...defaultConfig, //@wordpress/scriptを引き継ぐ
@@ -23,13 +23,13 @@ module.exports = {
 	//エントリーポイント
 	entry: {
 		// hcb: './src/js/hcb.js',
-		hcb_script: './src/js/hcb_script.js',
-		'/code-block/index': './src/js/code-block/index.js',
+		'js/hcb_script': './src/js/hcb_script.js',
+		'js/code-block/index': './src/js/code-block/index.js',
 	},
 
 	//アウトプット先
 	output: {
-		path: path.resolve(__dirname, 'build/js'),
+		path: path.resolve(__dirname, 'build'),
 		filename: '[name].js',
 	},
 	resolve: {
