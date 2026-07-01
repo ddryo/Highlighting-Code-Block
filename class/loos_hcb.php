@@ -190,7 +190,7 @@ class LOOS_HCB {
 
 		// Code Lang (Default)
 		if ( 'off' === $HCB['show_lang'] ) {
-			$inline_css .= '.hcb_wrap{--hcb--data-label: none;--hcb--btn-offset: 0px;}';
+			$inline_css .= '.hcb_wrap>pre{--hcb--data-label: none;}.hcb_wrap{--hcb--btn-offset: 0px;}';
 		}
 
 		// Font smoothing
