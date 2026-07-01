@@ -141,6 +141,11 @@
 
 
 // Lang Name
+.hcb_wrap > pre,
+.hcb-block {
+	--hcb--data-label: attr(data-lang);
+}
+
 .hcb_wrap > pre::before, // for Classic
 .hcb-block::before {
 	position: absolute;
@@ -182,4 +187,3 @@
 // .hcb-block[data-show-lang="0"]:not([data-file])::before {
 // 	content: none;
 // }
-

@@ -166,6 +166,10 @@
 
 
 // Lang Name, File Name
+.hcb_wrap > pre {
+	--hcb--data-label: attr(data-lang);
+}
+
 .hcb_wrap > pre::before {
 	position: absolute;
 	top: 0;
