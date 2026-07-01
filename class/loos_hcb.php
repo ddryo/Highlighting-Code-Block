@@ -128,18 +128,47 @@ class LOOS_HCB {
 
 		// Set Prism.js file url
 		if ( self::$settings['prism_js_path'] ) {
-			self::$custom_prism_path = get_stylesheet_directory_uri() . '/' . self::$settings['prism_js_path'];
+			self::$custom_prism_path = get_stylesheet_directory_uri() . '/' . self::sanitize_theme_path( self::$settings['prism_js_path'] );
 		}
 
 		// Set front coloring file url
 		if ( self::$settings['prism_css_path'] ) {
-			self::$custom_coloring_path = get_stylesheet_directory_uri() . '/' . self::$settings['prism_css_path'];
+			self::$custom_coloring_path = get_stylesheet_directory_uri() . '/' . self::sanitize_theme_path( self::$settings['prism_css_path'] );
 		}
 
 		self::$front_css_path  = LOOS_HCB_URL . '/build/css/hcb--' . self::$settings['front_coloring'] . '.css';
 		self::$editor_css_path = LOOS_HCB_URL . '/build/css/hcb-editor--' . self::$settings['editor_coloring'] . '.css';
 	}
 
+
+	/**
+	 * CSS値（font-family / font-size など）を <style> コンテキスト用にサニタイズする。
+	 * タグや <style> ブロックを抜け出す文字、別のCSS宣言・ルールを注入できる文字を除去する。
+	 */
+	public static function sanitize_css_value( $value ) {
+		$value = wp_strip_all_tags( (string) $value );
+		$value = str_replace( [ '<', '>', '{', '}', ';' ], '', $value );
+		return trim( $value );
+	}
+
+	/**
+	 * テーマ内の相対ファイルパスをサニタイズする。
+	 * タグ・引用符・パストラバーサルを除去し、先頭のスラッシュを取り除く。
+	 */
+	public static function sanitize_theme_path( $value ) {
+		$value = wp_strip_all_tags( (string) $value );
+		$value = str_replace( [ '<', '>', '"', "'", '..' ], '', $value );
+		return ltrim( trim( $value ), '/' );
+	}
+
+	/**
+	 * 言語設定テキストをサニタイズする。
+	 * スクリプトコンテキストを抜け出すタグを除去する（引用符・コロン・カンマ等は保持）。
+	 */
+	public static function sanitize_langs( $value ) {
+		$value = wp_strip_all_tags( (string) $value );
+		return str_replace( [ '<', '>' ], '', $value );
+	}
 
 	/**
 	 * インラインスタイルの生成
@@ -150,12 +179,13 @@ class LOOS_HCB {
 		$HCB        = self::$settings;
 
 		// Font size
-		$inline_css .= ':root{--hcb--fz--base: ' . $HCB['fontsize_pc'] . '}';
-		$inline_css .= ':root{--hcb--fz--mobile: ' . $HCB['fontsize_sp'] . '}';
+		$inline_css .= ':root{--hcb--fz--base: ' . self::sanitize_css_value( $HCB['fontsize_pc'] ) . '}';
+		$inline_css .= ':root{--hcb--fz--mobile: ' . self::sanitize_css_value( $HCB['fontsize_sp'] ) . '}';
 
 		// Font family
-		if ( $HCB['font_family'] ) {
-			$inline_css .= ':root{--hcb--ff:' . $HCB['font_family'] . '}';
+		$font_family = self::sanitize_css_value( $HCB['font_family'] );
+		if ( $font_family ) {
+			$inline_css .= ':root{--hcb--ff:' . $font_family . '}';
 		}
 
 		// Code Lang (Default)
