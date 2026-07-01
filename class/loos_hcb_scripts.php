@@ -169,6 +169,7 @@ class LOOS_HCB_Scripts {
 	 * Add code to Admin Head. (for TinyMCE)
 	 */
 	public static function hook_admin_head() {
+		// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_lang_obj_str() returns JSON encoded with wp_json_encode( JSON_HEX_* ).
 		echo '<script id="hcb-langs">var hcbLangs = ' . self::get_lang_obj_str() . ';</script>' . PHP_EOL;
 	}
 }
