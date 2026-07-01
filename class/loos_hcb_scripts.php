@@ -132,7 +132,8 @@ class LOOS_HCB_Scripts {
 	 * TinyMCEでも必要なので admin_head にフックさせている。
 	 */
 	public static function get_lang_obj_str() {
-		$langs = LOOS_HCB::$settings['support_langs'];
+		// スクリプトコンテキストを抜け出すタグ等を除去（保存前の値への多層防御）.
+		$langs = LOOS_HCB::sanitize_langs( LOOS_HCB::$settings['support_langs'] );
 
 		// Replace full-width characters and spaces with half-width equivalents
 		$langs = str_replace(

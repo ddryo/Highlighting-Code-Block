@@ -20,7 +20,14 @@ add_action( 'admin_menu', function() {
  */
 add_action( 'admin_init', function() {
 	// データベースに保存されるオプション名を登録
-	register_setting( LOOS_HCB::MENU_SLUG, LOOS_HCB::DB_NAME['settings'] );
+	register_setting(
+		LOOS_HCB::MENU_SLUG,
+		LOOS_HCB::DB_NAME['settings'],
+		[
+			'type'              => 'array',
+			'sanitize_callback' => [ 'LOOS_HCB_Menu', 'sanitize_settings' ],
+		]
+	);
 
 	//「基本設定」セクション
 	add_settings_section(
@@ -61,6 +68,7 @@ add_action( 'admin_init', function() {
 				'type'  => 'checkbox',
 				'label' => __( 'Turn on font smoothing', 'highlighting-code-block' ),
 				'desc'  => sprintf(
+					/* translators: %1$s and %2$s are CSS property declarations wrapped in <code> tags. */
 					__( 'Add %1$s and %2$s to the code block.', 'highlighting-code-block' ),
 					'<code>-webkit-font-smoothing: antialiased;</code>',
 					'<code>-moz-osx-font-smoothing: grayscale;</code>'
@@ -136,6 +144,7 @@ add_action( 'admin_init', function() {
 	$help_desc = __( 'When you use each original file, please upload it in the theme folder.', 'highlighting-code-block' ) . '<br>' .
 		__( 'If you set the path to your own file, the default coloring file and prism.js file will not be loaded..', 'highlighting-code-block' ) .
 		'<br>' . sprintf(
+			/* translators: %s is a link to the prism.js download page. */
 			__( '* The currently loaded prism.js file can be downloaded at %s.', 'highlighting-code-block' ),
 			'<a href="https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript+c+csharp+bash+cpp+ruby+markup-templating+git+java+json+objectivec+php+sql+scss+python+typescript+swift&plugins=line-highlight+line-numbers" target="_blank">' . __( 'Here', 'highlighting-code-block' ) . '</a>'
 		);
@@ -147,9 +156,10 @@ add_action( 'admin_init', function() {
 				'type'  => 'textarea',
 				'rows'  => 16,
 				'desc'  => sprintf(
-                    __( 'Write in the format of %s, separated by "," (comma).', 'highlighting-code-block' ),
-                    '<code>' . __( 'class-key:"language-name"', 'highlighting-code-block' ) . '</code>'
-                ) . '<br>&emsp;- ' .
+					/* translators: %s is the input format example wrapped in a <code> tag. */
+					__( 'Write in the format of %s, separated by "," (comma).', 'highlighting-code-block' ),
+					'<code>' . __( 'class-key:"language-name"', 'highlighting-code-block' ) . '</code>'
+				) . '<br>&emsp;- ' .
 					__( '"class-key" is the class name used in prism.js (the part corresponding to "◯◯" in "lang- ◯◯")', 'highlighting-code-block' ) .
 					'<br> ' . __( '* If you use a language that is not supported by default, please use it together with "Original prism.js" setting.', 'highlighting-code-block' ),
 				'after' => '<pre class="default_support_langs"><code>' . LOOS_HCB::DEFAULT_LANGS . '</code></pre>',
@@ -197,14 +207,53 @@ add_action( 'admin_init', function() {
 class LOOS_HCB_Menu {
 
 	/**
+	 * 設定値のサニタイズ（register_setting の sanitize_callback）
+	 *
+	 * 保存される各値をサーバ側で型・許容値ごとに検証する。
+	 * 想定キーのみをホワイトリストとして保存し、未知のキーは破棄する。
+	 */
+	public static function sanitize_settings( $input ) {
+
+		$input  = is_array( $input ) ? $input : [];
+		$output = [];
+
+		// on / off のチェックボックス値.
+		foreach ( [ 'show_lang', 'show_linenum', 'show_copy', 'font_smoothing' ] as $key ) {
+			$output[ $key ] = ( isset( $input[ $key ] ) && 'on' === $input[ $key ] ) ? 'on' : 'off';
+		}
+
+		// light / dark のカラーリング値.
+		foreach ( [ 'front_coloring', 'editor_coloring' ] as $key ) {
+			$output[ $key ] = ( isset( $input[ $key ] ) && 'dark' === $input[ $key ] ) ? 'dark' : 'light';
+		}
+
+		// CSSコンテキストに出力される値（font-size / font-family）.
+		foreach ( [ 'fontsize_pc', 'fontsize_sp', 'font_family' ] as $key ) {
+			$output[ $key ] = isset( $input[ $key ] ) ? LOOS_HCB::sanitize_css_value( $input[ $key ] ) : '';
+		}
+
+		// テーマ内の相対ファイルパス.
+		foreach ( [ 'prism_css_path', 'prism_js_path' ] as $key ) {
+			$output[ $key ] = isset( $input[ $key ] ) ? LOOS_HCB::sanitize_theme_path( $input[ $key ] ) : '';
+		}
+
+		// 言語設定テキスト.
+		if ( isset( $input['support_langs'] ) ) {
+			$output['support_langs'] = LOOS_HCB::sanitize_langs( $input['support_langs'] );
+		}
+
+		return $output;
+	}
+
+	/**
 	 * hcb_settings_cb
 	 */
 	public static function hcb_settings_cb() {
-		echo '<div class="wrap hcb_setting">' .
-		'<h1>' . __( 'Highlighting Code Block settings', 'highlighting-code-block' ) . '</h1>' .
-		'<form action="options.php" method="post">';
+		echo '<div class="wrap hcb_setting">';
+		echo '<h1>' . esc_html__( 'Highlighting Code Block settings', 'highlighting-code-block' ) . '</h1>';
+		echo '<form action="options.php" method="post">';
+		settings_fields( LOOS_HCB::MENU_SLUG ); // register_setting() の グループ名に一致させる.
 		do_settings_sections( LOOS_HCB::MENU_SLUG );
-		settings_fields( LOOS_HCB::MENU_SLUG ); // register_setting() の グループ名に一致させる
 		submit_button();
 		echo '</form></div>';
 	}
@@ -238,7 +287,9 @@ class LOOS_HCB_Menu {
 			self::field_textarea( $args );
 		}
 
-		if ( $args['desc'] ) echo '<p class="description">' . $args['desc'] . '</p>';
+		if ( $args['desc'] ) {
+			echo '<p class="description">' . wp_kses_post( $args['desc'] ) . '</p>';
+		}
 	}
 
 	/**
@@ -250,7 +301,15 @@ class LOOS_HCB_Menu {
 		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
 		$value = LOOS_HCB::$settings[ $id ];
 
-		echo $args['before'] . '<input id="' . $id . '" name="' . $name . '" type="' . $args['input_type'] . '" value="' . $value . '" />' . $args['after'];
+		echo esc_html( $args['before'] );
+		printf(
+			'<input id="%1$s" name="%2$s" type="%3$s" value="%4$s" />',
+			esc_attr( $id ),
+			esc_attr( $name ),
+			esc_attr( $args['input_type'] ),
+			esc_attr( $value )
+		);
+		echo wp_kses_post( $args['after'] );
 	}
 
 	/**
@@ -262,10 +321,16 @@ class LOOS_HCB_Menu {
 		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
 		$value = LOOS_HCB::$settings[ $id ];
 
-		echo '<div class="hcb_field_textarea ' . $id . '">' .
-			'<textarea id="' . $id . '" name="' . $name . '" type="text" class="regular-text" rows="' . $args['rows'] . '" >' .
-			$value . '</textarea>' . $args['after'] .
-		'</div>';
+		echo '<div class="hcb_field_textarea ' . esc_attr( $id ) . '">';
+		printf(
+			'<textarea id="%1$s" name="%2$s" class="regular-text" rows="%3$s">%4$s</textarea>',
+			esc_attr( $id ),
+			esc_attr( $name ),
+			esc_attr( $args['rows'] ),
+			esc_textarea( $value )
+		);
+		echo wp_kses_post( $args['after'] );
+		echo '</div>';
 	}
 
 	/**
@@ -277,18 +342,19 @@ class LOOS_HCB_Menu {
 		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
 		$value = LOOS_HCB::$settings[ $id ];
 
-		$fields = '';
-		foreach ( $args['choices'] as $key => $val ) {
+		echo '<fieldset>';
+		foreach ( $args['choices'] as $label => $val ) {
 			$radio_id = $id . '_' . $val;
-			$checked  = checked( $value, $val, false );
-			$props    = 'name="' . $name . '" value="' . $val . '" ' . $checked;
-
-			$fields .= '<label for="' . $radio_id . '">' .
-				'<input id="' . $radio_id . '" type="radio" ' . $props . ' >' .
-				'<span>' . $key . '</span>' .
-			'</label><br>';
+			printf(
+				'<label for="%1$s"><input id="%1$s" type="radio" name="%2$s" value="%3$s"%4$s><span>%5$s</span></label><br>',
+				esc_attr( $radio_id ),
+				esc_attr( $name ),
+				esc_attr( $val ),
+				checked( $value, $val, false ),
+				esc_html( $label )
+			);
 		}
-		echo '<fieldset>' . $fields . '</fieldset>';
+		echo '</fieldset>';
 	}
 
 	/**
@@ -300,9 +366,14 @@ class LOOS_HCB_Menu {
 		$name  = LOOS_HCB::DB_NAME['settings'] . '[' . $id . ']';
 		$value = LOOS_HCB::$settings[ $id ];
 
-		$checked = checked( $value, 'on', false );
-		echo '<input type="hidden" name="' . $name . '" value="off">' .
-		'<input type="checkbox" id="' . $id . '" name="' . $name . '" value="on" ' . $checked . ' />' .
-		'<label for="' . $id . '">' . $args['label'] . '</label>';
+		printf(
+			'<input type="hidden" name="%1$s" value="off">' .
+			'<input type="checkbox" id="%2$s" name="%1$s" value="on"%3$s />' .
+			'<label for="%2$s">%4$s</label>',
+			esc_attr( $name ),
+			esc_attr( $id ),
+			checked( $value, 'on', false ),
+			esc_html( $args['label'] )
+		);
 	}
 }
