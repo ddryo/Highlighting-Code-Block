@@ -128,29 +128,47 @@ class LOOS_HCB_Scripts {
 
 
 	/**
-	 * Add code to Admin Head.
-	 * TinyMCEでも必要なので admin_head にフックさせている。
+	 * 言語設定テキストをパースし、JSへ安全に渡せるJSON文字列を返す。
+	 *
+	 * ユーザーが入力する `class-key:"language-name"` 形式をサーバ側で連想配列へ変換し、
+	 * キーは [A-Za-z0-9_-] に限定、ラベルはテキストとしてサニタイズする。
+	 * 出力は wp_json_encode( JSON_HEX_* ) を用いて <script> コンテキストで安全な形にし、
+	 * 任意のJS文を混入できないようにする（Stored XSS対策）。
 	 */
 	public static function get_lang_obj_str() {
-		// スクリプトコンテキストを抜け出すタグ等を除去（保存前の値への多層防御）.
-		$langs = LOOS_HCB::sanitize_langs( LOOS_HCB::$settings['support_langs'] );
 
-		// Replace full-width characters and spaces with half-width equivalents
-		$langs = str_replace(
+		$raw = (string) LOOS_HCB::$settings['support_langs'];
+
+		// 全角の記号・スペースを半角へ正規化（ユーザー入力の揺れを吸収）.
+		$raw = str_replace(
 			[ '　', '＂', '＇', '：', '；', '，' ],
 			[ ' ', '"', "'", ':', ';', ',' ],
-			$langs
+			$raw
 		);
-		$langs = str_replace( [ "\r\n", "\r", "\n" ], '', $langs );
-		$langs = trim( $langs, ',' );
 
-		return '{' . trim( $langs ) . '}';
+		// `key:"label"` 形式のみを抽出する。キーは英数字・ハイフン・アンダースコアに限定.
+		$langs = [];
+		if ( preg_match_all( '/([A-Za-z0-9_-]+)\s*:\s*"([^"]*)"/', $raw, $matches, PREG_SET_ORDER ) ) {
+			foreach ( $matches as $match ) {
+				$key = $match[1];
+				if ( '' === $key ) {
+					continue;
+				}
+				$langs[ $key ] = sanitize_text_field( $match[2] );
+			}
+		}
+
+		// JS(<script>)コンテキストで安全なJSONオブジェクトとして出力する.
+		$json = wp_json_encode( (object) $langs, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT );
+
+		// エンコード失敗時も壊れたJSを出力しないよう空オブジェクトにフォールバック.
+		return false === $json ? '{}' : $json;
 	}
 
 	/**
 	 * Add code to Admin Head. (for TinyMCE)
 	 */
 	public static function hook_admin_head() {
-		echo '<script id="hcb-langs">var hcbLangs = ' . wp_kses( self::get_lang_obj_str(), [] ) . ';</script>' . PHP_EOL;
+		echo '<script id="hcb-langs">var hcbLangs = ' . self::get_lang_obj_str() . ';</script>' . PHP_EOL;
 	}
 }
